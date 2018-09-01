@@ -1,0 +1,6 @@
+framework module Pods_QLDT {
+  umbrella header "Pods-QLDT-umbrella.h"
+
+  export *
+  module * { export * }
+}

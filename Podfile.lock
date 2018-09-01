@@ -1,0 +1,52 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - AllPod (0.1.5):
+    - AFNetworking (~> 3.1)
+    - AVHexColor (~> 2.0)
+    - JSONKit-NoWarning (~> 1.2)
+    - Reachability (~> 3.2)
+    - SDWebImage (~> 4.4)
+    - SVProgressHUD
+    - Toast (~> 4.0.0)
+  - AVHexColor (2.0.0)
+  - JSONKit-NoWarning (1.2)
+  - Mapbox-iOS-SDK (4.2.0)
+  - Reachability (3.2)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
+  - SVProgressHUD (2.2.5)
+  - Toast (4.0.0)
+
+DEPENDENCIES:
+  - AllPod (~> 0.1.5)
+  - Mapbox-iOS-SDK (~> 4.2)
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AllPod: 6ebc5d645d3ccac26955025f53486ddd0d8e5224
+  AVHexColor: 33e5e102f3b6f3acd002779183ee226e21870c28
+  JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
+  Mapbox-iOS-SDK: 706d52e3ad095e16944d9643f37d5a97627f6c19
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+
+PODFILE CHECKSUM: e005e88d2ac4fc5ce4e2f4701c48130fdc5b34a6
+
+COCOAPODS: 1.4.0

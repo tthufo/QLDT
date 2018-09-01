@@ -1,0 +1,6 @@
+framework module AllPod {
+  umbrella header "AllPod-umbrella.h"
+
+  export *
+  module * { export * }
+}
