@@ -20,6 +20,7 @@
 		FC935AF0210CC5880067D480 /* TL_ChangeHost_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC935AEE210CC5880067D480 /* TL_ChangeHost_ViewController.swift */; };
 		FC935AF1210CC5880067D480 /* TL_ChangeHost_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC935AEF210CC5880067D480 /* TL_ChangeHost_ViewController.xib */; };
 		FC935AF3210CCD750067D480 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC935AF2210CCD750067D480 /* Macro.swift */; };
+		FCE372F9213AA96D00F79D7A /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE372F8213AA96D00F79D7A /* Information.swift */; };
 		FCE6173E210EAA3500000438 /* QL_Home_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */; };
 		FCE6173F210EAA3500000438 /* QL_Home_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */; };
 		FCE61743210EAA4600000438 /* TG_Drop_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE61740210EAA4600000438 /* TG_Drop_Cell.xib */; };
@@ -48,6 +49,7 @@
 		FC935AEE210CC5880067D480 /* TL_ChangeHost_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TL_ChangeHost_ViewController.swift; sourceTree = "<group>"; };
 		FC935AEF210CC5880067D480 /* TL_ChangeHost_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TL_ChangeHost_ViewController.xib; sourceTree = "<group>"; };
 		FC935AF2210CCD750067D480 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
+		FCE372F8213AA96D00F79D7A /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QL_Home_ViewController.xib; path = QLDT/ViewControllers/QL_Home_ViewController.xib; sourceTree = SOURCE_ROOT; };
 		FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QL_Home_ViewController.swift; path = QLDT/ViewControllers/QL_Home_ViewController.swift; sourceTree = SOURCE_ROOT; };
 		FCE61740210EAA4600000438 /* TG_Drop_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TG_Drop_Cell.xib; path = QLDT/ViewControllers/TG_Drop_Cell.xib; sourceTree = SOURCE_ROOT; };
@@ -138,6 +140,7 @@
 		FCE6173B210EAA2700000438 /* HomViewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
+				FCE372F8213AA96D00F79D7A /* Information.swift */,
 				FCE61741210EAA4600000438 /* format.plist */,
 				FCE61740210EAA4600000438 /* TG_Drop_Cell.xib */,
 				FCE61742210EAA4600000438 /* TG_Image_Cell.xib */,
@@ -268,6 +271,7 @@
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AVHexColor/AVHexColor.framework",
 				"${BUILT_PRODUCTS_DIR}/AllPod/AllPod.framework",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/JSONKit-NoWarning/JSONKit_NoWarning.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
@@ -281,6 +285,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVHexColor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AllPod.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONKit_NoWarning.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
@@ -309,6 +314,7 @@
 				FC53869E210C875600F00873 /* AppDelegate.swift in Sources */,
 				FC5386B5210CBB6600F00873 /* QL_LogIn_ViewController.swift in Sources */,
 				FC935AF0210CC5880067D480 /* TL_ChangeHost_ViewController.swift in Sources */,
+				FCE372F9213AA96D00F79D7A /* Information.swift in Sources */,
 				FC935AED210CC2FF0067D480 /* UIViewController+ViewCat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

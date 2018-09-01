@@ -16,6 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        Information.saveToken()
+        
+        LTRequest.sharedInstance().initRequest()
+        
         let nav = UINavigationController.init(rootViewController: QL_LogIn_ViewController())
         
         nav.isNavigationBarHidden = true

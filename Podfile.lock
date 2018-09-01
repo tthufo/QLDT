@@ -22,6 +22,7 @@ PODS:
     - SDWebImage (~> 4.4)
     - SVProgressHUD
     - Toast (~> 4.0.0)
+  - AppAuth (0.94.0)
   - AVHexColor (2.0.0)
   - JSONKit-NoWarning (1.2)
   - Mapbox-iOS-SDK (4.2.0)
@@ -34,11 +35,13 @@ PODS:
 
 DEPENDENCIES:
   - AllPod (~> 0.1.5)
+  - AppAuth
   - Mapbox-iOS-SDK (~> 4.2)
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   AllPod: 6ebc5d645d3ccac26955025f53486ddd0d8e5224
+  AppAuth: 0f099c2286a1a9754e5bd27211c43d307dc4f778
   AVHexColor: 33e5e102f3b6f3acd002779183ee226e21870c28
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
   Mapbox-iOS-SDK: 706d52e3ad095e16944d9643f37d5a97627f6c19
@@ -47,6 +50,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: e005e88d2ac4fc5ce4e2f4701c48130fdc5b34a6
+PODFILE CHECKSUM: 1b41e59a66bed30e69eb9efcdb0e14acf49080fa
 
 COCOAPODS: 1.4.0
