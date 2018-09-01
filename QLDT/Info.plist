@@ -43,5 +43,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoidHRodWZvIiwiYSI6ImNqZjd5dWJ1ejFtNWUyd3FoeTgwYXR4ejMifQ.G0Xts0LPweafpr3ms3dLJQ</string>
+	<key>MGLMapboxMetricsEnabledSettingShownInApp</key>
+	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>QLDT cần sử dụng Micro của bạn</string>
 </dict>
 </plist>

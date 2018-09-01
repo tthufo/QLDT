@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-            <string>HelveticaNeue-Bold</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TL_ChangeHost_ViewController" customModule="QLDT" customModuleProvider="target">
             <connections>
@@ -115,16 +109,28 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thông tin máy chủ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Euz-dm-kRG">
+                    <rect key="frame" x="16" y="98" width="177" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="efZ-Rx-f0A"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Euz-dm-kRG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="3yR-Uh-TvS"/>
                 <constraint firstItem="8Vc-Nv-Mac" firstAttribute="top" secondItem="kBK-Oa-Im1" secondAttribute="bottom" constant="53" id="63G-Hq-VRp"/>
                 <constraint firstItem="8Vc-Nv-Mac" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="DKg-yE-bmE"/>
                 <constraint firstItem="Jw4-rU-PgY" firstAttribute="top" secondItem="8Vc-Nv-Mac" secondAttribute="bottom" constant="24" id="Jwb-ts-gLd"/>
                 <constraint firstItem="kBK-Oa-Im1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Jz1-gq-xxy"/>
                 <constraint firstItem="ZDH-ST-oDf" firstAttribute="top" secondItem="kBK-Oa-Im1" secondAttribute="bottom" constant="59" id="Ki5-ek-OFu"/>
                 <constraint firstItem="ZDH-ST-oDf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Ovd-9S-Yt6"/>
+                <constraint firstItem="Euz-dm-kRG" firstAttribute="top" secondItem="kBK-Oa-Im1" secondAttribute="bottom" constant="14" id="RTa-BI-yzS"/>
                 <constraint firstItem="kBK-Oa-Im1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="acJ-Da-wGY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Euz-dm-kRG" secondAttribute="trailing" constant="127" id="gdF-3P-GjY"/>
                 <constraint firstItem="kBK-Oa-Im1" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="haM-h9-VHM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jw4-rU-PgY" secondAttribute="trailing" constant="18" id="lWf-aV-qah"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZDH-ST-oDf" secondAttribute="trailing" constant="24" id="mDF-2J-DaX"/>

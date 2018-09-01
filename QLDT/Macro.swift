@@ -10,6 +10,8 @@ import Foundation
 
 import SDWebImage
 
+import JSONKit_NoWarning
+
 let screenWidth = UIScreen.main.bounds.size.width
 
 let screenHeight = UIScreen.main.bounds.size.height
@@ -67,6 +69,15 @@ func root() -> UIViewController {
 extension String {
     func replace(target: String, withString: String) -> String {
         return self.replace(target:target, withString:withString)
+    }
+
+    func urlGet(postFix: String) -> String {
+        let host = root().getValue("url")
+        return "%@/%@".format(parameters:(host)!, postFix)
+    }
+    
+    func dictionize() -> NSDictionary {
+        return (self as NSString).objectFromJSONString() as! NSDictionary
     }
 }
 

@@ -19,8 +19,33 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
         super.viewDidLoad()
 
         collectionView.withCell("TG_Image_Cell")
+        
+        didRequestUserInfo()
     }
 
+    func didRequestUserInfo() {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/LayerGroup/list"),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "method":"GET",
+                                                   "overrideAlert":"1",
+                                                   "host":self], withCache: { (cache) in
+                                                    
+        }) { (response, errorCode, error, isValid) in
+            
+            print(error)
+            
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
+            
+            print(response)
+            
+//            self.add(response?.dictionize().reFormat() as! [AnyHashable : Any], andKey: "info")
+        }
+    }
+    
     @IBAction func didPressMenu(menu: DropButton) {
 
     }

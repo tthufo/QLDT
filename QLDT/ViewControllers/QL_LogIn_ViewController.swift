@@ -77,11 +77,11 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
     func didAuthorize() {
         let config = OIDServiceConfiguration.init(authorizationEndpoint: URL.init(string: "%@/connect/authorize".format(parameters: authenHost))!, tokenEndpoint: URL.init(string: "%@/connect/token".format(parameters: authenHost))!)
         
+//        let token = OIDTokenRequest.init(configuration: config, grantType: "password", authorizationCode: "offline_access openid profile", redirectURL: URL.init(string: "%@/oauth2redirect".format(parameters: authenHost)), clientID: "htgt.bn.app", clientSecret: "secret", scopes: [OIDScopeOpenID, OIDScopeProfile], refreshToken: "", codeVerifier: "", additionalParameters: ["username":uName.text!,"password":pass.text!])
         
-        let token = OIDTokenRequest.init(configuration: config, grantType: "password", authorizationCode: "offline_access openid profile", redirectURL: URL.init(string: "%@/oauth2redirect".format(parameters: authenHost)), clientID: "htgt.bn.app", clientSecret: "secret", scopes: [OIDScopeOpenID, OIDScopeProfile], refreshToken: "", codeVerifier: "", additionalParameters: ["username":uName.text!,"password":pass.text!])
+        let token1 = OIDTokenRequest.init(configuration: config, grantType: "password", authorizationCode: nil, redirectURL: nil, clientID: "htgt.bn.app", clientSecret: "secret", scopes: nil, refreshToken: nil, codeVerifier: nil, additionalParameters: ["username":uName.text!,"password":pass.text!])
         
-        
-        OIDAuthorizationService.perform(token) { (response, error) in
+        OIDAuthorizationService.perform(token1) { (response, error) in
             
             if error != nil {
                 
@@ -104,12 +104,12 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
             
             Information.saveToken()
             
-            //self.didRequestUserInfo()
+            print(Information.token)
+            
+            self.navigationController?.pushViewController(QL_Home_ViewController(), animated: true)
         }
     }
     
-//    self.navigationController?.pushViewController(QL_Home_ViewController(), animated: true)
-
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     
         if textField ==  uName {

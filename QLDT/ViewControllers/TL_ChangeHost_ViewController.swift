@@ -14,6 +14,8 @@ class TL_ChangeHost_ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        host.text = self.getValue("url")
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -21,6 +23,16 @@ class TL_ChangeHost_ViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         
         return true
+    }
+    
+    @IBAction func didPressSubmi() {
+        if host.text == "" {
+            self.showToast("Bạn chưa nhập địa chỉ máy chủ", andPos: 0)
+            
+            return
+        }
+        
+        
     }
     
     @IBAction func didPressBack() {

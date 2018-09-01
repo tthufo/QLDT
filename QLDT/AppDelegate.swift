@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Information.saveToken()
         
+        if self.getValue("url") == nil {
+            self.addValue("http://117.4.242.159:3333", andKey: "url")
+        }
+        
         LTRequest.sharedInstance().initRequest()
         
         let nav = UINavigationController.init(rootViewController: QL_LogIn_ViewController())
