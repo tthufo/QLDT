@@ -61,8 +61,13 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 return
             }
             
-            print(((response?.dictionize()["array"] as! NSArray)[2] as! NSDictionary)["LayerId"])
-
+            let layerId = ((response?.dictionize()["array"] as! NSArray)[0] as! NSDictionary)["LayerId"]
+            
+            let layerData = ((response?.dictionize()["array"] as! NSArray)[0] as! NSDictionary).bv_jsonString(withPrettyPrint: true)
+            
+            //LayerField.insertData(layerId: layerId as! Int32, layerData: layerData!)
+            
+            LayerField.getAllData()
         }
     }
     
@@ -78,7 +83,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 self.navigationController?.pushViewController(TL_ChangeHost_ViewController(), animated: true)
                 break
             case 2:
-                self.navigationController?.pushViewController(TL_ChangeHost_ViewController(), animated: true)
+                self.navigationController?.pushViewController(QL_Recover_ViewController(), animated: true)
                 break
             case 3:
                 self.navigationController?.pushViewController(QL_Setting_ViewController(), animated: true)

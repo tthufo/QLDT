@@ -119,7 +119,6 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
