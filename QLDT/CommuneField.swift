@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LayerField {
+class CommuneField {
     
     static func contexting() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -25,12 +25,12 @@ class LayerField {
             return
         }
         
-        let entity = NSEntityDescription.entity(forEntityName: "Field", in: contexting())
+        let entity = NSEntityDescription.entity(forEntityName: "Commune", in: contexting())
         let newUser = NSManagedObject(entity: entity!, insertInto: contexting())
         
         
-        newUser.setValue(layerId, forKey: "layerId")
-        newUser.setValue(layerData, forKey: "layerData")
+        newUser.setValue(layerId, forKey: "areaId")
+        newUser.setValue(layerData, forKey: "areaData")
         do {
             try contexting().save()
         } catch {
@@ -39,8 +39,8 @@ class LayerField {
     }
     
     static func getData(layerId: Int32) -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Field")
-        request.predicate = NSPredicate(format: "layerId = %i", layerId)
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Commune")
+        request.predicate = NSPredicate(format: "areaId = %i", layerId)
         request.returnsObjectsAsFaults = false
         var array = [NSManagedObject]()
         do {
@@ -56,7 +56,7 @@ class LayerField {
     }
     
     static func getAllData() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Field")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Commune")
         request.returnsObjectsAsFaults = false
         var array = [NSManagedObject]()
         do {
@@ -72,7 +72,7 @@ class LayerField {
     }
     
     static func deleteAllData() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Field")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Commune")
         request.returnsObjectsAsFaults = false
         do {
             let results = try contexting().fetch(request)
@@ -81,7 +81,7 @@ class LayerField {
                 contexting().delete(managedObjectData)
             }
         } catch let error as NSError {
-            print("Detele all data in Field error : \(error) \(error.userInfo)")
+            print("Detele all data in Commune error : \(error) \(error.userInfo)")
         }
     }
 }

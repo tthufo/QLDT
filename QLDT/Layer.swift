@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LayerField {
+class LayerList {
     
     static func contexting() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -25,7 +25,7 @@ class LayerField {
             return
         }
         
-        let entity = NSEntityDescription.entity(forEntityName: "Field", in: contexting())
+        let entity = NSEntityDescription.entity(forEntityName: "Layer", in: contexting())
         let newUser = NSManagedObject(entity: entity!, insertInto: contexting())
         
         
@@ -39,7 +39,7 @@ class LayerField {
     }
     
     static func getData(layerId: Int32) -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Field")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Layer")
         request.predicate = NSPredicate(format: "layerId = %i", layerId)
         request.returnsObjectsAsFaults = false
         var array = [NSManagedObject]()
@@ -56,7 +56,7 @@ class LayerField {
     }
     
     static func getAllData() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Field")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Layer")
         request.returnsObjectsAsFaults = false
         var array = [NSManagedObject]()
         do {
@@ -72,7 +72,7 @@ class LayerField {
     }
     
     static func deleteAllData() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Field")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Layer")
         request.returnsObjectsAsFaults = false
         do {
             let results = try contexting().fetch(request)
@@ -81,7 +81,7 @@ class LayerField {
                 contexting().delete(managedObjectData)
             }
         } catch let error as NSError {
-            print("Detele all data in Field error : \(error) \(error.userInfo)")
+            print("Detele all data in Layer error : \(error) \(error.userInfo)")
         }
     }
 }

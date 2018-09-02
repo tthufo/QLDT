@@ -25,6 +25,9 @@
 		FCCC3D66213C30540005D519 /* QL_Recover_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D64213C30540005D519 /* QL_Recover_ViewController.swift */; };
 		FCCC3D67213C30550005D519 /* QL_Recover_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCC3D65213C30540005D519 /* QL_Recover_ViewController.xib */; };
 		FCCC3D6E213C51330005D519 /* LayerField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D6D213C51330005D519 /* LayerField.swift */; };
+		FCCC3D70213C65BC0005D519 /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D6F213C65BC0005D519 /* Layer.swift */; };
+		FCCC3D72213C6D440005D519 /* CommuneField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D71213C6D440005D519 /* CommuneField.swift */; };
+		FCCC3D74213C6D540005D519 /* DistrictField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D73213C6D540005D519 /* DistrictField.swift */; };
 		FCE372F9213AA96D00F79D7A /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE372F8213AA96D00F79D7A /* Information.swift */; };
 		FCE6173E210EAA3500000438 /* QL_Home_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */; };
 		FCE6173F210EAA3500000438 /* QL_Home_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */; };
@@ -59,6 +62,9 @@
 		FCCC3D64213C30540005D519 /* QL_Recover_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Recover_ViewController.swift; sourceTree = "<group>"; };
 		FCCC3D65213C30540005D519 /* QL_Recover_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Recover_ViewController.xib; sourceTree = "<group>"; };
 		FCCC3D6D213C51330005D519 /* LayerField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerField.swift; sourceTree = "<group>"; };
+		FCCC3D6F213C65BC0005D519 /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
+		FCCC3D71213C6D440005D519 /* CommuneField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommuneField.swift; sourceTree = "<group>"; };
+		FCCC3D73213C6D540005D519 /* DistrictField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistrictField.swift; sourceTree = "<group>"; };
 		FCE372F8213AA96D00F79D7A /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QL_Home_ViewController.xib; path = QLDT/ViewControllers/QL_Home_ViewController.xib; sourceTree = SOURCE_ROOT; };
 		FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QL_Home_ViewController.swift; path = QLDT/ViewControllers/QL_Home_ViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -132,6 +138,9 @@
 				FC935AEA210CC2FD0067D480 /* QLDT-Bridging-Header.h */,
 				FCE61746210EAB0900000438 /* CoreDataStack.swift */,
 				FCCC3D6D213C51330005D519 /* LayerField.swift */,
+				FCCC3D71213C6D440005D519 /* CommuneField.swift */,
+				FCCC3D73213C6D540005D519 /* DistrictField.swift */,
+				FCCC3D6F213C65BC0005D519 /* Layer.swift */,
 				FC935AF2210CCD750067D480 /* Macro.swift */,
 			);
 			path = QLDT;
@@ -325,7 +334,9 @@
 			files = (
 				FC5386A6210C875600F00873 /* QLDT.xcdatamodeld in Sources */,
 				FC935AF3210CCD750067D480 /* Macro.swift in Sources */,
+				FCCC3D72213C6D440005D519 /* CommuneField.swift in Sources */,
 				FCE6173F210EAA3500000438 /* QL_Home_ViewController.swift in Sources */,
+				FCCC3D70213C65BC0005D519 /* Layer.swift in Sources */,
 				FCE61747210EAB0A00000438 /* CoreDataStack.swift in Sources */,
 				FCCC3D62213BFD2A0005D519 /* QL_Setting_ViewController.swift in Sources */,
 				FC5386A0210C875600F00873 /* ViewController.swift in Sources */,
@@ -336,6 +347,7 @@
 				FCE372F9213AA96D00F79D7A /* Information.swift in Sources */,
 				FCCC3D66213C30540005D519 /* QL_Recover_ViewController.swift in Sources */,
 				FC935AED210CC2FF0067D480 /* UIViewController+ViewCat.m in Sources */,
+				FCCC3D74213C6D540005D519 /* DistrictField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

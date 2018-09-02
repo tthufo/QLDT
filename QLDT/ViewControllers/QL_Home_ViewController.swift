@@ -23,9 +23,15 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.withCell("TG_Image_Cell")
         
         didRequestAllField()
+        
+        didRequestLayerList()
+        
+        didRequestCommune()
+        
+        didRequestDistrict()
     }
 
-    func didRequestUserInfo() {
+    func didRequestLayerList() {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/LayerGroup/list"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
@@ -40,7 +46,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 return
             }
             
-            print((response?.dictionize()["array"] as! NSArray)[0])
+//            print((response?.dictionize()["array"] as! NSArray)[0])
             
 //            self.add(response?.dictionize().reFormat() as! [AnyHashable : Any], andKey: "info")
         }
@@ -61,13 +67,63 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 return
             }
             
-            let layerId = ((response?.dictionize()["array"] as! NSArray)[0] as! NSDictionary)["LayerId"]
+            for layer in (response?.dictionize()["array"] as! NSArray) {
+                let layerId = (layer as! NSDictionary)["LayerId"]
+                
+                let layerData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
+                
+                //LayerField.insertData(layerId: layerId as! Int32, layerData: layerData!)
+            }
             
-            let layerData = ((response?.dictionize()["array"] as! NSArray)[0] as! NSDictionary).bv_jsonString(withPrettyPrint: true)
+//            let layerId = ((response?.dictionize()["array"] as! NSArray)[0] as! NSDictionary)["LayerId"]
+//
+//            let layerData = ((response?.dictionize()["array"] as! NSArray)[0] as! NSDictionary).bv_jsonString(withPrettyPrint: true)
             
             //LayerField.insertData(layerId: layerId as! Int32, layerData: layerData!)
             
-            LayerField.getAllData()
+            //print((response?.dictionize()["array"] as! NSArray).count)
+        }
+    }
+    
+    func didRequestCommune() {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Region/listCommune"),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "method":"GET",
+                                                   "overrideAlert":"1",
+                                                   "host":self], withCache: { (cache) in
+                                                    
+        }) { (response, errorCode, error, isValid) in
+            
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
+            
+            print((response?.dictionize()["array"] as! NSArray))
+            
+            //            self.add(response?.dictionize().reFormat() as! [AnyHashable : Any], andKey: "info")
+        }
+    }
+    
+    func didRequestDistrict() {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Region/listDistrict"),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "method":"GET",
+                                                   "overrideAlert":"1",
+                                                   "host":self], withCache: { (cache) in
+                                                    
+        }) { (response, errorCode, error, isValid) in
+            
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
+            
+            print((response?.dictionize()["array"] as! NSArray))
+            
+            //            self.add(response?.dictionize().reFormat() as! [AnyHashable : Any], andKey: "info")
         }
     }
     

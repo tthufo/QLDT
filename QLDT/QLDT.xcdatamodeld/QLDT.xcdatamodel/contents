@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Commune" representedClassName="Commune" syncable="YES" codeGenerationType="class">
+        <attribute name="areaData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="areaId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="District" representedClassName="District" syncable="YES" codeGenerationType="class">
+        <attribute name="areaData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="areaId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="Field" representedClassName="Field" syncable="YES" codeGenerationType="class">
+        <attribute name="layerData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="layerId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Layer" representedClassName="Layer" syncable="YES" codeGenerationType="class">
         <attribute name="layerData" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="layerId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
         <element name="Field" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Layer" positionX="-54" positionY="9" width="128" height="75"/>
+        <element name="District" positionX="-36" positionY="27" width="128" height="75"/>
+        <element name="Commune" positionX="-18" positionY="36" width="128" height="75"/>
     </elements>
 </model>
