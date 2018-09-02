@@ -20,6 +20,8 @@
 		FC935AF0210CC5880067D480 /* TL_ChangeHost_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC935AEE210CC5880067D480 /* TL_ChangeHost_ViewController.swift */; };
 		FC935AF1210CC5880067D480 /* TL_ChangeHost_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC935AEF210CC5880067D480 /* TL_ChangeHost_ViewController.xib */; };
 		FC935AF3210CCD750067D480 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC935AF2210CCD750067D480 /* Macro.swift */; };
+		FCCC3D62213BFD2A0005D519 /* QL_Setting_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D60213BFD290005D519 /* QL_Setting_ViewController.swift */; };
+		FCCC3D63213BFD2A0005D519 /* QL_Setting_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCC3D61213BFD2A0005D519 /* QL_Setting_ViewController.xib */; };
 		FCE372F9213AA96D00F79D7A /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE372F8213AA96D00F79D7A /* Information.swift */; };
 		FCE6173E210EAA3500000438 /* QL_Home_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */; };
 		FCE6173F210EAA3500000438 /* QL_Home_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */; };
@@ -49,6 +51,8 @@
 		FC935AEE210CC5880067D480 /* TL_ChangeHost_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TL_ChangeHost_ViewController.swift; sourceTree = "<group>"; };
 		FC935AEF210CC5880067D480 /* TL_ChangeHost_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TL_ChangeHost_ViewController.xib; sourceTree = "<group>"; };
 		FC935AF2210CCD750067D480 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
+		FCCC3D60213BFD290005D519 /* QL_Setting_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Setting_ViewController.swift; sourceTree = "<group>"; };
+		FCCC3D61213BFD2A0005D519 /* QL_Setting_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Setting_ViewController.xib; sourceTree = "<group>"; };
 		FCE372F8213AA96D00F79D7A /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QL_Home_ViewController.xib; path = QLDT/ViewControllers/QL_Home_ViewController.xib; sourceTree = SOURCE_ROOT; };
 		FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QL_Home_ViewController.swift; path = QLDT/ViewControllers/QL_Home_ViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -133,6 +137,8 @@
 				FC5386B4210CBB6600F00873 /* QL_LogIn_ViewController.xib */,
 				FC935AEE210CC5880067D480 /* TL_ChangeHost_ViewController.swift */,
 				FC935AEF210CC5880067D480 /* TL_ChangeHost_ViewController.xib */,
+				FCCC3D60213BFD290005D519 /* QL_Setting_ViewController.swift */,
+				FCCC3D61213BFD2A0005D519 /* QL_Setting_ViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -221,6 +227,7 @@
 				FC5386A3210C875600F00873 /* Main.storyboard in Resources */,
 				FC935AF1210CC5880067D480 /* TL_ChangeHost_ViewController.xib in Resources */,
 				FC5386B6210CBB6600F00873 /* QL_LogIn_ViewController.xib in Resources */,
+				FCCC3D63213BFD2A0005D519 /* QL_Setting_ViewController.xib in Resources */,
 				FCE61744210EAA4600000438 /* format.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +317,7 @@
 				FC935AF3210CCD750067D480 /* Macro.swift in Sources */,
 				FCE6173F210EAA3500000438 /* QL_Home_ViewController.swift in Sources */,
 				FCE61747210EAB0A00000438 /* CoreDataStack.swift in Sources */,
+				FCCC3D62213BFD2A0005D519 /* QL_Setting_ViewController.swift in Sources */,
 				FC5386A0210C875600F00873 /* ViewController.swift in Sources */,
 				FC53869E210C875600F00873 /* AppDelegate.swift in Sources */,
 				FC5386B5210CBB6600F00873 /* QL_LogIn_ViewController.swift in Sources */,

@@ -32,7 +32,7 @@ class TL_ChangeHost_ViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        
+        self.addValue(host.text, andKey: "url")
     }
     
     @IBAction func didPressBack() {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,10 +30,9 @@
                                 <constraint firstAttribute="width" constant="44" id="jXb-FK-MVX"/>
                                 <constraint firstAttribute="height" constant="44" id="l6Z-uI-QT9"/>
                             </constraints>
-                            <state key="normal" image="back_a"/>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trang chủ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hal-t4-SfZ">
-                            <rect key="frame" x="120" y="32" width="80" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QLGTVT Bắc Ninh" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hal-t4-SfZ">
+                            <rect key="frame" x="88.5" y="32" width="143" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="DyK-1n-F91"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="Hz9-42-EME"/>
@@ -48,12 +47,12 @@
                                 <constraint firstAttribute="height" constant="44" id="atk-Hk-6S0"/>
                                 <constraint firstAttribute="width" constant="44" id="wFv-xO-nv8"/>
                             </constraints>
-                            <state key="normal" image="back_a"/>
+                            <state key="normal" image="dot"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="string" keyPath="pListName" value="format"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="didPressMenu" destination="-1" eventType="touchUpInside" id="MHZ-0K-hjK"/>
+                                <action selector="didPressMenuWithMenu:" destination="-1" eventType="touchUpInside" id="jT6-B1-z71"/>
                             </connections>
                         </button>
                     </subviews>
@@ -101,6 +100,6 @@
         </view>
     </objects>
     <resources>
-        <image name="back_a" width="170" height="170"/>
+        <image name="dot" width="85" height="85"/>
     </resources>
 </document>

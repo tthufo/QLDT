@@ -14,13 +14,15 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
     @IBOutlet var collectionView: UICollectionView!
     
     var images: NSMutableArray? = ["","","","",""]
-        
+    
+    let menuList: NSArray = [["title":"Đồng bộ danh mục", "ima":"ic_pass"], ["title":"Thay đổi địa chỉ máy chủ", "ima":"ic_pass"], ["title":"Thay đổi mật khẩu", "ima":"ic_pass"], ["title":"Cài đặt", "ima":"ic_pass"], ["title":"Đăng xuất", "ima":"ic_pass"], ["title":"Thoát", "ima":"ic_pass"]]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         collectionView.withCell("TG_Image_Cell")
         
-        didRequestUserInfo()
+        didRequestAllField()
     }
 
     func didRequestUserInfo() {
@@ -31,8 +33,27 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                                                    "host":self], withCache: { (cache) in
                                                     
         }) { (response, errorCode, error, isValid) in
+                        
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
             
-            print(error)
+            print((response?.dictionize()["array"] as! NSArray)[0])
+            
+//            self.add(response?.dictionize().reFormat() as! [AnyHashable : Any], andKey: "info")
+        }
+    }
+    
+    func didRequestAllField() {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Layer/getAllWithField"),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "method":"GET",
+                                                   "overrideAlert":"1",
+                                                   "host":self], withCache: { (cache) in
+                                                    
+        }) { (response, errorCode, error, isValid) in
             
             if errorCode != "200" {
                 self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
@@ -40,14 +61,38 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 return
             }
             
-            print(response)
-            
-//            self.add(response?.dictionize().reFormat() as! [AnyHashable : Any], andKey: "info")
+            print(((response?.dictionize()["array"] as! NSArray)[2] as! NSDictionary)["LayerId"])
+
         }
     }
     
     @IBAction func didPressMenu(menu: DropButton) {
-
+        menu.didDropDown(withData: menuList as! [Any], andInfo: ["rect":CGRect.init(x: Int(self.screenWidth() - 225), y: -135, width: 225, height: 200)]) { (objc) in
+            
+            let indexing = (objc as! NSDictionary)["index"]
+            
+            switch (indexing as AnyObject).integerValue {
+            case 0:
+                break
+            case 1:
+                self.navigationController?.pushViewController(TL_ChangeHost_ViewController(), animated: true)
+                break
+            case 2:
+                self.navigationController?.pushViewController(TL_ChangeHost_ViewController(), animated: true)
+                break
+            case 3:
+                self.navigationController?.pushViewController(QL_Setting_ViewController(), animated: true)
+                break
+            case 4:
+                self.navigationController?.popToRootViewController(animated: true)
+                break
+            case 5:
+                exit(0)
+                break
+            default :
+                break
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
