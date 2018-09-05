@@ -13,12 +13,6 @@ class Information: NSObject {
     
     static var userInfo: NSDictionary?
     
-    
-    static var start: Date!
-    
-    static var end: Date!
-
-    
     static func saveToken() {
         
         if self.getValue("token") != nil {

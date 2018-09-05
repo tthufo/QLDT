@@ -13,7 +13,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
 
     @IBOutlet var collectionView: UICollectionView!
     
-    var images: NSMutableArray? = ["","","","",""]
+    var images: NSMutableArray? = ["","",""]
     
     let menuList: NSArray = [["title":"Đồng bộ danh mục", "ima":"ic_pass"], ["title":"Thay đổi địa chỉ máy chủ", "ima":"ic_pass"], ["title":"Thay đổi mật khẩu", "ima":"ic_pass"], ["title":"Cài đặt", "ima":"ic_pass"], ["title":"Đăng xuất", "ima":"ic_pass"], ["title":"Thoát", "ima":"ic_pass"]]
     
@@ -46,9 +46,13 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 return
             }
             
-//            print((response?.dictionize()["array"] as! NSArray)[0])
-            
-//            self.add(response?.dictionize().reFormat() as! [AnyHashable : Any], andKey: "info")
+            for layer in (response?.dictionize()["array"] as! NSArray) {
+                let layerId = (layer as! NSDictionary)["Id"]
+                
+                let layerData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
+                
+                LayerList.insertData(layerId: layerId as! Int32, layerData: layerData!)
+            }
         }
     }
     
@@ -72,16 +76,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 
                 let layerData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
                 
-                //LayerField.insertData(layerId: layerId as! Int32, layerData: layerData!)
+                LayerField.insertData(layerId: layerId as! Int32, layerData: layerData!)
             }
-            
-//            let layerId = ((response?.dictionize()["array"] as! NSArray)[0] as! NSDictionary)["LayerId"]
-//
-//            let layerData = ((response?.dictionize()["array"] as! NSArray)[0] as! NSDictionary).bv_jsonString(withPrettyPrint: true)
-            
-            //LayerField.insertData(layerId: layerId as! Int32, layerData: layerData!)
-            
-            //print((response?.dictionize()["array"] as! NSArray).count)
         }
     }
     
@@ -161,7 +157,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Int(screenWidth()/2 - 0), height: Int(screenWidth()/2 - 0))
+        return CGSize(width: Int(screenWidth()/2 + 50), height: Int(screenWidth()/2 + 50))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -186,7 +182,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        self.navigationController?.pushViewController(QL_Info_Collector_ViewController(), animated: true)
     }
     
     override func didReceiveMemoryWarning() {

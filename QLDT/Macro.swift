@@ -62,6 +62,10 @@ func root() -> UIViewController {
     return (root.window?.rootViewController)!
 }
 
+func logged() -> Bool {
+    return Information.token != nil
+}
+
 //func user() -> TG_User_ViewController {
 //    return ((root() as! UINavigationController).viewControllers.first as! TG_Root_ViewController).viewControllers?.last as! TG_User_ViewController
 //}

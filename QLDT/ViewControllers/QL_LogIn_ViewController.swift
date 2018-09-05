@@ -25,6 +25,10 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if logged() {
+            self.navigationController?.pushViewController(QL_Home_ViewController(), animated: false)
+        }
+        
         let appInfo = self.appInfor()! as NSDictionary
         
         app.text = "Phiên bản %@".format(parameters: appInfo.getValueFromKey("majorVersion"))
