@@ -13,6 +13,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
 
     @IBOutlet var collectionView: UICollectionView!
     
+    var timer: Timer?
+
     var images: NSMutableArray? = ["","",""]
     
     let menuList: NSArray = [["title":"Đồng bộ danh mục", "ima":"ic_pass"], ["title":"Thay đổi địa chỉ máy chủ", "ima":"ic_pass"], ["title":"Thay đổi mật khẩu", "ima":"ic_pass"], ["title":"Cài đặt", "ima":"ic_pass"], ["title":"Đăng xuất", "ima":"ic_pass"], ["title":"Thoát", "ima":"ic_pass"]]
@@ -22,6 +24,16 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
 
         collectionView.withCell("TG_Image_Cell")
         
+        syncing()
+    }
+    
+    func syncing() {
+        if LayerList.getAllData().count == 0 {
+            self.showSVHUD("Đang cập nhật thông tin từ trang chủ", andOption: 0)
+            
+            startTimer()
+        }
+        
         didRequestAllField()
         
         didRequestLayerList()
@@ -30,13 +42,33 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         didRequestDistrict()
     }
+    
+    func startTimer() {
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+        }
+        timer = Timer.scheduledTimer(timeInterval: 3.0,
+                                     target: self,
+                                     selector: #selector(eventWith(timer:)),
+                                     userInfo: nil,
+                                     repeats: false)
+    }
+    
+    @objc func eventWith(timer: Timer!) {
+        self.hideSVHUD()
+    }
 
+    
     func didRequestLayerList() {
+        if LayerList.getAllData().count != 0 {
+            return
+        }
+        
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/LayerGroup/list"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
-                                                   "overrideAlert":"1",
-                                                   "host":self], withCache: { (cache) in
+                                                   "overrideAlert":"1"], withCache: { (cache) in
                                                     
         }) { (response, errorCode, error, isValid) in
                         
@@ -57,11 +89,14 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func didRequestAllField() {
+        if LayerField.getAllData().count != 0 {
+            return
+        }
+        
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Layer/getAllWithField"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
-                                                   "overrideAlert":"1",
-                                                   "host":self], withCache: { (cache) in
+                                                   "overrideAlert":"1"], withCache: { (cache) in
                                                     
         }) { (response, errorCode, error, isValid) in
             
@@ -82,11 +117,14 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func didRequestCommune() {
+        if CommuneField.getAllData().count != 0 {
+            return
+        }
+        
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Region/listCommune"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
-                                                   "overrideAlert":"1",
-                                                   "host":self], withCache: { (cache) in
+                                                   "overrideAlert":"1"], withCache: { (cache) in
                                                     
         }) { (response, errorCode, error, isValid) in
             
@@ -96,18 +134,25 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 return
             }
             
-            print((response?.dictionize()["array"] as! NSArray))
-            
-            //            self.add(response?.dictionize().reFormat() as! [AnyHashable : Any], andKey: "info")
+            for layer in (response?.dictionize()["array"] as! NSArray) {
+                let communeId = (layer as! NSDictionary)["area_id"]
+                
+                let communeData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
+                
+                CommuneField.insertData(layerId: communeId as! Int32, layerData: communeData!)
+            }
         }
     }
     
     func didRequestDistrict() {
+        if DistrictField.getAllData().count != 0 {
+            return
+        }
+        
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Region/listDistrict"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
-                                                   "overrideAlert":"1",
-                                                   "host":self], withCache: { (cache) in
+                                                   "overrideAlert":"1"], withCache: { (cache) in
                                                     
         }) { (response, errorCode, error, isValid) in
             
@@ -117,9 +162,13 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 return
             }
             
-            print((response?.dictionize()["array"] as! NSArray))
-            
-            //            self.add(response?.dictionize().reFormat() as! [AnyHashable : Any], andKey: "info")
+            for layer in (response?.dictionize()["array"] as! NSArray) {
+                let districtId = (layer as! NSDictionary)["area_id"]
+                
+                let districtData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
+                
+                DistrictField.insertData(layerId: districtId as! Int32, layerData: districtData!)
+            }
         }
     }
     
@@ -130,6 +179,11 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
             
             switch (indexing as AnyObject).integerValue {
             case 0:
+                LayerField.deleteAllData()
+                LayerList.deleteAllData()
+                CommuneField.deleteAllData()
+                DistrictField.deleteAllData()
+                self.syncing()
                 break
             case 1:
                 self.navigationController?.pushViewController(TL_ChangeHost_ViewController(), animated: true)
