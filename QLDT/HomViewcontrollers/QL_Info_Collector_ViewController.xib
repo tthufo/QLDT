@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Info_Collector_ViewController" customModule="QLDT" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="Ibv-zx-2Af" id="bjf-ag-Sau"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,7 +36,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu thập dữ liệu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPF-n6-hgB">
-                            <rect key="frame" x="96" y="32" width="130" height="21"/>
+                            <rect key="frame" x="95" y="32" width="130" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="AjK-yU-vhk"/>
                                 <constraint firstAttribute="height" constant="21" id="QyP-sO-oCX"/>
@@ -57,12 +58,24 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="flex" value=""/>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ibv-zx-2Af">
+                    <rect key="frame" x="0.0" y="84" width="320" height="396"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="mJ5-1O-yIm"/>
+                        <outlet property="delegate" destination="-1" id="ORg-hd-Oz0"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="gJJ-Bk-bdC" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="316-VW-Jzp"/>
+                <constraint firstItem="Ibv-zx-2Af" firstAttribute="top" secondItem="gJJ-Bk-bdC" secondAttribute="bottom" id="6CO-Eq-ilX"/>
+                <constraint firstItem="Ibv-zx-2Af" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9uN-4J-cTL"/>
+                <constraint firstItem="Ibv-zx-2Af" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="RKu-TF-JzC"/>
                 <constraint firstItem="gJJ-Bk-bdC" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Y5C-hy-2Ts"/>
                 <constraint firstItem="gJJ-Bk-bdC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kSM-hP-a3Y"/>
+                <constraint firstItem="Ibv-zx-2Af" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="w6L-rr-atq"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
