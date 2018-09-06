@@ -215,7 +215,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Int(screenWidth()/2 + 50), height: Int(screenWidth()/2 + 50))
+        return CGSize(width: Int(screenHeight()/3 - 10), height: Int(screenHeight()/3 - 30))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -234,8 +234,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         let image = (self.withView(cell, tag: 11) as! UIImageView)
         
-        image.withBorder(["Bcorner":3, "Bwidth":0.5, "Bhex":"#147EFB"])
-        
+        image.withBorder(["Bwidth":"3", "Bcolor":UIColor.red])
+
         image.image = UIImage.init(named: dict["img"] as! String)
         
         (self.withView(cell, tag: 12) as! UILabel).text = dict["title"] as? String

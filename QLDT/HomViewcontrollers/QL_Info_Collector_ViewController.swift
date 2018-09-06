@@ -31,7 +31,7 @@ class QL_Info_Collector_ViewController: UIViewController {
         
         dataList = type == 0 ? images : type == 1 ? images1 : images2
         
-        tableView.withCell("TG_Drop_Cell")
+        tableView.withCell("TG_Cell")
     }
 
     @IBAction func didPressBack() {
@@ -46,7 +46,7 @@ class QL_Info_Collector_ViewController: UIViewController {
 extension QL_Info_Collector_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return 54
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,7 +54,7 @@ extension QL_Info_Collector_ViewController: UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TG_Drop_Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TG_Cell", for: indexPath)
         
         let data = dataList![indexPath.row] as! NSDictionary
         
@@ -67,6 +67,20 @@ extension QL_Info_Collector_ViewController: UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let configData = NSMutableDictionary()
+
+        let data = dataList![indexPath.row] as! NSDictionary
+        
+        configData.addEntries(from: data as! [AnyHashable : Any])
+        
+        let extraData = ["url":"", "online":1] as [String : Any]
+        
+        let commonList = QL_Common_List_ViewController()
+        
+        commonList.configType = configData
+        
+        self.navigationController?.pushViewController(commonList, animated: true)
     }
 }
 

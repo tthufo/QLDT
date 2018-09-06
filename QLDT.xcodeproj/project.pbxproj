@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04E7283921410F8100C40CCE /* TG_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E7283821410F8100C40CCE /* TG_Cell.xib */; };
+		04E7283D214123D100C40CCE /* QL_Common_List_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7283B214123D100C40CCE /* QL_Common_List_ViewController.swift */; };
+		04E7283E214123D100C40CCE /* QL_Common_List_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E7283C214123D100C40CCE /* QL_Common_List_ViewController.xib */; };
 		2DD18908589E68B3E352589B /* Pods_QLDT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322D50A53DFEC8CC6483F8F4 /* Pods_QLDT.framework */; };
 		FC53869E210C875600F00873 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53869D210C875600F00873 /* AppDelegate.swift */; };
 		FC5386A0210C875600F00873 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53869F210C875600F00873 /* ViewController.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04E7283821410F8100C40CCE /* TG_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Cell.xib; sourceTree = "<group>"; };
+		04E7283B214123D100C40CCE /* QL_Common_List_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Common_List_ViewController.swift; sourceTree = "<group>"; };
+		04E7283C214123D100C40CCE /* QL_Common_List_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Common_List_ViewController.xib; sourceTree = "<group>"; };
 		0BD10565D939699D9C0722CC /* Pods-QLDT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDT.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDT/Pods-QLDT.release.xcconfig"; sourceTree = "<group>"; };
 		322D50A53DFEC8CC6483F8F4 /* Pods_QLDT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C942F17FE159246DBF6592F9 /* Pods-QLDT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDT/Pods-QLDT.debug.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04E7283A214123AB00C40CCE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				04E7283B214123D100C40CCE /* QL_Common_List_ViewController.swift */,
+				04E7283C214123D100C40CCE /* QL_Common_List_ViewController.xib */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		637C09360AB8948283D39DDC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +143,7 @@
 		FC53869C210C875600F00873 /* QLDT */ = {
 			isa = PBXGroup;
 			children = (
+				04E7283A214123AB00C40CCE /* Common */,
 				FCE6173B210EAA2700000438 /* HomViewcontrollers */,
 				FC5386B2210CB8B900F00873 /* ViewControllers */,
 				FC53869D210C875600F00873 /* AppDelegate.swift */,
@@ -171,6 +187,7 @@
 				FCE372F8213AA96D00F79D7A /* Information.swift */,
 				FCE61741210EAA4600000438 /* format.plist */,
 				FCE61740210EAA4600000438 /* TG_Drop_Cell.xib */,
+				04E7283821410F8100C40CCE /* TG_Cell.xib */,
 				FCE61742210EAA4600000438 /* TG_Image_Cell.xib */,
 				FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */,
 				FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */,
@@ -247,6 +264,7 @@
 				FCE61745210EAA4600000438 /* TG_Image_Cell.xib in Resources */,
 				FCE61743210EAA4600000438 /* TG_Drop_Cell.xib in Resources */,
 				FC5386A8210C875600F00873 /* Assets.xcassets in Resources */,
+				04E7283E214123D100C40CCE /* QL_Common_List_ViewController.xib in Resources */,
 				FCCC3D67213C30550005D519 /* QL_Recover_ViewController.xib in Resources */,
 				FCAF7AC121404BC4007A1181 /* QL_Info_Collector_ViewController.xib in Resources */,
 				FCE6173E210EAA3500000438 /* QL_Home_ViewController.xib in Resources */,
@@ -255,6 +273,7 @@
 				FC5386B6210CBB6600F00873 /* QL_LogIn_ViewController.xib in Resources */,
 				FCCC3D63213BFD2A0005D519 /* QL_Setting_ViewController.xib in Resources */,
 				FCE61744210EAA4600000438 /* format.plist in Resources */,
+				04E7283921410F8100C40CCE /* TG_Cell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +360,7 @@
 			files = (
 				FC5386A6210C875600F00873 /* QLDT.xcdatamodeld in Sources */,
 				FCAF7AC021404BC4007A1181 /* QL_Info_Collector_ViewController.swift in Sources */,
+				04E7283D214123D100C40CCE /* QL_Common_List_ViewController.swift in Sources */,
 				FC935AF3210CCD750067D480 /* Macro.swift in Sources */,
 				FCCC3D72213C6D440005D519 /* CommuneField.swift in Sources */,
 				FCE6173F210EAA3500000438 /* QL_Home_ViewController.swift in Sources */,
