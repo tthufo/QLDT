@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Info_Collector_ViewController" customModule="QLDT" customModuleProvider="target">
             <connections>
                 <outlet property="tableView" destination="Ibv-zx-2Af" id="bjf-ag-Sau"/>
+                <outlet property="titleLabel" destination="aPF-n6-hgB" id="z7q-a9-M1e"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,8 +36,8 @@
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="5ow-L9-1zO"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu thập dữ liệu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPF-n6-hgB">
-                            <rect key="frame" x="95" y="32" width="130" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPF-n6-hgB">
+                            <rect key="frame" x="155" y="32" width="10" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="AjK-yU-vhk"/>
                                 <constraint firstAttribute="height" constant="21" id="QyP-sO-oCX"/>

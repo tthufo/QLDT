@@ -36,6 +36,10 @@ class QL_Recover_ViewController: UIViewController {
         return true
     }
     
+    @IBAction func didPressBack() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func didRecoverPass() {
         if !old.hasText || !new.hasText || !reNew.hasText {
             self.showToast("Bạn phải nhập đủ thông tin", andPos: 0)
