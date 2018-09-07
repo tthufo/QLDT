@@ -22,7 +22,7 @@ class QL_Info_Collector_ViewController: UIViewController {
     
     var images1: NSMutableArray? = [["title":"Tai nạn", "img":"ic_acc"],["title":"Sự cố", "img":"ic_report"],["title":"Phản hồi", "img":"ic_speaker"]]
     
-    var images2: NSMutableArray? = [["title":"Kiểm tra", "img":"ic_888"],["title":"Bảo trì", "img":"ic_999"]]
+    var images2: NSMutableArray? = [["title":"Kiểm tra", "img":"ic_888", "url":"api/Maintain/listInspection"],["title":"Bảo trì", "img":"ic_999", "url":"api/Maintain/listMaintenance"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,15 +68,14 @@ extension QL_Info_Collector_ViewController: UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let configData = NSMutableDictionary()
-
         let data = dataList![indexPath.row] as! NSDictionary
+
+        let configData = NSMutableDictionary()
         
         configData.addEntries(from: data as! [AnyHashable : Any])
         
-        let extraData = ["url":"", "online":1] as [String : Any]
-        
         let commonList = QL_Common_List_ViewController()
+        
         
         commonList.configType = configData
         

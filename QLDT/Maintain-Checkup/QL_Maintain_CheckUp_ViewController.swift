@@ -1,14 +1,14 @@
 //
-//  QL_Common_List_ViewController.swift
+//  GL_Maintain_CheckUp_ViewController.swift
 //  QLDT
 //
-//  Created by Mac on 9/6/18.
+//  Created by Mac on 9/7/18.
 //  Copyright © 2018 Thanh Hai Tran. All rights reserved.
 //
 
 import UIKit
 
-class QL_Common_List_ViewController: UIViewController {
+class QL_Maintain_CheckUp_ViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     
@@ -16,25 +16,39 @@ class QL_Common_List_ViewController: UIViewController {
     
     var dataList: NSMutableArray!
     
-    var configType: NSDictionary!
+    var checkUpData: NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        titleLabel.text = configType.getValueFromKey("title")
         
-        tableView.withCell("TG_Cell")
+        titleLabel.text = checkUpData.getValueFromKey("Name")
+        
+        tableView.withCell("QL_Check_Cell")
         
         dataList = NSMutableArray()
         
-        if configType.response(forKey: "url") {
-            didRequest()
-        }
+        didRequest()
     }
-
+    
+    //http://117.4.242.159:3333/api/Maintain/detail?id=1039
+    
+    //http://117.4.242.159:3333/api/Maintain/listChat?id=1041
+    
+//    http://117.4.242.159:3333/api/Maintain/putChatMessage   {
+//    "Id": 0,
+//    "MaintenanceId": 1041,
+//    "Message": "dsfdsfd",
+//    "Time": "2018-09-07T10:10:08Z",
+//    "User": null,
+//    "UserId": "f92db026-7c7d-4143-98bf-a572da41c950"
+//}
+    // IsMaintenance
+    
+    
     func didRequest() {
-        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/detail"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "Getparam":["id":checkUpData["Id"]],
                                                    "method":"GET",
                                                    "overrideAlert":"1"], withCache: { (cache) in
                                                     
@@ -45,37 +59,46 @@ class QL_Common_List_ViewController: UIViewController {
                 
                 return
             }
-        
-            self.dataList.removeAllObjects()
             
-            self.dataList.addObjects(from: response?.dictionize()["array"] as! [Any])
+            //self.dataList.removeAllObjects()
             
-            self.tableView.reloadData()
+           //// self.dataList.addObjects(from: response?.dictionize()["array"] as! [Any])
+            
+            //self.tableView.reloadData()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
     }
     
     @IBAction func didPressBack() {
         self.navigationController?.popViewController(animated: true)
     }
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }
 
-extension QL_Common_List_ViewController: UITableViewDataSource, UITableViewDelegate {
+extension QL_Maintain_CheckUp_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 54
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataList.count
+        return 2//dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TG_Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QL_Check_Cell", for: indexPath)
         
         if dataList.count == 0 {
             return cell
@@ -83,9 +106,7 @@ extension QL_Common_List_ViewController: UITableViewDataSource, UITableViewDeleg
         
         let data = dataList![indexPath.row] as! NSDictionary
         
-        (self.withView(cell, tag: 104) as! UIImageView).image = UIImage.init(named: (configType["img"] as? String)!)
-        
-        (self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data["Name"] as? String)!)
+       
         
         return cell
     }
@@ -93,13 +114,6 @@ extension QL_Common_List_ViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let data = dataList![indexPath.row] as! NSDictionary
-
-        let checkUp = QL_Maintain_CheckUp_ViewController()
-        
-        checkUp.checkUpData = data
-        
-        self.navigationController?.pushViewController(checkUp, animated: true)
     }
 }
 
