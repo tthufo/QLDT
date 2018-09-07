@@ -10,6 +10,8 @@
 		044F715121421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F714F21421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.swift */; };
 		044F715221421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044F715021421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.xib */; };
 		044F7154214229CB003CB99A /* QL_Check_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044F7153214229CB003CB99A /* QL_Check_Cell.xib */; };
+		044F715721427FC9003CB99A /* QL_Comment_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044F715521427FC9003CB99A /* QL_Comment_ViewController.swift */; };
+		044F715821427FC9003CB99A /* QL_Comment_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044F715621427FC9003CB99A /* QL_Comment_ViewController.xib */; };
 		04E7283921410F8100C40CCE /* TG_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E7283821410F8100C40CCE /* TG_Cell.xib */; };
 		04E7283D214123D100C40CCE /* QL_Common_List_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7283B214123D100C40CCE /* QL_Common_List_ViewController.swift */; };
 		04E7283E214123D100C40CCE /* QL_Common_List_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E7283C214123D100C40CCE /* QL_Common_List_ViewController.xib */; };
@@ -49,6 +51,8 @@
 		044F714F21421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Maintain_CheckUp_ViewController.swift; sourceTree = "<group>"; };
 		044F715021421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Maintain_CheckUp_ViewController.xib; sourceTree = "<group>"; };
 		044F7153214229CB003CB99A /* QL_Check_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Check_Cell.xib; sourceTree = "<group>"; };
+		044F715521427FC9003CB99A /* QL_Comment_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Comment_ViewController.swift; sourceTree = "<group>"; };
+		044F715621427FC9003CB99A /* QL_Comment_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Comment_ViewController.xib; sourceTree = "<group>"; };
 		04E7283821410F8100C40CCE /* TG_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Cell.xib; sourceTree = "<group>"; };
 		04E7283B214123D100C40CCE /* QL_Common_List_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Common_List_ViewController.swift; sourceTree = "<group>"; };
 		04E7283C214123D100C40CCE /* QL_Common_List_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Common_List_ViewController.xib; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 				044F714F21421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.swift */,
 				044F715021421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.xib */,
 				044F7153214229CB003CB99A /* QL_Check_Cell.xib */,
+				044F715521427FC9003CB99A /* QL_Comment_ViewController.swift */,
+				044F715621427FC9003CB99A /* QL_Comment_ViewController.xib */,
 			);
 			path = "Maintain-Checkup";
 			sourceTree = "<group>";
@@ -286,6 +292,7 @@
 				FCAF7AC121404BC4007A1181 /* QL_Info_Collector_ViewController.xib in Resources */,
 				FCE6173E210EAA3500000438 /* QL_Home_ViewController.xib in Resources */,
 				FC5386A3210C875600F00873 /* Main.storyboard in Resources */,
+				044F715821427FC9003CB99A /* QL_Comment_ViewController.xib in Resources */,
 				FC935AF1210CC5880067D480 /* TL_ChangeHost_ViewController.xib in Resources */,
 				FC5386B6210CBB6600F00873 /* QL_LogIn_ViewController.xib in Resources */,
 				044F7154214229CB003CB99A /* QL_Check_Cell.xib in Resources */,
@@ -396,6 +403,7 @@
 				FCCC3D66213C30540005D519 /* QL_Recover_ViewController.swift in Sources */,
 				FC935AED210CC2FF0067D480 /* UIViewController+ViewCat.m in Sources */,
 				FCCC3D74213C6D540005D519 /* DistrictField.swift in Sources */,
+				044F715721427FC9003CB99A /* QL_Comment_ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

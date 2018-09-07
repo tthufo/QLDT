@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Maintain_CheckUp_ViewController" customModule="QLDT" customModuleProvider="target">
             <connections>
+                <outlet property="bar" destination="pNW-t4-RkM" id="jgS-q2-2Al"/>
+                <outlet property="chat" destination="x1A-r8-9PR" id="78q-NS-e5Z"/>
                 <outlet property="tableView" destination="hOR-WA-6Em" id="n0s-IX-uE9"/>
                 <outlet property="titleLabel" destination="NbZ-yD-0uP" id="3ju-rY-ksz"/>
                 <outlet property="view" destination="oOx-Pg-4Ig" id="6zv-Qk-ize"/>
@@ -46,12 +48,25 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1A-r8-9PR">
+                            <rect key="frame" x="276" y="20" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="0pE-FW-wfD"/>
+                                <constraint firstAttribute="height" constant="44" id="ebR-ar-Ylv"/>
+                            </constraints>
+                            <state key="normal" image="back_a"/>
+                            <connections>
+                                <action selector="didPressChat" destination="-1" eventType="touchUpInside" id="o7Q-f6-v1m"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.90980392160000001" green="0.49019607840000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="x1A-r8-9PR" secondAttribute="trailing" id="0Au-Bu-4yL"/>
                         <constraint firstItem="NbZ-yD-0uP" firstAttribute="centerX" secondItem="3HH-68-CoL" secondAttribute="centerX" id="1PG-ih-d4H"/>
                         <constraint firstAttribute="bottom" secondItem="HiB-Do-vJC" secondAttribute="bottom" id="A6R-f9-4AE"/>
                         <constraint firstAttribute="height" constant="64" id="Jx6-44-S8O"/>
+                        <constraint firstAttribute="bottom" secondItem="x1A-r8-9PR" secondAttribute="bottom" id="jf2-S7-w5R"/>
                         <constraint firstItem="HiB-Do-vJC" firstAttribute="leading" secondItem="3HH-68-CoL" secondAttribute="leading" id="mbw-ao-Mc8"/>
                         <constraint firstAttribute="bottom" secondItem="NbZ-yD-0uP" secondAttribute="bottom" constant="11" id="rGa-DF-Pcc"/>
                     </constraints>
@@ -69,11 +84,57 @@
                         <outlet property="delegate" destination="-1" id="ST9-Ih-Pq7"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VkL-8A-lKO">
+                    <rect key="frame" x="0.0" y="432" width="320" height="48"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDg-sa-XyT">
+                            <rect key="frame" x="28" y="7" width="82" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="Hủy bỏ">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="pVZ-T2-nie"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tl3-69-qtO">
+                            <rect key="frame" x="213" y="7" width="82" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.90980392160000001" green="0.49019607840000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="Cập nhật">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="didPressUpdate" destination="-1" eventType="touchUpInside" id="6O4-J6-DCS"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="VSh-bF-vjw"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="VkL-8A-lKO" firstAttribute="trailing" secondItem="i4O-mx-CQ6" secondAttribute="trailing" id="1Ak-i8-AMT"/>
                 <constraint firstItem="hOR-WA-6Em" firstAttribute="bottom" secondItem="i4O-mx-CQ6" secondAttribute="bottom" id="1nF-lk-XVM"/>
                 <constraint firstItem="hOR-WA-6Em" firstAttribute="trailing" secondItem="i4O-mx-CQ6" secondAttribute="trailing" id="3DW-Pw-rnq"/>
+                <constraint firstItem="VkL-8A-lKO" firstAttribute="leading" secondItem="i4O-mx-CQ6" secondAttribute="leading" id="Ab9-ce-4Hb"/>
+                <constraint firstItem="VkL-8A-lKO" firstAttribute="bottom" secondItem="i4O-mx-CQ6" secondAttribute="bottom" id="AgW-hc-BN8"/>
                 <constraint firstItem="3HH-68-CoL" firstAttribute="leading" secondItem="i4O-mx-CQ6" secondAttribute="leading" id="TLM-6g-0DC"/>
                 <constraint firstItem="3HH-68-CoL" firstAttribute="trailing" secondItem="i4O-mx-CQ6" secondAttribute="trailing" id="ZJb-xA-4Mf"/>
                 <constraint firstItem="3HH-68-CoL" firstAttribute="top" secondItem="i4O-mx-CQ6" secondAttribute="top" id="iIN-U7-Qpm"/>
@@ -82,6 +143,28 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="i4O-mx-CQ6"/>
+            <point key="canvasLocation" x="-85" y="-58"/>
+        </view>
+        <view contentMode="scaleToFill" id="pNW-t4-RkM">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pkh-6t-74D">
+                    <rect key="frame" x="259" y="0.0" width="61" height="45"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Thoát">
+                        <color key="titleColor" red="0.90980392160000001" green="0.49019607840000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="didPressDismiss" destination="-1" eventType="touchUpInside" id="GlC-a4-sdO"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="UA2-RQ-sAy"/>
+            <point key="canvasLocation" x="-805" y="346"/>
         </view>
     </objects>
     <resources>

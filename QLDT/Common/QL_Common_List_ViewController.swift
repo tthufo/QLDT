@@ -36,7 +36,10 @@ class QL_Common_List_ViewController: UIViewController {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
-                                                   "overrideAlert":"1"], withCache: { (cache) in
+                                                   "overrideLoading":1,
+                                                   "overrideAlert":1,
+                                                   "host":self
+                                                   ], withCache: { (cache) in
                                                     
         }) { (response, errorCode, error, isValid) in
             
