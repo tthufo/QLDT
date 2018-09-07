@@ -38,7 +38,7 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
         
         tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 50, right: 0)
         
-        chat.isHidden = isMaintain()
+        chat.isHidden = !isMaintain()
         
         didRequest()
     }
