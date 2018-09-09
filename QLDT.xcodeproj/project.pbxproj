@@ -45,6 +45,7 @@
 		FCE61744210EAA4600000438 /* format.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCE61741210EAA4600000438 /* format.plist */; };
 		FCE61745210EAA4600000438 /* TG_Image_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE61742210EAA4600000438 /* TG_Image_Cell.xib */; };
 		FCE61747210EAB0A00000438 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE61746210EAB0900000438 /* CoreDataStack.swift */; };
+		FCFA5EE021458E15003D5442 /* QL_Comment_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFA5EDF21458E15003D5442 /* QL_Comment_Cell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		FCE61741210EAA4600000438 /* format.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = format.plist; path = QLDT/ViewControllers/format.plist; sourceTree = SOURCE_ROOT; };
 		FCE61742210EAA4600000438 /* TG_Image_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TG_Image_Cell.xib; path = QLDT/ViewControllers/TG_Image_Cell.xib; sourceTree = SOURCE_ROOT; };
 		FCE61746210EAB0900000438 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		FCFA5EDF21458E15003D5442 /* QL_Comment_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Comment_Cell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				044F7153214229CB003CB99A /* QL_Check_Cell.xib */,
 				044F715521427FC9003CB99A /* QL_Comment_ViewController.swift */,
 				044F715621427FC9003CB99A /* QL_Comment_ViewController.xib */,
+				FCFA5EDF21458E15003D5442 /* QL_Comment_Cell.xib */,
 			);
 			path = "Maintain-Checkup";
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				FC5386A8210C875600F00873 /* Assets.xcassets in Resources */,
 				04E7283E214123D100C40CCE /* QL_Common_List_ViewController.xib in Resources */,
 				FCCC3D67213C30550005D519 /* QL_Recover_ViewController.xib in Resources */,
+				FCFA5EE021458E15003D5442 /* QL_Comment_Cell.xib in Resources */,
 				FCAF7AC121404BC4007A1181 /* QL_Info_Collector_ViewController.xib in Resources */,
 				FCE6173E210EAA3500000438 /* QL_Home_ViewController.xib in Resources */,
 				FC5386A3210C875600F00873 /* Main.storyboard in Resources */,

@@ -104,9 +104,9 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
             
             self.addValue(response?.accessToken, andKey: "token")
             
-            Information.saveToken()
+            self.addValue(self.uName.text, andKey: "userName")
             
-            print(Information.token)
+            Information.saveToken()
             
             self.navigationController?.pushViewController(QL_Home_ViewController(), animated: true)
         }

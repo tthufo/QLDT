@@ -13,12 +13,20 @@ class Information: NSObject {
     
     static var userInfo: NSDictionary?
     
+    static var userName: String?
+    
     static func saveToken() {
         
         if self.getValue("token") != nil {
             token = "Bearer %@".format(parameters: self.getValue("token"))
         } else {
             token = nil
+        }
+        
+        if self.getValue("userName") != nil {
+            userName = self.getValue("userName")
+        } else {
+            userName = nil
         }
     }
     

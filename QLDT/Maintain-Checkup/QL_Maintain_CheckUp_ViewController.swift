@@ -88,7 +88,6 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
         }
     }
     
-    
     func didRequestUpdate() {
         
         let postData = NSMutableArray()
@@ -151,7 +150,11 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
     }
     
     @IBAction func didPressChat() {
-        self.present(QL_Comment_ViewController(), animated: true) {
+        let comment = QL_Comment_ViewController()
+        
+        comment.checkUpData = self.checkUpData
+        
+        self.present(comment, animated: true) {
             
         }
     }

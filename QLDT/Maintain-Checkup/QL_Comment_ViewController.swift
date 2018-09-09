@@ -14,31 +14,95 @@ class QL_Comment_ViewController: UIViewController {
     
     @IBOutlet var titleLabel: UILabel!
     
-    @IBOutlet var bar: UIView!
-    
-    @IBOutlet var chat: UIButton!
-    
     var dataList: NSMutableArray!
     
     var checkUpData: NSDictionary!
     
     var kb: KeyBoard!
     
+    @IBOutlet var bottom: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.withCell("QL_Check_Cell")
+        kb = KeyBoard.shareInstance()
+        
+        tableView.withCell("QL_Comment_Cell")
 
         dataList = NSMutableArray()
-
+        
+        didRequestMessage()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        tableView.estimatedRowHeight = 60
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        kb.keyboardOff()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        kb.keyboard { (height, isOn) in
+         
+            self.bottom.constant = isOn ? height : 0
+        }
+    }
+    
+    func didRequestMessage() {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/listChat"),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "Getparam":["id":checkUpData["Id"]],
+                                                   "method":"GET",
+                                                   "host":self,
+                                                   "overrideLoading":1,
+                                                   "overrideAlert":1], withCache: { (cache) in
+                                                    
+        }) { (response, errorCode, error, isValid) in
+            
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
+            
+            
+            
+            self.dataList.removeAllObjects()
+
+            let results = response?.dictionize()["array"] as! NSArray
+
+            self.dataList.addObjects(from: results as! [Any])
+
+            self.tableView.reloadData()
+        }
+    }
+    
+    @IBAction func didPressBack() {
+        self.dismiss(animated: true) {
+            
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
 }
 
+extension QL_Comment_ViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+}
 
 extension QL_Comment_ViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -51,12 +115,42 @@ extension QL_Comment_ViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "QL_Check_Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QL_Comment_Cell", for: indexPath)
         
         if dataList.count == 0 {
             return cell
         }
         
+        let data = dataList[indexPath.row] as! NSDictionary
+        
+        let isMe = (data["User"] as! NSDictionary)["UserName"] as? String == Information.userName
+        
+        let dayLeft = self.withView(cell, tag: 10) as! UILabel
+        
+        dayLeft.text = data.getValueFromKey("Time")
+        
+//        let contentLeft = self.withView(cell, tag: 11) as! UILabel
+//
+//        contentLeft.text = data.getValueFromKey("Message")
+
+        let dayRight = self.withView(cell, tag: 20) as! UILabel
+        
+        dayRight.text = data.getValueFromKey("Time")
+
+        let contentRight = self.withView(cell, tag: 21) as! UILabel
+        
+        contentRight.text = data.getValueFromKey("Message")
+
+        
+        dayLeft.isHidden = !isMe
+        
+//        contentLeft.isHidden = !isMe
+        
+        dayRight.isHidden = isMe
+        
+        contentRight.isHidden = isMe
+        
+
         
         return cell
     }

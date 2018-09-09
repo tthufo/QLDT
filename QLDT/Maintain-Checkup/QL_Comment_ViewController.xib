@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Comment_ViewController" customModule="QLDT" customModuleProvider="target">
             <connections>
+                <outlet property="bottom" destination="fyT-iA-Kws" id="Coe-df-GJn"/>
                 <outlet property="tableView" destination="jTh-Ag-yQc" id="MF6-vM-TKa"/>
                 <outlet property="titleLabel" destination="N41-SP-f04" id="NNR-4L-nmk"/>
                 <outlet property="view" destination="rWb-Na-iSt" id="tVz-HG-oDf"/>
@@ -32,6 +33,9 @@
                                 <constraint firstAttribute="width" constant="44" id="eyZ-Bx-42C"/>
                             </constraints>
                             <state key="normal" image="back_a"/>
+                            <connections>
+                                <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="S6L-gL-1o2"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N41-SP-f04">
                             <rect key="frame" x="155" y="32" width="10" height="21"/>
@@ -67,7 +71,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jTh-Ag-yQc">
-                    <rect key="frame" x="5" y="92" width="310" height="332"/>
+                    <rect key="frame" x="5" y="92" width="310" height="331"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
                     <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
@@ -85,15 +89,12 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7m-Wg-30o">
-                    <rect key="frame" x="0.0" y="432" width="320" height="48"/>
+                    <rect key="frame" x="0.0" y="431" width="320" height="48"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSy-AA-XFJ">
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSy-AA-XFJ">
                             <rect key="frame" x="261" y="11" width="51" height="27"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="51" id="XuP-bY-yBY"/>
-                                <constraint firstAttribute="height" constant="27" id="biM-Nb-qQK"/>
-                            </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" title="Gửi">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -104,23 +105,27 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </button>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="noe-vh-Iwq">
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="noe-vh-Iwq">
                             <rect key="frame" x="8" y="9" width="245" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="send" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="RqK-g7-UDU"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="noe-vh-Iwq" firstAttribute="leading" secondItem="f7m-Wg-30o" secondAttribute="leading" constant="8" id="0jJ-v5-EeY"/>
-                        <constraint firstAttribute="bottom" secondItem="xSy-AA-XFJ" secondAttribute="bottom" constant="10" id="KbZ-Nj-8u8"/>
-                        <constraint firstItem="noe-vh-Iwq" firstAttribute="top" secondItem="f7m-Wg-30o" secondAttribute="top" constant="9" id="KpF-4I-D8F"/>
-                        <constraint firstAttribute="trailing" secondItem="xSy-AA-XFJ" secondAttribute="trailing" constant="8" id="dwe-LN-kjf"/>
-                        <constraint firstAttribute="bottom" secondItem="noe-vh-Iwq" secondAttribute="bottom" constant="9" id="exi-zV-gNI"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="fhr-aF-6UR"/>
-                        <constraint firstAttribute="height" constant="48" id="iUa-ES-Ks5"/>
-                        <constraint firstItem="xSy-AA-XFJ" firstAttribute="leading" secondItem="noe-vh-Iwq" secondAttribute="trailing" constant="8" id="rXl-zI-4qF"/>
+                        <constraint firstAttribute="height" constant="48" id="gpD-oP-AXT"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t3k-ET-SIa">
+                    <rect key="frame" x="0.0" y="480" width="320" height="0.0"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="fyT-iA-Kws"/>
                     </constraints>
                 </view>
             </subviews>
@@ -128,17 +133,17 @@
             <constraints>
                 <constraint firstItem="kmk-BN-1yS" firstAttribute="top" secondItem="OjA-SX-osa" secondAttribute="top" id="0j1-Hy-DFY"/>
                 <constraint firstItem="kmk-BN-1yS" firstAttribute="trailing" secondItem="OjA-SX-osa" secondAttribute="trailing" id="0xt-ww-EnH"/>
-                <constraint firstItem="f7m-Wg-30o" firstAttribute="leading" secondItem="OjA-SX-osa" secondAttribute="leading" id="2zw-yi-yKe"/>
-                <constraint firstItem="OjA-SX-osa" firstAttribute="trailing" secondItem="jTh-Ag-yQc" secondAttribute="trailing" constant="5" id="45M-K3-dDR"/>
                 <constraint firstItem="kmk-BN-1yS" firstAttribute="leading" secondItem="OjA-SX-osa" secondAttribute="leading" id="49z-UU-zkZ"/>
-                <constraint firstItem="f7m-Wg-30o" firstAttribute="trailing" secondItem="OjA-SX-osa" secondAttribute="trailing" id="TSG-FW-SOG"/>
-                <constraint firstItem="jTh-Ag-yQc" firstAttribute="leading" secondItem="OjA-SX-osa" secondAttribute="leading" constant="5" id="Yf1-vz-kvL"/>
-                <constraint firstItem="f7m-Wg-30o" firstAttribute="bottom" secondItem="OjA-SX-osa" secondAttribute="bottom" id="YhM-ur-Iak"/>
-                <constraint firstItem="f7m-Wg-30o" firstAttribute="trailing" secondItem="OjA-SX-osa" secondAttribute="trailing" id="dO5-xa-tWg"/>
-                <constraint firstItem="jTh-Ag-yQc" firstAttribute="top" secondItem="kmk-BN-1yS" secondAttribute="bottom" constant="8" id="dei-S4-N9Y"/>
-                <constraint firstItem="f7m-Wg-30o" firstAttribute="top" secondItem="jTh-Ag-yQc" secondAttribute="bottom" constant="8" id="gyg-M8-hfm"/>
-                <constraint firstItem="f7m-Wg-30o" firstAttribute="bottom" secondItem="OjA-SX-osa" secondAttribute="bottom" id="jmV-BQ-5Oj"/>
-                <constraint firstItem="f7m-Wg-30o" firstAttribute="leading" secondItem="OjA-SX-osa" secondAttribute="leading" id="qws-OA-FYY"/>
+                <constraint firstItem="t3k-ET-SIa" firstAttribute="bottom" secondItem="OjA-SX-osa" secondAttribute="bottom" id="6ej-f9-Q37"/>
+                <constraint firstItem="jTh-Ag-yQc" firstAttribute="leading" secondItem="OjA-SX-osa" secondAttribute="leading" constant="5" id="AVS-v7-ijP"/>
+                <constraint firstItem="f7m-Wg-30o" firstAttribute="trailing" secondItem="OjA-SX-osa" secondAttribute="trailing" id="BTx-NU-8Va"/>
+                <constraint firstItem="OjA-SX-osa" firstAttribute="trailing" secondItem="jTh-Ag-yQc" secondAttribute="trailing" constant="5" id="Xcx-hs-w76"/>
+                <constraint firstItem="t3k-ET-SIa" firstAttribute="leading" secondItem="OjA-SX-osa" secondAttribute="leading" id="dNL-5V-emT"/>
+                <constraint firstItem="f7m-Wg-30o" firstAttribute="leading" secondItem="OjA-SX-osa" secondAttribute="leading" id="flX-dL-i6G"/>
+                <constraint firstItem="t3k-ET-SIa" firstAttribute="trailing" secondItem="OjA-SX-osa" secondAttribute="trailing" id="gz8-NI-QyS"/>
+                <constraint firstItem="t3k-ET-SIa" firstAttribute="top" secondItem="f7m-Wg-30o" secondAttribute="bottom" constant="1" id="qVV-4a-8WC"/>
+                <constraint firstItem="f7m-Wg-30o" firstAttribute="top" secondItem="jTh-Ag-yQc" secondAttribute="bottom" constant="8" id="qgw-nY-zR0"/>
+                <constraint firstItem="jTh-Ag-yQc" firstAttribute="top" secondItem="kmk-BN-1yS" secondAttribute="bottom" constant="8" id="ttg-SD-ipf"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="OjA-SX-osa"/>
