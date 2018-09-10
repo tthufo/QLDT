@@ -20,7 +20,7 @@ class QL_Info_Collector_ViewController: UIViewController {
     
     var images: NSMutableArray? = [["title":"Đường bộ", "img":"ic_2"],["title":"Đường thủy", "img":"ic_3"],["title":"Đường sắt", "img":"ic_4"],["title":"Biểu mẫu", "img":"ic_5"]]
     
-    var images1: NSMutableArray? = [["title":"Tai nạn", "img":"ic_acc"],["title":"Sự cố", "img":"ic_report"],["title":"Phản hồi", "img":"ic_speaker"]]
+    var images1: NSMutableArray? = [["title":"Tai nạn", "img":"ic_acc", "type":0],["title":"Sự cố", "img":"ic_report", "type":1],["title":"Phản hồi", "img":"ic_speaker", "type":2]]
     
     var images2: NSMutableArray? = [["title":"Kiểm tra", "img":"ic_888", "url":"api/Maintain/listInspection"],["title":"Bảo trì", "img":"ic_999", "url":"api/Maintain/listMaintenance"]]
     
@@ -74,12 +74,21 @@ extension QL_Info_Collector_ViewController: UITableViewDataSource, UITableViewDe
         
         configData.addEntries(from: data as! [AnyHashable : Any])
         
-        let commonList = QL_Common_List_ViewController()
-        
-        
-        commonList.configType = configData
-        
-        self.navigationController?.pushViewController(commonList, animated: true)
+        if type == 1 {
+            let list = QL_List_ViewController()
+            
+            list.configType = configData
+            
+            self.navigationController?.pushViewController(list, animated: true)
+        }
+
+        if type == 2 {
+            let commonList = QL_Common_List_ViewController()
+            
+            commonList.configType = configData
+            
+            self.navigationController?.pushViewController(commonList, animated: true)
+        }
     }
 }
 

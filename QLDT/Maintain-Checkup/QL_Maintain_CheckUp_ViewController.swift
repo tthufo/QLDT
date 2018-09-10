@@ -103,7 +103,7 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
         
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/updateAssets"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
-//                                                   "MaintenanceAssets":postData,
+                                                   "Postparam":postData,
                                                    "host":self,
                                                    "overrideLoading":1,
                                                    "overrideAlert":1], withCache: { (cache) in
@@ -114,6 +114,12 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
                 self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
                 
                 return
+            }
+            
+            if response?.dictionize().getValueFromKey("success") == "1" {
+                self.navigationController?.popViewController(animated: true)
+                
+                self.showToast("Cập nhật thành công", andPos: 0)
             }
         }
     }

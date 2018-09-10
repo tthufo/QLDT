@@ -16,6 +16,10 @@
 		04E7283D214123D100C40CCE /* QL_Common_List_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7283B214123D100C40CCE /* QL_Common_List_ViewController.swift */; };
 		04E7283E214123D100C40CCE /* QL_Common_List_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E7283C214123D100C40CCE /* QL_Common_List_ViewController.xib */; };
 		2DD18908589E68B3E352589B /* Pods_QLDT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322D50A53DFEC8CC6483F8F4 /* Pods_QLDT.framework */; };
+		FC4354A42146DE480016A4CB /* QL_Crash_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4354A22146DE480016A4CB /* QL_Crash_ViewController.swift */; };
+		FC4354A52146DE480016A4CB /* QL_Crash_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4354A32146DE480016A4CB /* QL_Crash_ViewController.xib */; };
+		FC4354A82146E2DA0016A4CB /* QL_List_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4354A62146E2DA0016A4CB /* QL_List_ViewController.swift */; };
+		FC4354A92146E2DA0016A4CB /* QL_List_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4354A72146E2DA0016A4CB /* QL_List_ViewController.xib */; };
 		FC53869E210C875600F00873 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53869D210C875600F00873 /* AppDelegate.swift */; };
 		FC5386A0210C875600F00873 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53869F210C875600F00873 /* ViewController.swift */; };
 		FC5386A3210C875600F00873 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5386A1210C875600F00873 /* Main.storyboard */; };
@@ -60,6 +64,10 @@
 		0BD10565D939699D9C0722CC /* Pods-QLDT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDT.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDT/Pods-QLDT.release.xcconfig"; sourceTree = "<group>"; };
 		322D50A53DFEC8CC6483F8F4 /* Pods_QLDT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C942F17FE159246DBF6592F9 /* Pods-QLDT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDT/Pods-QLDT.debug.xcconfig"; sourceTree = "<group>"; };
+		FC4354A22146DE480016A4CB /* QL_Crash_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Crash_ViewController.swift; sourceTree = "<group>"; };
+		FC4354A32146DE480016A4CB /* QL_Crash_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Crash_ViewController.xib; sourceTree = "<group>"; };
+		FC4354A62146E2DA0016A4CB /* QL_List_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_List_ViewController.swift; sourceTree = "<group>"; };
+		FC4354A72146E2DA0016A4CB /* QL_List_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_List_ViewController.xib; sourceTree = "<group>"; };
 		FC53869A210C875600F00873 /* QLDT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLDT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC53869D210C875600F00873 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC53869F210C875600F00873 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +155,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC4354A12146DDCC0016A4CB /* Faulty-Crash */ = {
+			isa = PBXGroup;
+			children = (
+				FC4354A22146DE480016A4CB /* QL_Crash_ViewController.swift */,
+				FC4354A32146DE480016A4CB /* QL_Crash_ViewController.xib */,
+				FC4354A62146E2DA0016A4CB /* QL_List_ViewController.swift */,
+				FC4354A72146E2DA0016A4CB /* QL_List_ViewController.xib */,
+			);
+			path = "Faulty-Crash";
+			sourceTree = "<group>";
+		};
 		FC538691210C875600F00873 = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +187,7 @@
 		FC53869C210C875600F00873 /* QLDT */ = {
 			isa = PBXGroup;
 			children = (
+				FC4354A12146DDCC0016A4CB /* Faulty-Crash */,
 				044F714E21421DD9003CB99A /* Maintain-Checkup */,
 				04E7283A214123AB00C40CCE /* Common */,
 				FCE6173B210EAA2700000438 /* HomViewcontrollers */,
@@ -288,6 +308,7 @@
 			files = (
 				FC5386AB210C875600F00873 /* LaunchScreen.storyboard in Resources */,
 				FCE61745210EAA4600000438 /* TG_Image_Cell.xib in Resources */,
+				FC4354A52146DE480016A4CB /* QL_Crash_ViewController.xib in Resources */,
 				FCE61743210EAA4600000438 /* TG_Drop_Cell.xib in Resources */,
 				FC5386A8210C875600F00873 /* Assets.xcassets in Resources */,
 				04E7283E214123D100C40CCE /* QL_Common_List_ViewController.xib in Resources */,
@@ -302,6 +323,7 @@
 				044F7154214229CB003CB99A /* QL_Check_Cell.xib in Resources */,
 				044F715221421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.xib in Resources */,
 				FCCC3D63213BFD2A0005D519 /* QL_Setting_ViewController.xib in Resources */,
+				FC4354A92146E2DA0016A4CB /* QL_List_ViewController.xib in Resources */,
 				FCE61744210EAA4600000438 /* format.plist in Resources */,
 				04E7283921410F8100C40CCE /* TG_Cell.xib in Resources */,
 			);
@@ -389,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC5386A6210C875600F00873 /* QLDT.xcdatamodeld in Sources */,
+				FC4354A82146E2DA0016A4CB /* QL_List_ViewController.swift in Sources */,
 				044F715121421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.swift in Sources */,
 				FCAF7AC021404BC4007A1181 /* QL_Info_Collector_ViewController.swift in Sources */,
 				04E7283D214123D100C40CCE /* QL_Common_List_ViewController.swift in Sources */,
@@ -403,6 +426,7 @@
 				FCCC3D6E213C51330005D519 /* LayerField.swift in Sources */,
 				FC5386B5210CBB6600F00873 /* QL_LogIn_ViewController.swift in Sources */,
 				FC935AF0210CC5880067D480 /* TL_ChangeHost_ViewController.swift in Sources */,
+				FC4354A42146DE480016A4CB /* QL_Crash_ViewController.swift in Sources */,
 				FCE372F9213AA96D00F79D7A /* Information.swift in Sources */,
 				FCCC3D66213C30540005D519 /* QL_Recover_ViewController.swift in Sources */,
 				FC935AED210CC2FF0067D480 /* UIViewController+ViewCat.m in Sources */,

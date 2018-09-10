@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="bottom" destination="fyT-iA-Kws" id="Coe-df-GJn"/>
                 <outlet property="tableView" destination="jTh-Ag-yQc" id="MF6-vM-TKa"/>
+                <outlet property="textField" destination="noe-vh-Iwq" id="TeJ-qb-bEe"/>
                 <outlet property="titleLabel" destination="N41-SP-f04" id="NNR-4L-nmk"/>
                 <outlet property="view" destination="rWb-Na-iSt" id="tVz-HG-oDf"/>
             </connections>
@@ -32,7 +33,7 @@
                                 <constraint firstAttribute="height" constant="44" id="Gxi-3h-X5r"/>
                                 <constraint firstAttribute="width" constant="44" id="eyZ-Bx-42C"/>
                             </constraints>
-                            <state key="normal" image="back_a"/>
+                            <state key="normal" image="x"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="S6L-gL-1o2"/>
                             </connections>
@@ -53,7 +54,10 @@
                                 <constraint firstAttribute="height" constant="44" id="GJ4-DA-dRc"/>
                                 <constraint firstAttribute="width" constant="44" id="RH2-Do-ZQl"/>
                             </constraints>
-                            <state key="normal" image="back_a"/>
+                            <state key="normal" image="ic_sync_home"/>
+                            <connections>
+                                <action selector="didRequestMessage" destination="-1" eventType="touchUpInside" id="mtm-Ec-5mD"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.90980392160000001" green="0.49019607840000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -70,7 +74,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="flex" value=""/>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jTh-Ag-yQc">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jTh-Ag-yQc">
                     <rect key="frame" x="5" y="92" width="310" height="331"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -91,10 +95,13 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f7m-Wg-30o">
                     <rect key="frame" x="0.0" y="431" width="320" height="48"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSy-AA-XFJ">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSy-AA-XFJ">
                             <rect key="frame" x="261" y="11" width="51" height="27"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="51" id="25D-v8-R1U"/>
+                                <constraint firstAttribute="height" constant="27" id="BtH-WT-GRq"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" title="Gửi">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -104,13 +111,15 @@
                                     <integer key="value" value="3"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="didPressSend" destination="-1" eventType="touchUpInside" id="qXH-HS-jX6"/>
+                            </connections>
                         </button>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="noe-vh-Iwq">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tin nhắn" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="noe-vh-Iwq">
                             <rect key="frame" x="8" y="9" width="245" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="send" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="RqK-g7-UDU"/>
                             </connections>
@@ -118,7 +127,13 @@
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="xSy-AA-XFJ" secondAttribute="trailing" constant="8" id="42b-Cx-VZY"/>
+                        <constraint firstAttribute="bottom" secondItem="noe-vh-Iwq" secondAttribute="bottom" constant="9" id="YFg-xQ-7mV"/>
+                        <constraint firstItem="noe-vh-Iwq" firstAttribute="leading" secondItem="f7m-Wg-30o" secondAttribute="leading" constant="8" id="ZBb-Ab-bMk"/>
+                        <constraint firstItem="xSy-AA-XFJ" firstAttribute="leading" secondItem="noe-vh-Iwq" secondAttribute="trailing" constant="8" id="dfe-k6-NH9"/>
                         <constraint firstAttribute="height" constant="48" id="gpD-oP-AXT"/>
+                        <constraint firstItem="xSy-AA-XFJ" firstAttribute="top" secondItem="f7m-Wg-30o" secondAttribute="top" constant="11" id="kbL-yk-x3s"/>
+                        <constraint firstItem="noe-vh-Iwq" firstAttribute="top" secondItem="f7m-Wg-30o" secondAttribute="top" constant="9" id="w7F-sC-u3a"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t3k-ET-SIa">
@@ -151,6 +166,7 @@
         </view>
     </objects>
     <resources>
-        <image name="back_a" width="170" height="170"/>
+        <image name="ic_sync_home" width="49" height="49"/>
+        <image name="x" width="74" height="74"/>
     </resources>
 </document>

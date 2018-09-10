@@ -25,8 +25,6 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
         collectionView.withCell("TG_Image_Cell")
         
         syncing()
-        
-        print(Information.userInfo)
     }
     
     func syncing() {

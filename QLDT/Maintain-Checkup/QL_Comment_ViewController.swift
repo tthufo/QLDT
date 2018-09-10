@@ -14,6 +14,8 @@ class QL_Comment_ViewController: UIViewController {
     
     @IBOutlet var titleLabel: UILabel!
     
+    @IBOutlet var textField: UITextField!
+    
     var dataList: NSMutableArray!
     
     var checkUpData: NSDictionary!
@@ -53,7 +55,38 @@ class QL_Comment_ViewController: UIViewController {
         }
     }
     
-    func didRequestMessage() {
+    func didRequestSend() {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/putChatMessage"),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "Id":"0",
+                                                   "MaintenanceId":checkUpData["Id"],
+                                                   "Message":self.textField.text,
+                                                   "Time":NSDate().string(withFormat: "yyyy-MM-dd'T'HH:mm:ss"),
+                                                   "User":NSNull(),
+                                                   "UserId":checkUpData["Inspector"],
+                                                   "host":self,
+                                                   "overrideLoading":1,
+                                                   "overrideAlert":1], withCache: { (cache) in
+                                                    
+        }) { (response, errorCode, error, isValid) in
+            
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
+            
+            self.didRequestMessage()
+
+            self.perform(#selector(self.didScrollToBottom), with: self, afterDelay: 0.5)
+        }
+    }
+    
+    @objc func didScrollToBottom() {
+        self.tableView.didScrolltoBottom(true)
+    }
+    
+    @IBAction func didRequestMessage() {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/listChat"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "Getparam":["id":checkUpData["Id"]],
@@ -69,8 +102,6 @@ class QL_Comment_ViewController: UIViewController {
                 
                 return
             }
-            
-            
             
             self.dataList.removeAllObjects()
 
@@ -88,10 +119,19 @@ class QL_Comment_ViewController: UIViewController {
         }
     }
     
+    @IBAction func didPressSend() {
+        if !self.textField.hasText {
+            return
+        }
+        
+        self.textField.text = ""
+        
+        didRequestSend()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
 }
 
 extension QL_Comment_ViewController: UITextFieldDelegate {
@@ -124,14 +164,15 @@ extension QL_Comment_ViewController: UITableViewDataSource, UITableViewDelegate 
         let data = dataList[indexPath.row] as! NSDictionary
         
         let isMe = (data["User"] as! NSDictionary)["UserName"] as? String == Information.userName
+
         
         let dayLeft = self.withView(cell, tag: 10) as! UILabel
         
         dayLeft.text = data.getValueFromKey("Time")
         
-//        let contentLeft = self.withView(cell, tag: 11) as! UILabel
-//
-//        contentLeft.text = data.getValueFromKey("Message")
+        let contentLeft = self.withView(cell, tag: 11) as! UILabel
+
+        contentLeft.text = isMe ? data.getValueFromKey("Message") : ""
 
         let dayRight = self.withView(cell, tag: 20) as! UILabel
         
@@ -139,12 +180,12 @@ extension QL_Comment_ViewController: UITableViewDataSource, UITableViewDelegate 
 
         let contentRight = self.withView(cell, tag: 21) as! UILabel
         
-        contentRight.text = data.getValueFromKey("Message")
+        contentRight.text = !isMe ? data.getValueFromKey("Message") : ""
 
         
         dayLeft.isHidden = !isMe
         
-//        contentLeft.isHidden = !isMe
+        contentLeft.isHidden = !isMe
         
         dayRight.isHidden = isMe
         

@@ -296,7 +296,7 @@ static LTRequest *__sharedLTRequest = nil;
             }
         }
         
-        [manager GET:url parameters: [dict responseForKey:@"Getparam"] ? dict[@"Getparam"] : nil success:^(NSURLSessionTask *task, id responseObject) {
+        [manager GET:url parameters:[dict responseForKey:@"Getparam"] ? dict[@"Getparam"] : nil success:^(NSURLSessionTask *task, id responseObject) {
             
             if([responseObject length] == 0)
             {
@@ -346,7 +346,7 @@ static LTRequest *__sharedLTRequest = nil;
             }
         }
         
-        [manager POST:url parameters:post success:^(NSURLSessionTask *task, id responseObject) {
+        [manager POST:url parameters:[dict responseForKey:@"Postparam"] ? dict[@"Postparam"] : post success:^(NSURLSessionTask *task, id responseObject) {
             
             if([responseObject length] == 0)
             {
