@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "46A99BF172F5758D764ED4500A70B85F"
+               BlueprintIdentifier = "3401EC49740D451A19C84AF36231E14C"
                BuildableName = "JSONKit_NoWarning.framework"
                BlueprintName = "JSONKit-NoWarning"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "46A99BF172F5758D764ED4500A70B85F"
+            BlueprintIdentifier = "3401EC49740D451A19C84AF36231E14C"
             BuildableName = "JSONKit_NoWarning.framework"
             BlueprintName = "JSONKit-NoWarning"
             ReferencedContainer = "container:Pods.xcodeproj">

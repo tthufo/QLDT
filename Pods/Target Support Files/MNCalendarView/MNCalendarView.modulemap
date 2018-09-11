@@ -1,0 +1,6 @@
+framework module MNCalendarView {
+  umbrella header "MNCalendarView-umbrella.h"
+
+  export *
+  module * { export * }
+}

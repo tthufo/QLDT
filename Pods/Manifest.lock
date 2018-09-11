@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AllPod (0.1.5):
+  - AllPod (0.1.6):
     - AFNetworking (~> 3.1)
     - AVHexColor (~> 2.0)
     - JSONKit-NoWarning (~> 1.2)
@@ -26,6 +26,7 @@ PODS:
   - AVHexColor (2.0.0)
   - JSONKit-NoWarning (1.2)
   - Mapbox-iOS-SDK (4.2.0)
+  - MNCalendarView (0.0.1)
   - Reachability (3.2)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -34,22 +35,38 @@ PODS:
   - Toast (4.0.0)
 
 DEPENDENCIES:
-  - AllPod (~> 0.1.5)
+  - AllPod (~> 0.1.6)
   - AppAuth
   - Mapbox-iOS-SDK (~> 4.2)
+  - MNCalendarView (~> 0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - AllPod
+    - AppAuth
+    - AVHexColor
+    - JSONKit-NoWarning
+    - Mapbox-iOS-SDK
+    - MNCalendarView
+    - Reachability
+    - SDWebImage
+    - SVProgressHUD
+    - Toast
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AllPod: 6ebc5d645d3ccac26955025f53486ddd0d8e5224
+  AllPod: 9887db3b02a6a8ef06075ead803ce0fc63f30fcc
   AppAuth: 0f099c2286a1a9754e5bd27211c43d307dc4f778
   AVHexColor: 33e5e102f3b6f3acd002779183ee226e21870c28
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
   Mapbox-iOS-SDK: 706d52e3ad095e16944d9643f37d5a97627f6c19
+  MNCalendarView: 97b17949b033fb457f09bc199a812017544eb581
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: 1b41e59a66bed30e69eb9efcdb0e14acf49080fa
+PODFILE CHECKSUM: b7aea1ada3f84ae8391e6a577b8735aa73794a51
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

@@ -20,9 +20,13 @@ class QL_Crash_ViewController: UIViewController {
     
     var dataType: NSMutableDictionary!
     
+    var kb: KeyBoard!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        kb = KeyBoard.shareInstance()
         
         titleLabel.text = configType.getValueFromKey("title")
         
@@ -53,6 +57,21 @@ class QL_Crash_ViewController: UIViewController {
         print(configType)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        kb.keyboardOff()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        kb.keyboard{ (height, isOn) in
+            
+            self.tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: isOn ? height : 0, right: 0)
+        }
+    }
+    
     @IBAction func didRequestSubmit() {
 //        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
 //                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
@@ -81,12 +100,33 @@ class QL_Crash_ViewController: UIViewController {
     @IBAction func didPressBack() {
 //        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true) {
-            
+
         }
+//        let cal = MNViewController.init(calendar: Calendar.init(identifier: .gregorian), title: "")
+//
+//        cal?.delegate = self
+//
+//        self.present(cal!, animated: true) {
+//
+//        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+extension QL_Crash_ViewController: CalendarDelegate {
+    func didChooseCalendar(_ date: Date!) {
+        print(date)
+    }
+}
+
+extension QL_Crash_ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        
+        return true
     }
 }
 
@@ -108,9 +148,11 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let data = dataList![indexPath.row] as! NSDictionary
-//
-//        (self.withView(cell, tag: 104) as! UIImageView).image = UIImage.init(named: (configType["img"] as? String)!)
-//
+
+        if data["ident"] as! String == "QL_Input_Cell" {
+            (self.withView(cell, tag: 2) as! UITextField).delegate = self
+        }
+        
         (self.withView(cell, tag: 1) as! UILabel).text = data["title"] as! String
 //
         return cell

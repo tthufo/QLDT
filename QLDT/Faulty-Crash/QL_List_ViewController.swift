@@ -31,11 +31,11 @@ class QL_List_ViewController: UIViewController {
     
     @IBAction func didPressAdd() {
         let crash = QL_Crash_ViewController()
-        
+
         crash.configType = self.configType
-        
+
         self.present(crash, animated: true) {
-            
+
         }
     }
     
@@ -45,6 +45,26 @@ class QL_List_ViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+extension QL_List_ViewController: MNCalendarViewDelegate {
+
+    func calendarView(_ calendarView: MNCalendarView!, didSelect date: Date!) {
+        
+    }
+    
+    func calendarView(_ calendarView: MNCalendarView!, shouldSelect date: Date!) -> Bool {
+        
+//        NSTimeInterval timeInterval = [date timeIntervalSinceDate:self.currentDate];
+//
+//        if (timeInterval > MN_WEEK && timeInterval < (MN_WEEK * 2)) {
+//            return NO;
+//        }
+//
+//        return YES;
+        
+        return true
     }
 }
 

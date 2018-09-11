@@ -145,7 +145,10 @@ static LTRequest *__sharedLTRequest = nil;
     {
         if([dict responseForKey:@"host"])
         {
-            [(UIViewController*)dict[@"host"] showSVHUD: self.lang ? @"Loading" : @"Đang tải" andOption:0];
+            if([[dict getValueFromKey:@"overrideLoading"] isEqualToString:@"1"])
+            {
+                [(UIViewController*)dict[@"host"] showSVHUD: self.lang ? @"Loading" : @"Đang tải" andOption:0];
+            }
         }
     }
     
@@ -292,11 +295,14 @@ static LTRequest *__sharedLTRequest = nil;
         {
             if([dict responseForKey:@"host"])
             {
-                [(UIViewController*)dict[@"host"] showSVHUD: self.lang ? @"Loading" : @"Đang tải" andOption:0];
+                if([[dict getValueFromKey:@"overrideLoading"] isEqualToString:@"1"])
+                {
+                    [(UIViewController*)dict[@"host"] showSVHUD: self.lang ? @"Loading" : @"Đang tải" andOption:0];
+                }
             }
         }
         
-        [manager GET:url parameters:[dict responseForKey:@"Getparam"] ? dict[@"Getparam"] : nil success:^(NSURLSessionTask *task, id responseObject) {
+        [manager GET:url parameters: [dict responseForKey:@"Getparam"] ? dict[@"Getparam"] : nil success:^(NSURLSessionTask *task, id responseObject) {
             
             if([responseObject length] == 0)
             {
@@ -342,11 +348,14 @@ static LTRequest *__sharedLTRequest = nil;
         {
             if([dict responseForKey:@"host"])
             {
-                [dict[@"host"] showSVHUD: self.lang ? @"Loading" : @"Đang tải" andOption:0];
+                if([[dict getValueFromKey:@"overrideLoading"] isEqualToString:@"1"])
+                {
+                    [dict[@"host"] showSVHUD: self.lang ? @"Loading" : @"Đang tải" andOption:0];
+                }
             }
         }
         
-        [manager POST:url parameters:[dict responseForKey:@"Postparam"] ? dict[@"Postparam"] : post success:^(NSURLSessionTask *task, id responseObject) {
+        [manager POST:url parameters: [dict responseForKey:@"Postparam"] ? dict[@"Postparam"] : post success:^(NSURLSessionTask *task, id responseObject) {
             
             if([responseObject length] == 0)
             {

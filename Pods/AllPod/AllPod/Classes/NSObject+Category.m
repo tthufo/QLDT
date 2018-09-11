@@ -303,8 +303,8 @@
         {
             [SVProgressHUD showWithStatus:string];
             [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-            [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
-            [SVProgressHUD setForegroundColor:[UIColor blackColor]];
+            [SVProgressHUD setBackgroundColor:[UIColor orangeColor]];
+            [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
         }
             break;
         case 1:
