@@ -110,7 +110,7 @@ extension UIImage {
 
 extension UIImageView {
     func imageUrl (url: String) {
-        self.sd_setImage(with: NSURL.init(string: url)! as URL, placeholderImage: UIImage.init(named: "")) { (image, error, cacheType, url) in
+        self.sd_setImage(with: NSURL.init(string: url)! as URL, placeholderImage: UIImage.init(named: "bg_thumb_default_img")) { (image, error, cacheType, url) in
             if error != nil {
                 return
             }

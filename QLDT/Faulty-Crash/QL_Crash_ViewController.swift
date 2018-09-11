@@ -18,15 +18,37 @@ class QL_Crash_ViewController: UIViewController {
     
     var configType: NSDictionary!
     
+    var dataType: NSMutableDictionary!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         titleLabel.text = configType.getValueFromKey("title")
         
-        tableView.withCell("TG_Cell")
+        tableView.withCell("QL_Input_Cell")
         
-        dataList = NSMutableArray()
+        tableView.withCell("QL_Drop_Cell")
+        
+        tableView.withCell("QL_Calendar_Cell")
+
+        tableView.withCell("QL_Location_Cell")
+
+        tableView.withCell("QL_Image_Cell")
+
+
+        dataList = [["title":"Mã vị trí tai nạn", "data":"", "ident":"QL_Input_Cell"],
+                    ["title":"Địa chỉ", "data":"", "ident":"QL_Input_Cell"],
+                    ["title":"Vị trí", "data":"", "ident":"QL_Drop_Cell"],
+                    ["title":"Thời gian", "data":"", "ident":"QL_Calendar_Cell"],
+                    ["title":"Hiện trạng", "data":"", "ident":"QL_Input_Cell"],
+                    ["title":"Số hiệu đường", "data":"", "ident":"QL_Input_Cell"],
+                    ["title":"Phân loại", "data":"", "ident":"QL_Input_Cell"],
+                    ["title":"Tọa độ", "data":"", "ident":"QL_Location_Cell"],
+                    ["title":"Ảnh minh họa", "data":"", "ident":"QL_Image_Cell"],
+        ]
+
+        dataType = [:]
         
         print(configType)
     }
@@ -57,7 +79,10 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     @IBAction func didPressBack() {
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) {
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,7 +93,7 @@ class QL_Crash_ViewController: UIViewController {
 extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 54
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -76,30 +101,22 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TG_Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: (dataList[indexPath.row] as! NSDictionary)["ident"] as! String, for: indexPath)
         
         if dataList.count == 0 {
             return cell
         }
         
         let data = dataList![indexPath.row] as! NSDictionary
-        
-        (self.withView(cell, tag: 104) as! UIImageView).image = UIImage.init(named: (configType["img"] as? String)!)
-        
-        (self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data["Name"] as? String)!)
-        
+//
+//        (self.withView(cell, tag: 104) as! UIImageView).image = UIImage.init(named: (configType["img"] as? String)!)
+//
+        (self.withView(cell, tag: 1) as! UILabel).text = data["title"] as! String
+//
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let data = dataList![indexPath.row] as! NSDictionary
-        
-        let checkUp = QL_Maintain_CheckUp_ViewController()
-        
-        checkUp.checkUpData = data
-        
-        self.navigationController?.pushViewController(checkUp, animated: true)
     }
 }

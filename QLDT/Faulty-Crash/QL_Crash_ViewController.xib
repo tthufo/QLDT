@@ -31,7 +31,7 @@
                                 <constraint firstAttribute="width" constant="44" id="Hhk-JI-rzu"/>
                                 <constraint firstAttribute="height" constant="44" id="jgu-1B-ABt"/>
                             </constraints>
-                            <state key="normal" image="back_a"/>
+                            <state key="normal" image="x"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="dDU-qr-gza"/>
                             </connections>
@@ -70,7 +70,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1qv-av-2N9">
-                    <rect key="frame" x="0.0" y="84" width="320" height="396"/>
+                    <rect key="frame" x="0.0" y="84" width="320" height="348"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
                     <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
@@ -125,16 +125,16 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="1qv-av-2N9" firstAttribute="leading" secondItem="Vlq-3j-PVq" secondAttribute="leading" id="1Cj-cZ-CUV"/>
                 <constraint firstItem="9c8-9N-p9D" firstAttribute="leading" secondItem="Vlq-3j-PVq" secondAttribute="leading" id="Ctr-U6-GpF"/>
+                <constraint firstItem="1qv-av-2N9" firstAttribute="top" secondItem="3k2-mf-ztO" secondAttribute="bottom" id="DVB-B6-MSQ"/>
                 <constraint firstItem="3k2-mf-ztO" firstAttribute="trailing" secondItem="Vlq-3j-PVq" secondAttribute="trailing" id="Kg7-aX-GE8"/>
                 <constraint firstItem="3k2-mf-ztO" firstAttribute="leading" secondItem="Vlq-3j-PVq" secondAttribute="leading" id="Rc9-Nl-Hev"/>
                 <constraint firstItem="3k2-mf-ztO" firstAttribute="top" secondItem="Vlq-3j-PVq" secondAttribute="top" id="Ttr-8j-csA"/>
-                <constraint firstItem="1qv-av-2N9" firstAttribute="bottom" secondItem="Vlq-3j-PVq" secondAttribute="bottom" id="bqf-T3-2SW"/>
-                <constraint firstItem="1qv-av-2N9" firstAttribute="top" secondItem="3k2-mf-ztO" secondAttribute="bottom" id="eeX-nd-IR5"/>
+                <constraint firstItem="9c8-9N-p9D" firstAttribute="top" secondItem="1qv-av-2N9" secondAttribute="bottom" id="egk-FH-21K"/>
+                <constraint firstItem="1qv-av-2N9" firstAttribute="trailing" secondItem="Vlq-3j-PVq" secondAttribute="trailing" id="kjb-4z-mHK"/>
                 <constraint firstItem="9c8-9N-p9D" firstAttribute="bottom" secondItem="Vlq-3j-PVq" secondAttribute="bottom" id="ozr-5K-MUh"/>
-                <constraint firstItem="1qv-av-2N9" firstAttribute="trailing" secondItem="Vlq-3j-PVq" secondAttribute="trailing" id="pXh-1q-afw"/>
                 <constraint firstItem="9c8-9N-p9D" firstAttribute="trailing" secondItem="Vlq-3j-PVq" secondAttribute="trailing" id="syw-0P-R9y"/>
+                <constraint firstItem="1qv-av-2N9" firstAttribute="leading" secondItem="Vlq-3j-PVq" secondAttribute="leading" id="vFb-B3-eZ4"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Vlq-3j-PVq"/>
@@ -142,7 +142,7 @@
         </view>
     </objects>
     <resources>
-        <image name="back_a" width="170" height="170"/>
         <image name="ic_sync_home" width="49" height="49"/>
+        <image name="x" width="74" height="74"/>
     </resources>
 </document>

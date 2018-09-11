@@ -9,6 +9,8 @@ target 'QLDT' do
 
   pod 'Mapbox-iOS-SDK', '~> 4.2'
 
+  pod 'CalendarView'
+
   pod 'AppAuth'
 
 end

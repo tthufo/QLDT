@@ -32,6 +32,9 @@
                                 <constraint firstAttribute="width" constant="44" id="xXG-XH-Qy1"/>
                             </constraints>
                             <state key="normal" image="back_a"/>
+                            <connections>
+                                <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="JaV-Xo-aNG"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybf-xl-z8q">
                             <rect key="frame" x="155" y="32" width="10" height="21"/>
@@ -66,9 +69,10 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="flex" value=""/>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Vn-qj-fgT">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8Vn-qj-fgT">
                     <rect key="frame" x="0.0" y="84" width="320" height="396"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="50"/>
                     <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
                     <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                     <connections>
@@ -76,11 +80,33 @@
                         <outlet property="delegate" destination="-1" id="Xuy-JN-czy"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELJ-Qc-KV0">
+                    <rect key="frame" x="260" y="416" width="44" height="44"/>
+                    <color key="backgroundColor" red="0.97647058823529409" green="0.54117647058823526" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="HeJ-HO-gh9"/>
+                        <constraint firstAttribute="height" constant="44" id="XyM-gH-016"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="39"/>
+                    <state key="normal" title="+">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="22"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="didPressAdd" destination="-1" eventType="touchUpInside" id="EH9-M7-hJL"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="dtu-XF-rYE" firstAttribute="leading" secondItem="Bo2-db-Mhu" secondAttribute="leading" id="AK8-TJ-LqU"/>
                 <constraint firstItem="8Vn-qj-fgT" firstAttribute="leading" secondItem="Bo2-db-Mhu" secondAttribute="leading" id="Gzd-Qh-edf"/>
+                <constraint firstItem="Bo2-db-Mhu" firstAttribute="bottom" secondItem="ELJ-Qc-KV0" secondAttribute="bottom" constant="20" id="LdC-pO-Ldx"/>
+                <constraint firstItem="Bo2-db-Mhu" firstAttribute="trailing" secondItem="ELJ-Qc-KV0" secondAttribute="trailing" constant="16" id="Lvz-wO-y9T"/>
                 <constraint firstItem="dtu-XF-rYE" firstAttribute="top" secondItem="Bo2-db-Mhu" secondAttribute="top" id="PvS-rB-m9f"/>
                 <constraint firstItem="dtu-XF-rYE" firstAttribute="trailing" secondItem="Bo2-db-Mhu" secondAttribute="trailing" id="SIm-lv-Bkm"/>
                 <constraint firstItem="8Vn-qj-fgT" firstAttribute="trailing" secondItem="Bo2-db-Mhu" secondAttribute="trailing" id="cpL-oe-bhi"/>

@@ -19,6 +19,7 @@ class QL_List_ViewController: UIViewController {
     var configType: NSDictionary!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         titleLabel.text = configType.getValueFromKey("title")
@@ -28,8 +29,14 @@ class QL_List_ViewController: UIViewController {
         dataList = NSMutableArray()
     }
     
-    @IBAction func didRequestSubmit() {
-
+    @IBAction func didPressAdd() {
+        let crash = QL_Crash_ViewController()
+        
+        crash.configType = self.configType
+        
+        self.present(crash, animated: true) {
+            
+        }
     }
     
     @IBAction func didPressBack() {
