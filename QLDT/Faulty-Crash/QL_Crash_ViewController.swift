@@ -102,13 +102,6 @@ class QL_Crash_ViewController: UIViewController {
         self.dismiss(animated: true) {
 
         }
-//        let cal = MNViewController.init(calendar: Calendar.init(identifier: .gregorian), title: "")
-//
-//        cal?.delegate = self
-//
-//        self.present(cal!, animated: true) {
-//
-//        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -149,12 +142,58 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = dataList![indexPath.row] as! NSDictionary
 
+        (self.withView(cell, tag: 1) as! UILabel).text = data["title"] as! String
+
+        
+        
+        
         if data["ident"] as! String == "QL_Input_Cell" {
             (self.withView(cell, tag: 2) as! UITextField).delegate = self
         }
         
-        (self.withView(cell, tag: 1) as! UILabel).text = data["title"] as! String
-//
+        if data["ident"] as! String == "QL_Drop_Cell" {
+            let drop = (self.withView(cell, tag: 2) as! DropButton)
+            
+            drop.action(forTouch: [:]) { (objc) in
+                drop.didDropDown(withData: [["title":"ahihi"]], andCompletion: { (result) in
+                    print(result)
+                })
+            }
+        }
+        
+        if data["ident"] as! String == "QL_Calendar_Cell" {
+            let cal = (self.withView(cell, tag: 2) as! UIImageView)
+            
+            cal.action(forTouch: [:]) { (objc) in
+                let cal = MNViewController.init(calendar: Calendar.init(identifier: .gregorian), title: "")
+        
+                cal?.delegate = self
+        
+                self.present(cal!, animated: true) {
+        
+                }
+            }
+            
+            let date = (self.withView(cell, tag: 3) as! UILabel)
+        }
+        
+        if data["ident"] as! String == "QL_Location_Cell" {
+            let loc = (self.withView(cell, tag: 2) as! UIImageView)
+            
+            loc.action(forTouch: [:]) { (objc) in
+                let map = QL_Map_ViewController()
+                
+                
+                self.present(map, animated: true, completion: {
+                    
+                })
+            }
+            
+            let X = (self.withView(cell, tag: 3) as! UILabel)
+            
+            let Y = (self.withView(cell, tag: 4) as! UILabel)
+        }
+        
         return cell
     }
     
