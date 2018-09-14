@@ -52,11 +52,46 @@ class QL_Crash_ViewController: UIViewController {
                     ["title":"Ảnh minh họa", "data":"", "ident":"QL_Image_Cell"],
         ]
         
+        let temp1: NSArray = [["title":"Mã tài sản", "data":"", "ident":"QL_Input_Cell"],
+                             ["title":"Thời gian", "data":"", "ident":"QL_Calendar_Cell"],
+                             ["title":"Tọa độ", "data":[], "ident":"QL_Location_Cell"],
+                             ["title":"Mã vị trí sự cố", "data":"", "ident":"QL_Input_Cell"],
+                             ["title":"Địa chỉ", "data":"", "ident":"QL_Input_Cell"],
+                             ["title":"Vị trí", "data":"", "ident":"QL_Drop_Cell"],
+                             ["title":"Ghi chú", "data":"", "ident":"QL_Input_Cell"],
+                             ["title":"Hiện trạng", "data":"", "ident":"QL_Drop_Cell"],
+                             ["title":"Số hiệu đường", "data":"", "ident":"QL_Input_Cell"],
+                             ["title":"Phân loại", "data":"", "ident":"QL_Drop_Cell"],
+                             ["title":"Ảnh minh họa", "data":"", "ident":"QL_Image_Cell"],
+        ]
+        
+        let temp2: NSArray = [["title":"Mã tài sản", "data":"", "ident":"QL_Input_Cell"],
+                              ["title":"Tọa độ", "data":[], "ident":"QL_Location_Cell"],
+                              ["title":"Mã điểm phản hồi", "data":"", "ident":"QL_Input_Cell"],
+                              ["title":"Địa chỉ", "data":"", "ident":"QL_Input_Cell"],
+                              ["title":"Vị trí", "data":"", "ident":"QL_Drop_Cell"],
+                              ["title":"Mã khách hàng", "data":"", "ident":"QL_Input_Cell"],
+                              ["title":"Ghi chú", "data":"", "ident":"QL_Input_Cell"],
+                              ["title":"Trạng thái xử lý", "data":"", "ident":"QL_Input_Cell"],
+                              ["title":"Hiện trạng", "data":"", "ident":"QL_Drop_Cell"],
+                              ["title":"Phân loại", "data":"", "ident":"QL_Drop_Cell"],
+                              ["title":"Số hiệu đường", "data":"", "ident":"QL_Input_Cell"],
+                              ["title":"Thời gian", "data":"", "ident":"QL_Calendar_Cell"],
+        ]
+        
         dataList = NSMutableArray()
         
-        dataList.addObjects(from: temp.withMutable())
+        if configType.getValueFromKey("type") == "0" {
+            dataList.addObjects(from: temp.withMutable())
+        }
         
-        print(configType)
+        if configType.getValueFromKey("type") == "1" {
+            dataList.addObjects(from: temp2.withMutable())
+        }
+        
+        if configType.getValueFromKey("type") == "2" {
+            dataList.addObjects(from: temp3.withMutable())
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,7 +145,7 @@ class QL_Crash_ViewController: UIViewController {
             switch (camType) {
             case .authorized:
                 Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    
+                    self.saveImage(image: image as! UIImage)
                 })
                 break
             case .denied:
@@ -121,7 +156,7 @@ class QL_Crash_ViewController: UIViewController {
                 break
             case .per_granted:
                 Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    
+                    self.saveImage(image: image as! UIImage)
                 })
                 break
             case .restricted:
@@ -138,7 +173,7 @@ class QL_Crash_ViewController: UIViewController {
             switch (camType) {
             case .authorized:
                 Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    
+                    self.saveImage(image: image as! UIImage)
                 })
                 break
             case .denied:
@@ -149,7 +184,7 @@ class QL_Crash_ViewController: UIViewController {
                 break
             case .per_granted:
                 Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    
+                    self.saveImage(image: image as! UIImage)
                 })
                 break
             case .restricted:
@@ -159,6 +194,12 @@ class QL_Crash_ViewController: UIViewController {
                 break
             }
         }
+    }
+    
+    func saveImage(image: UIImage) {
+        (dataList[8] as! NSMutableDictionary)["data"] = image.imageString()
+        
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -284,15 +325,18 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 })
             }
             
-            let coor = (data["data"] as! NSArray).firstObject as! NSDictionary
-            
-            let X = (self.withView(cell, tag: 3) as! UILabel)
-            
-            X.text = coor["lat"] as? String
-            
-            let Y = (self.withView(cell, tag: 4) as! UILabel)
-            
-            Y.text = coor["lng"] as? String
+            if (data["data"] as! NSArray).count != 0 {
+                
+                let coor = (data["data"] as! NSArray).firstObject as! NSDictionary
+                
+                let X = (self.withView(cell, tag: 3) as! UILabel)
+                
+                X.text = coor["lat"] as? String
+                
+                let Y = (self.withView(cell, tag: 4) as! UILabel)
+                
+                Y.text = coor["lng"] as? String
+            }
         }
         
         if data["ident"] as! String == "QL_Image_Cell" {
@@ -311,6 +355,9 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             
             let image = (self.withView(cell, tag: 4) as! UIImageView)
             
+            if data["data"] as! String != "" {
+                image.image = (data["data"] as! String).stringImage()
+            }
         }
         
         return cell
