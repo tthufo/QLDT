@@ -32,4 +32,6 @@
 
 #import "UIBarButtonItem+Badge.h"
 
+#import "Media.h"
+
 //#endif /* FBPlugInHeader_h */

@@ -8,13 +8,18 @@
 
 #import "MNViewController.h"
 
+#import "NSObject+Category.h"
+
 #import <MNCalendarView/MNCalendarView.h>
 
 @interface MNViewController () <MNCalendarViewDelegate>
+{
+    NSString * chosenDate;
+}
 
 @property(nonatomic,strong) NSCalendar     *calendar;
 @property(nonatomic,strong) IBOutlet MNCalendarView *calendarView;
-@property(nonatomic,strong) NSDate         *currentDate, * chosenDate;
+@property(nonatomic,strong) NSDate         *currentDate ;
 
 @end
 
@@ -41,7 +46,7 @@
   
   self.currentDate = [NSDate date];
 
-  self.chosenDate = self.currentDate;
+  chosenDate = [self.currentDate stringWithFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
     
   self.calendarView.calendar = self.calendar;
   self.calendarView.selectedDate = [NSDate date];
@@ -61,7 +66,7 @@
 {
     if(delegate && [delegate respondsToSelector:@selector(didChooseCalendar:)])
     {
-        [delegate didChooseCalendar:self.chosenDate];
+        [delegate didChooseCalendar: chosenDate];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -79,13 +84,10 @@
 #pragma mark - MNCalendarViewDelegate
 
 - (void)calendarView:(MNCalendarView *)calendarView didSelectDate:(NSDate *)date {
-    self.chosenDate = date;
+    chosenDate = [date stringWithFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
 }
 
 - (BOOL)calendarView:(MNCalendarView *)calendarView shouldSelectDate:(NSDate *)date {
-    
-  NSTimeInterval timeInterval = [date timeIntervalSinceDate:self.currentDate];
-
   return YES;
 }
 

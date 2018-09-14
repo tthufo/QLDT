@@ -80,15 +80,14 @@
                         <outlet property="delegate" destination="-1" id="Xuy-JN-czy"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELJ-Qc-KV0">
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELJ-Qc-KV0">
                     <rect key="frame" x="260" y="416" width="44" height="44"/>
-                    <color key="backgroundColor" red="0.97647058823529409" green="0.54117647058823526" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="HeJ-HO-gh9"/>
                         <constraint firstAttribute="height" constant="44" id="XyM-gH-016"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="39"/>
-                    <state key="normal" title="+">
+                    <state key="normal" image="ic_add">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -120,6 +119,7 @@
     </objects>
     <resources>
         <image name="back_a" width="170" height="170"/>
+        <image name="ic_add" width="49" height="49"/>
         <image name="ic_sync_home" width="49" height="49"/>
     </resources>
 </document>

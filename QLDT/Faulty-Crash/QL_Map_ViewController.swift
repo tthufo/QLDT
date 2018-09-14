@@ -8,9 +8,17 @@
 
 import UIKit
 
+protocol MapDelegate:class {
+    func didReloadData(data: NSArray)
+}
+
 class QL_Map_ViewController: UIViewController {
 
+    weak var delegate: MapDelegate?
+
     @IBOutlet var mapBox: MGLMapView!
+    
+    var tempLocation: [[String:String]] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +81,9 @@ class QL_Map_ViewController: UIViewController {
         
         mapBox.addAnnotation(marker)
         
-        print("onMapSingleTapped \(mapLocation)")
+        tempLocation.removeAll()
+        
+        tempLocation.append(["lat":"%f".format(parameters: mapLocation.latitude), "lng":"%f".format(parameters: mapLocation.longitude)])
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,6 +91,8 @@ class QL_Map_ViewController: UIViewController {
     }
     
     @IBAction func didPressBack() {
+        delegate?.didReloadData(data: tempLocation as NSArray)
+        
         self.dismiss(animated: true) {
             
         }

@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AllPod (0.1.6):
+  - AllPod (0.1.7):
     - AFNetworking (~> 3.1)
     - AVHexColor (~> 2.0)
     - JSONKit-NoWarning (~> 1.2)
@@ -35,7 +35,7 @@ PODS:
   - Toast (4.0.0)
 
 DEPENDENCIES:
-  - AllPod (~> 0.1.6)
+  - AllPod (~> 0.1.7)
   - AppAuth
   - Mapbox-iOS-SDK (~> 4.2)
   - MNCalendarView (~> 0.0)
@@ -56,7 +56,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AllPod: 9887db3b02a6a8ef06075ead803ce0fc63f30fcc
+  AllPod: 08a52146ec4bce448167f887c2b2c6162179b096
   AppAuth: 0f099c2286a1a9754e5bd27211c43d307dc4f778
   AVHexColor: 33e5e102f3b6f3acd002779183ee226e21870c28
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
@@ -67,6 +67,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
 
-PODFILE CHECKSUM: b7aea1ada3f84ae8391e6a577b8735aa73794a51
+PODFILE CHECKSUM: d3993d200d4645bafc2dc9c6e5f90e311d4d4ea3
 
 COCOAPODS: 1.5.3

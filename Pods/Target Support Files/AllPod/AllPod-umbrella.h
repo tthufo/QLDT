@@ -16,6 +16,7 @@
 #import "DropButton.h"
 #import "KeyBoard.h"
 #import "LTRequest.h"
+#import "Media.h"
 #import "MHFacebookImageViewer.h"
 #import "NSObject+Category.h"
 #import "ODRefreshControl.h"

@@ -14,7 +14,7 @@
     
 @optional
     
-- (void)didChooseCalendar:(NSDate*)date;
+- (void)didChooseCalendar:(NSString *)date;
     
 @end
 

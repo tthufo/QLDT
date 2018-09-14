@@ -41,18 +41,20 @@ class QL_Crash_ViewController: UIViewController {
         tableView.withCell("QL_Image_Cell")
 
 
-        dataList = [["title":"Mã vị trí tai nạn", "data":"", "ident":"QL_Input_Cell"],
+        let temp: NSArray = [["title":"Mã vị trí tai nạn", "data":"", "ident":"QL_Input_Cell"],
                     ["title":"Địa chỉ", "data":"", "ident":"QL_Input_Cell"],
                     ["title":"Vị trí", "data":"", "ident":"QL_Drop_Cell"],
                     ["title":"Thời gian", "data":"", "ident":"QL_Calendar_Cell"],
                     ["title":"Hiện trạng", "data":"", "ident":"QL_Input_Cell"],
                     ["title":"Số hiệu đường", "data":"", "ident":"QL_Input_Cell"],
                     ["title":"Phân loại", "data":"", "ident":"QL_Input_Cell"],
-                    ["title":"Tọa độ", "data":"", "ident":"QL_Location_Cell"],
+                    ["title":"Tọa độ", "data":[], "ident":"QL_Location_Cell"],
                     ["title":"Ảnh minh họa", "data":"", "ident":"QL_Image_Cell"],
         ]
-
-        dataType = [:]
+        
+        dataList = NSMutableArray()
+        
+        dataList.addObjects(from: temp.withMutable())
         
         print(configType)
     }
@@ -98,9 +100,64 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     @IBAction func didPressBack() {
-//        self.navigationController?.popViewController(animated: true)
         self.dismiss(animated: true) {
 
+        }
+    }
+    
+    func didAskForMedia() {
+        Permission.shareInstance().askGallery { (camType) in
+            switch (camType) {
+            case .authorized:
+                Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
+                    
+                })
+                break
+            case .denied:
+                self.showToast("Bạn chưa cho phép sử dụng Bộ sưu tập", andPos: 0)
+                break
+            case .per_denied:
+                self.showToast("Bạn chưa cho phép sử dụng Bộ sưu tập", andPos: 0)
+                break
+            case .per_granted:
+                Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
+                    
+                })
+                break
+            case .restricted:
+                self.showToast("Bạn chưa cho phép sử dụng Bộ sưu tập", andPos: 0)
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    func didAskForCamera() {
+        Permission.shareInstance().askCamera { (camType) in
+            switch (camType) {
+            case .authorized:
+                Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
+                    
+                })
+                break
+            case .denied:
+                self.showToast("Bạn chưa cho phép sử dụng Bộ sưu tập", andPos: 0)
+                break
+            case .per_denied:
+                self.showToast("Bạn chưa cho phép sử dụng Bộ sưu tập", andPos: 0)
+                break
+            case .per_granted:
+                Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
+                    
+                })
+                break
+            case .restricted:
+                self.showToast("Bạn chưa cho phép sử dụng Bộ sưu tập", andPos: 0)
+                break
+            default:
+                break
+            }
         }
     }
     
@@ -110,8 +167,10 @@ class QL_Crash_ViewController: UIViewController {
 }
 
 extension QL_Crash_ViewController: CalendarDelegate {
-    func didChooseCalendar(_ date: Date!) {
-        print(date)
+    func didChooseCalendar(_ date: String!) {
+        (dataList[3] as! NSMutableDictionary)["data"] = date
+        
+        self.tableView.reloadData()
     }
 }
 
@@ -120,6 +179,33 @@ extension QL_Crash_ViewController: UITextFieldDelegate {
         self.view.endEditing(true)
         
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let indexing = Int(textField.accessibilityLabel!)
+        
+        if let text = textField.text as NSString? {
+            let txtAfterUpdate = text.replacingCharacters(in: range, with: string)
+            
+            (dataList[indexing!] as! NSMutableDictionary)["data"] = txtAfterUpdate
+        }
+        
+        return true
+    }
+}
+
+extension QL_Crash_ViewController: MapDelegate {
+    
+    func didReloadData(data: NSArray) {
+        
+        if data.count == 0 {
+            return
+        }
+        
+        (dataList[7] as! NSMutableDictionary)["data"] = data
+        
+        self.tableView.reloadData()
     }
 }
 
@@ -142,13 +228,19 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = dataList![indexPath.row] as! NSDictionary
 
-        (self.withView(cell, tag: 1) as! UILabel).text = data["title"] as! String
+        (self.withView(cell, tag: 1) as! UILabel).text = data["title"] as? String
 
         
         
         
         if data["ident"] as! String == "QL_Input_Cell" {
-            (self.withView(cell, tag: 2) as! UITextField).delegate = self
+            let input = (self.withView(cell, tag: 2) as! UITextField)
+            
+            input.accessibilityLabel = "%i".format(parameters: indexPath.row)
+            
+            input.delegate = self
+            
+            input.text = data["data"] as? String
         }
         
         if data["ident"] as! String == "QL_Drop_Cell" {
@@ -156,7 +248,7 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             
             drop.action(forTouch: [:]) { (objc) in
                 drop.didDropDown(withData: [["title":"ahihi"]], andCompletion: { (result) in
-                    print(result)
+                    
                 })
             }
         }
@@ -175,6 +267,8 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             let date = (self.withView(cell, tag: 3) as! UILabel)
+            
+            date.text = data["data"] as? String
         }
         
         if data["ident"] as! String == "QL_Location_Cell" {
@@ -183,15 +277,40 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             loc.action(forTouch: [:]) { (objc) in
                 let map = QL_Map_ViewController()
                 
+                map.delegate = self
                 
                 self.present(map, animated: true, completion: {
                     
                 })
             }
             
+            let coor = (data["data"] as! NSArray).firstObject as! NSDictionary
+            
             let X = (self.withView(cell, tag: 3) as! UILabel)
             
+            X.text = coor["lat"] as? String
+            
             let Y = (self.withView(cell, tag: 4) as! UILabel)
+            
+            Y.text = coor["lng"] as? String
+        }
+        
+        if data["ident"] as! String == "QL_Image_Cell" {
+            
+            let gallery = (self.withView(cell, tag: 2) as! UIButton)
+            
+            gallery.action(forTouch: [:]) { (objc) in
+                self.didAskForMedia()
+            }
+            
+            let cam = (self.withView(cell, tag: 3) as! UIButton)
+            
+            cam.action(forTouch: [:]) { (objc) in
+                self.didAskForCamera()
+            }
+            
+            let image = (self.withView(cell, tag: 4) as! UIImageView)
+            
         }
         
         return cell
