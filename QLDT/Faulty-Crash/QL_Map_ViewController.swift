@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MapDelegate:class {
-    func didReloadData(data: NSArray)
+    func didReloadData(data: NSArray, indexing: String)
 }
 
 class QL_Map_ViewController: UIViewController {
@@ -17,6 +17,8 @@ class QL_Map_ViewController: UIViewController {
     weak var delegate: MapDelegate?
 
     @IBOutlet var mapBox: MGLMapView!
+    
+    var indexing: String!
     
     var tempLocation: [[String:String]] = []
 
@@ -91,7 +93,7 @@ class QL_Map_ViewController: UIViewController {
     }
     
     @IBAction func didPressBack() {
-        delegate?.didReloadData(data: tempLocation as NSArray)
+        delegate?.didReloadData(data: tempLocation as NSArray, indexing: self.indexing)
         
         self.dismiss(animated: true) {
             

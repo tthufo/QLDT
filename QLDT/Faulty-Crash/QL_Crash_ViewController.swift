@@ -41,7 +41,7 @@ class QL_Crash_ViewController: UIViewController {
         tableView.withCell("QL_Image_Cell")
 
 
-        let temp: NSArray = [["title":"Mã vị trí tai nạn", "data":"", "ident":"QL_Input_Cell"],
+        let temp0: NSArray = [["title":"Mã vị trí tai nạn", "data":"", "ident":"QL_Input_Cell"],
                     ["title":"Địa chỉ", "data":"", "ident":"QL_Input_Cell"],
                     ["title":"Vị trí", "data":"", "ident":"QL_Drop_Cell"],
                     ["title":"Thời gian", "data":"", "ident":"QL_Calendar_Cell"],
@@ -82,15 +82,15 @@ class QL_Crash_ViewController: UIViewController {
         dataList = NSMutableArray()
         
         if configType.getValueFromKey("type") == "0" {
-            dataList.addObjects(from: temp.withMutable())
+            dataList.addObjects(from: temp0.withMutable())
         }
         
         if configType.getValueFromKey("type") == "1" {
-            dataList.addObjects(from: temp2.withMutable())
+            dataList.addObjects(from: temp1.withMutable())
         }
         
         if configType.getValueFromKey("type") == "2" {
-            dataList.addObjects(from: temp3.withMutable())
+            dataList.addObjects(from: temp2.withMutable())
         }
     }
     
@@ -140,12 +140,12 @@ class QL_Crash_ViewController: UIViewController {
         }
     }
     
-    func didAskForMedia() {
+    func didAskForMedia(indexing: String) {
         Permission.shareInstance().askGallery { (camType) in
             switch (camType) {
             case .authorized:
                 Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    self.saveImage(image: image as! UIImage)
+                    self.saveImage(image: image as! UIImage, indexing: indexing)
                 })
                 break
             case .denied:
@@ -156,7 +156,7 @@ class QL_Crash_ViewController: UIViewController {
                 break
             case .per_granted:
                 Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    self.saveImage(image: image as! UIImage)
+                    self.saveImage(image: image as! UIImage, indexing: indexing)
                 })
                 break
             case .restricted:
@@ -168,12 +168,12 @@ class QL_Crash_ViewController: UIViewController {
         }
     }
     
-    func didAskForCamera() {
+    func didAskForCamera(indexing: String) {
         Permission.shareInstance().askCamera { (camType) in
             switch (camType) {
             case .authorized:
                 Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    self.saveImage(image: image as! UIImage)
+                    self.saveImage(image: image as! UIImage, indexing: indexing)
                 })
                 break
             case .denied:
@@ -184,7 +184,7 @@ class QL_Crash_ViewController: UIViewController {
                 break
             case .per_granted:
                 Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    self.saveImage(image: image as! UIImage)
+                    self.saveImage(image: image as! UIImage, indexing: indexing)
                 })
                 break
             case .restricted:
@@ -196,8 +196,8 @@ class QL_Crash_ViewController: UIViewController {
         }
     }
     
-    func saveImage(image: UIImage) {
-        (dataList[8] as! NSMutableDictionary)["data"] = image.imageString()
+    func saveImage(image: UIImage, indexing: String) {
+        (dataList[Int(indexing)!] as! NSMutableDictionary)["data"] = image.imageString()
         
         self.tableView.reloadData()
     }
@@ -208,8 +208,9 @@ class QL_Crash_ViewController: UIViewController {
 }
 
 extension QL_Crash_ViewController: CalendarDelegate {
-    func didChooseCalendar(_ date: String!) {
-        (dataList[3] as! NSMutableDictionary)["data"] = date
+    func didChooseCalendar(_ date: String!, and title: String!) {
+        
+        (dataList[Int(title)!] as! NSMutableDictionary)["data"] = date
         
         self.tableView.reloadData()
     }
@@ -238,13 +239,13 @@ extension QL_Crash_ViewController: UITextFieldDelegate {
 
 extension QL_Crash_ViewController: MapDelegate {
     
-    func didReloadData(data: NSArray) {
+    func didReloadData(data: NSArray, indexing: String) {
         
         if data.count == 0 {
             return
         }
         
-        (dataList[7] as! NSMutableDictionary)["data"] = data
+        (dataList[Int(indexing)!] as! NSMutableDictionary)["data"] = data
         
         self.tableView.reloadData()
     }
@@ -298,7 +299,7 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             let cal = (self.withView(cell, tag: 2) as! UIImageView)
             
             cal.action(forTouch: [:]) { (objc) in
-                let cal = MNViewController.init(calendar: Calendar.init(identifier: .gregorian), title: "")
+                let cal = MNViewController.init(calendar: Calendar.init(identifier: .gregorian), title: "%i".format(parameters: indexPath.row))
         
                 cal?.delegate = self
         
@@ -317,6 +318,8 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             
             loc.action(forTouch: [:]) { (objc) in
                 let map = QL_Map_ViewController()
+                
+                map.indexing = "%i".format(parameters: indexPath.row)
                 
                 map.delegate = self
                 
@@ -344,13 +347,13 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             let gallery = (self.withView(cell, tag: 2) as! UIButton)
             
             gallery.action(forTouch: [:]) { (objc) in
-                self.didAskForMedia()
+                self.didAskForMedia(indexing: "%i".format(parameters: indexPath.row))
             }
             
             let cam = (self.withView(cell, tag: 3) as! UIButton)
             
             cam.action(forTouch: [:]) { (objc) in
-                self.didAskForCamera()
+                self.didAskForCamera(indexing: "%i".format(parameters: indexPath.row))
             }
             
             let image = (self.withView(cell, tag: 4) as! UIImageView)

@@ -64,9 +64,9 @@
     
 - (IBAction)didPressChoose:(id)sender
 {
-    if(delegate && [delegate respondsToSelector:@selector(didChooseCalendar:)])
+    if(delegate && [delegate respondsToSelector:@selector(didChooseCalendar:and:)])
     {
-        [delegate didChooseCalendar: chosenDate];
+        [delegate didChooseCalendar: chosenDate and:self.title];
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
