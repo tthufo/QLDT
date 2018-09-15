@@ -29,6 +29,22 @@ class QL_List_ViewController: UIViewController {
         dataList = NSMutableArray()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let ID = configType["id"]
+        
+        let arr = Temp.getData(parentId: ID as! Int32)
+        
+        dataList.removeAllObjects()
+        
+        dataList.addObjects(from: arr)
+        
+        self.tableView.reloadData()
+        
+        print(arr.last)
+    }
+    
     @IBAction func didPressAdd() {
         let crash = QL_Crash_ViewController()
 
@@ -67,7 +83,7 @@ extension QL_List_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = dataList![indexPath.row] as! NSDictionary
                 
-        (self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data["Name"] as? String)!)
+        //(self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data["Name"] as? String)!)
         
         return cell
     }

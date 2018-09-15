@@ -32,6 +32,10 @@
 		FC7257E52147C77900D17A63 /* MNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7257E42147C77900D17A63 /* MNViewController.m */; };
 		FC7257E72147C9F100D17A63 /* MNViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7257E62147C9F100D17A63 /* MNViewController.xib */; };
 		FC84F1D1214D022C0025E213 /* QLDT1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FC84F1CF214D022C0025E213 /* QLDT1.xcdatamodeld */; };
+		FC84F1D3214D66EF0025E213 /* drop.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC84F1D2214D66EF0025E213 /* drop.plist */; };
+		FC84F1D5214D7B1F0025E213 /* TG_Region_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC84F1D4214D7B1F0025E213 /* TG_Region_Cell.xib */; };
+		FC84F1D7214D7B680025E213 /* region.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC84F1D6214D7B670025E213 /* region.plist */; };
+		FC84F1D9214D87370025E213 /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC84F1D8214D87370025E213 /* Temp.swift */; };
 		FC8E4FF221479F8300588836 /* QL_Input_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8E4FF121479F8300588836 /* QL_Input_Cell.xib */; };
 		FC8E4FF42147A14B00588836 /* QL_Drop_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8E4FF32147A14B00588836 /* QL_Drop_Cell.xib */; };
 		FC8E4FF62147A4BC00588836 /* QL_Calendar_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8E4FF52147A4BC00588836 /* QL_Calendar_Cell.xib */; };
@@ -92,6 +96,10 @@
 		FC7257E42147C77900D17A63 /* MNViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNViewController.m; sourceTree = "<group>"; };
 		FC7257E62147C9F100D17A63 /* MNViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MNViewController.xib; sourceTree = "<group>"; };
 		FC84F1D0214D022C0025E213 /* QLDT1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QLDT1.xcdatamodel; sourceTree = "<group>"; };
+		FC84F1D2214D66EF0025E213 /* drop.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = drop.plist; path = QLDT/ViewControllers/drop.plist; sourceTree = SOURCE_ROOT; };
+		FC84F1D4214D7B1F0025E213 /* TG_Region_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Region_Cell.xib; sourceTree = "<group>"; };
+		FC84F1D6214D7B670025E213 /* region.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = region.plist; path = QLDT/ViewControllers/region.plist; sourceTree = SOURCE_ROOT; };
+		FC84F1D8214D87370025E213 /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 		FC8E4FF121479F8300588836 /* QL_Input_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Input_Cell.xib; sourceTree = "<group>"; };
 		FC8E4FF32147A14B00588836 /* QL_Drop_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Drop_Cell.xib; sourceTree = "<group>"; };
 		FC8E4FF52147A4BC00588836 /* QL_Calendar_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Calendar_Cell.xib; sourceTree = "<group>"; };
@@ -236,6 +244,7 @@
 				FCCC3D71213C6D440005D519 /* Commune.swift */,
 				FCCC3D73213C6D540005D519 /* District.swift */,
 				FCCC3D6F213C65BC0005D519 /* Field.swift */,
+				FC84F1D8214D87370025E213 /* Temp.swift */,
 				FC935AF2210CCD750067D480 /* Macro.swift */,
 			);
 			path = QLDT;
@@ -261,8 +270,11 @@
 			children = (
 				FCE372F8213AA96D00F79D7A /* Information.swift */,
 				FCE61741210EAA4600000438 /* format.plist */,
+				FC84F1D2214D66EF0025E213 /* drop.plist */,
+				FC84F1D6214D7B670025E213 /* region.plist */,
 				FCE61740210EAA4600000438 /* TG_Drop_Cell.xib */,
 				04E7283821410F8100C40CCE /* TG_Cell.xib */,
+				FC84F1D4214D7B1F0025E213 /* TG_Region_Cell.xib */,
 				FCE61742210EAA4600000438 /* TG_Image_Cell.xib */,
 				FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */,
 				FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */,
@@ -334,6 +346,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC84F1D7214D7B680025E213 /* region.plist in Resources */,
 				FC5386AB210C875600F00873 /* LaunchScreen.storyboard in Resources */,
 				FC8E4FFA2147AD0C00588836 /* QL_Image_Cell.xib in Resources */,
 				FCE61745210EAA4600000438 /* TG_Image_Cell.xib in Resources */,
@@ -347,10 +360,12 @@
 				FCFA5EE021458E15003D5442 /* QL_Comment_Cell.xib in Resources */,
 				FCAF7AC121404BC4007A1181 /* QL_Info_Collector_ViewController.xib in Resources */,
 				FCE6173E210EAA3500000438 /* QL_Home_ViewController.xib in Resources */,
+				FC84F1D5214D7B1F0025E213 /* TG_Region_Cell.xib in Resources */,
 				FC5386A3210C875600F00873 /* Main.storyboard in Resources */,
 				044F715821427FC9003CB99A /* QL_Comment_ViewController.xib in Resources */,
 				FC935AF1210CC5880067D480 /* TL_ChangeHost_ViewController.xib in Resources */,
 				FC5386B6210CBB6600F00873 /* QL_LogIn_ViewController.xib in Resources */,
+				FC84F1D3214D66EF0025E213 /* drop.plist in Resources */,
 				044F7154214229CB003CB99A /* QL_Check_Cell.xib in Resources */,
 				FC8E4FF42147A14B00588836 /* QL_Drop_Cell.xib in Resources */,
 				044F715221421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.xib in Resources */,
@@ -454,6 +469,7 @@
 				FC84F1D1214D022C0025E213 /* QLDT1.xcdatamodeld in Sources */,
 				FC935AED210CC2FF0067D480 /* UIViewController+ViewCat.m in Sources */,
 				FC7257E52147C77900D17A63 /* MNViewController.m in Sources */,
+				FC84F1D9214D87370025E213 /* Temp.swift in Sources */,
 				FCCC3D74213C6D540005D519 /* District.swift in Sources */,
 				044F715721427FC9003CB99A /* QL_Comment_ViewController.swift in Sources */,
 			);

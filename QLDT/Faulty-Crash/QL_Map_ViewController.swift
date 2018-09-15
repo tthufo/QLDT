@@ -87,12 +87,12 @@ class QL_Map_ViewController: UIViewController {
                 progressView = UIProgressView(progressViewStyle: .default)
                 let frame = view.bounds.size
                 progressView.frame = CGRect(x: frame.width / 4, y: frame.height * 0.75, width: frame.width / 2, height: 10)
-                //view.addSubview(progressView)
+                view.addSubview(progressView)
             }
             
-            //progressView.progress = progressPercentage
+            progressView.progress = progressPercentage
             
-            self.showSVHUD("ahihii", andProgress: progressPercentage)
+//            self.showSVHUD("ahihii", andProgress: progressPercentage)
             
             if completedResources == expectedResources {
                 let byteCount = ByteCountFormatter.string(fromByteCount: Int64(pack.progress.countOfBytesCompleted), countStyle: ByteCountFormatter.CountStyle.memory)

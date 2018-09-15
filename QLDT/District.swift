@@ -38,15 +38,15 @@ class District {
         }
     }
     
-    static func getData(layerId: Int32) -> [NSManagedObject] {
+    static func getData(layerId: Int32) -> [NSDictionary] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "DistrictGroup")
         request.predicate = NSPredicate(format: "areaId = %i", layerId)
         request.returnsObjectsAsFaults = false
-        var array = [NSManagedObject]()
+        var array = [NSDictionary]()
         do {
             let result = try contexting().fetch(request)
             for data in result as! [NSManagedObject] {
-                array.append(data)
+                array.append(((data as! DistrictGroup).areaData?.dictionize().reFormat())!)
             }
         } catch {
             print("Failed")
@@ -55,14 +55,14 @@ class District {
         return array
     }
     
-    static func getAllData() -> [NSManagedObject] {
+    static func getAllData() -> [NSDictionary] {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "DistrictGroup")
         request.returnsObjectsAsFaults = false
-        var array = [NSManagedObject]()
+        var array = [NSDictionary]()
         do {
             let result = try contexting().fetch(request)
             for data in result as! [NSManagedObject] {
-                array.append(data)
+                array.append(((data as! DistrictGroup).areaData?.dictionize().reFormat())!)
             }
         } catch {
             print("Failed")

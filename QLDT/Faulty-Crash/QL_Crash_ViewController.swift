@@ -18,7 +18,7 @@ class QL_Crash_ViewController: UIViewController {
     
     var configType: NSDictionary!
     
-    var dataType: NSMutableDictionary!
+    var dataTemp: NSMutableDictionary!
     
     var kb: KeyBoard!
     
@@ -26,29 +26,15 @@ class QL_Crash_ViewController: UIViewController {
         
         let ID = configType["id"]
         
-        let arr = (Field.getData(layerId: ID as! Int32).first)
+//        let arr = (Field.getData(layerId: ID as! Int32).first)
         
+        self.dataTemp = (Field.getData(layerId: ID as! Int32).first)
         
-//        filedType = int -> number input   ///   int + xa_id  huyen_id -> drop
-//
-//        fieldType = (numeric + lat or lng) -> location
-//
-//        FieldName = lat/lng
-//
-//        fieldType = numeric không lat or lng  -> number input
-        
-//        fieldType = datetime -->calendar
-//
-//        FieldName = "anh_minh_hoa";  -> image
-        
-//        FieldOrder = 999;
-        
-//        filedType = nvarchar -> input
-
-        
-        for dict in arr!["LayerFields"] as! NSMutableArray {
+        for dict in self.dataTemp!["LayerFields"] as! NSMutableArray {
             let tempo = dict as! NSMutableDictionary
             
+            (dict as! NSMutableDictionary)["data"] = ""
+
             if tempo.getValueFromKey("FieldOrder") == "999" {
                 if tempo.getValueFromKey("FieldName") == "anh_minh_hoa" {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Image_Cell"
@@ -60,13 +46,31 @@ class QL_Crash_ViewController: UIViewController {
 
                 if !(tempo["CategoryType"] as AnyObject).isKind(of: NSString.self) {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Drop_Cell"
+                    let data = (tempo["CategoryType"] as! NSDictionary)["Categories"]
+                    (dict as! NSMutableDictionary)["data"] = data
+                    (dict as! NSMutableDictionary)["pList"] = "drop"
+                    (dict as! NSMutableDictionary)["key"] = "ItemName"
+                    (dict as! NSMutableDictionary)["activeData"] = (data as! NSArray).firstObject
                 }
 
                 if tempo.getValueFromKey("FieldType") == "int" {
-                    if tempo.getValueFromKey("FieldName") == "xa_id" || tempo.getValueFromKey("FieldName") == "huyen_id" {
+                    if tempo.getValueFromKey("FieldName") == "xa_id" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Drop_Cell"
+                        let data = Commune.getAllData()
+                        (dict as! NSMutableDictionary)["data"] = data
+                        (dict as! NSMutableDictionary)["pList"] = "region"
+                        (dict as! NSMutableDictionary)["key"] = "region_name"
+                        (dict as! NSMutableDictionary)["activeData"] = (data as NSArray).firstObject
+                    } else if tempo.getValueFromKey("FieldName") == "huyen_id" {
+                        (dict as! NSMutableDictionary)["ident"] = "QL_Drop_Cell"
+                        let data = District.getAllData()
+                        (dict as! NSMutableDictionary)["data"] = data
+                        (dict as! NSMutableDictionary)["pList"] = "region"
+                        (dict as! NSMutableDictionary)["key"] = "region_name"
+                        (dict as! NSMutableDictionary)["activeData"] = (data as NSArray).firstObject
                     } else {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
+                        (dict as! NSMutableDictionary)["number"] = "number"
                     }
                 }
 
@@ -77,26 +81,33 @@ class QL_Crash_ViewController: UIViewController {
                 if tempo.getValueFromKey("FieldType") == "numeric" {
                     if tempo.getValueFromKey("FieldName") != "lat" && tempo.getValueFromKey("FieldName") != "lng" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
+                        (dict as! NSMutableDictionary)["number"] = "number"
                     }
 
-                    if tempo.getValueFromKey("FieldName") == "lat" || tempo.getValueFromKey("FieldName") == "lng" {
+//                    if tempo.getValueFromKey("FieldName") == "lat" {//|| tempo.getValueFromKey("FieldName") == "lng" {
+//                        (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
+//                    }
+                    
+                    if tempo.getValueFromKey("FieldName") == "lat" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
+                        (dict as! NSMutableDictionary)["FieldLabel"] = "Tọa độ"
+                        (dict as! NSMutableDictionary)["data"] = []
+                    }
+                    
+                    if tempo.getValueFromKey("FieldName") == "lng" {
+                        (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
+                        (dict as! NSMutableDictionary)["IsVisible"] = false
+                        (dict as! NSMutableDictionary)["data"] = []
                     }
                 }
             }
         }
         
-        print(arr)
-        
-        let temp = NSMutableArray()
-        
-        return temp
+        return self.dataTemp!["LayerFields"] as! NSMutableArray
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dataFormat()
         
         kb = KeyBoard.shareInstance()
         
@@ -112,58 +123,10 @@ class QL_Crash_ViewController: UIViewController {
 
         tableView.withCell("QL_Image_Cell")
 
-
-        let temp0: NSArray = [["title":"Mã vị trí tai nạn", "data":"", "ident":"QL_Input_Cell"],
-                    ["title":"Địa chỉ", "data":"", "ident":"QL_Input_Cell"],
-                    ["title":"Vị trí", "data":"", "ident":"QL_Drop_Cell"],
-                    ["title":"Thời gian", "data":"", "ident":"QL_Calendar_Cell"],
-                    ["title":"Hiện trạng", "data":"", "ident":"QL_Input_Cell"],
-                    ["title":"Số hiệu đường", "data":"", "ident":"QL_Input_Cell"],
-                    ["title":"Phân loại", "data":"", "ident":"QL_Input_Cell"],
-                    ["title":"Tọa độ", "data":[], "ident":"QL_Location_Cell"],
-                    ["title":"Ảnh minh họa", "data":"", "ident":"QL_Image_Cell"],
-        ]
-        
-        let temp1: NSArray = [["title":"Mã tài sản", "data":"", "ident":"QL_Input_Cell"],
-                             ["title":"Thời gian", "data":"", "ident":"QL_Calendar_Cell"],
-                             ["title":"Tọa độ", "data":[], "ident":"QL_Location_Cell"],
-                             ["title":"Mã vị trí sự cố", "data":"", "ident":"QL_Input_Cell"],
-                             ["title":"Địa chỉ", "data":"", "ident":"QL_Input_Cell"],
-                             ["title":"Vị trí", "data":"", "ident":"QL_Drop_Cell"],
-                             ["title":"Ghi chú", "data":"", "ident":"QL_Input_Cell"],
-                             ["title":"Hiện trạng", "data":"", "ident":"QL_Drop_Cell"],
-                             ["title":"Số hiệu đường", "data":"", "ident":"QL_Input_Cell"],
-                             ["title":"Phân loại", "data":"", "ident":"QL_Drop_Cell"],
-                             ["title":"Ảnh minh họa", "data":"", "ident":"QL_Image_Cell"],
-        ]
-        
-        let temp2: NSArray = [["title":"Mã tài sản", "data":"", "ident":"QL_Input_Cell"],
-                              ["title":"Tọa độ", "data":[], "ident":"QL_Location_Cell"],
-                              ["title":"Mã điểm phản hồi", "data":"", "ident":"QL_Input_Cell"],
-                              ["title":"Địa chỉ", "data":"", "ident":"QL_Input_Cell"],
-                              ["title":"Vị trí", "data":"", "ident":"QL_Drop_Cell"],
-                              ["title":"Mã khách hàng", "data":"", "ident":"QL_Input_Cell"],
-                              ["title":"Ghi chú", "data":"", "ident":"QL_Input_Cell"],
-                              ["title":"Trạng thái xử lý", "data":"", "ident":"QL_Input_Cell"],
-                              ["title":"Hiện trạng", "data":"", "ident":"QL_Drop_Cell"],
-                              ["title":"Phân loại", "data":"", "ident":"QL_Drop_Cell"],
-                              ["title":"Số hiệu đường", "data":"", "ident":"QL_Input_Cell"],
-                              ["title":"Thời gian", "data":"", "ident":"QL_Calendar_Cell"],
-        ]
         
         dataList = NSMutableArray()
         
-        if configType.getValueFromKey("type") == "0" {
-            dataList.addObjects(from: temp0.withMutable())
-        }
-        
-        if configType.getValueFromKey("type") == "1" {
-            dataList.addObjects(from: temp1.withMutable())
-        }
-        
-        if configType.getValueFromKey("type") == "2" {
-            dataList.addObjects(from: temp2.withMutable())
-        }
+        dataList.addObjects(from: dataFormat() as! [Any])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -186,28 +149,37 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     @IBAction func didRequestSubmit() {
-//        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
-//                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
-//                                                   "method":"GET",
-//                                                   "overrideLoading":1,
-//                                                   "overrideAlert":1,
-//                                                   "host":self
-//            ], withCache: { (cache) in
-//
-//        }) { (response, errorCode, error, isValid) in
-//
-//            if errorCode != "200" {
-//                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
-//
-//                return
-//            }
-//
-//            self.dataList.removeAllObjects()
-//
-//            self.dataList.addObjects(from: response?.dictionize()["array"] as! [Any])
-//
-//            self.tableView.reloadData()
-//        }
+        
+        if LTRequest.isConnectionAvailable() {
+            //        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
+            //                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+            //                                                   "method":"GET",
+            //                                                   "overrideLoading":1,
+            //                                                   "overrideAlert":1,
+            //                                                   "host":self
+            //            ], withCache: { (cache) in
+            //
+            //        }) { (response, errorCode, error, isValid) in
+            //
+            //            if errorCode != "200" {
+            //                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+            //
+            //                return
+            //            }
+            //
+            //            self.dataList.removeAllObjects()
+            //
+            //            self.dataList.addObjects(from: response?.dictionize()["array"] as! [Any])
+            //
+            //            self.tableView.reloadData()
+            //        }
+
+            Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: "ahihi")
+            
+            didPressBack()
+        } else {
+            
+        }
     }
     
     @IBAction func didPressBack() {
@@ -338,7 +310,11 @@ extension QL_Crash_ViewController: MapDelegate {
 extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        let data = dataList![indexPath.row] as! NSDictionary
+
+        let isShow = data["IsVisible"] as! Bool
+        
+        return isShow ? UITableViewAutomaticDimension : 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -354,13 +330,17 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = dataList![indexPath.row] as! NSDictionary
 
-        (self.withView(cell, tag: 1) as! UILabel).text = data["title"] as? String
+        (self.withView(cell, tag: 1) as! UILabel).text = data["FieldLabel"] as? String
 
         
         
         
         if data["ident"] as! String == "QL_Input_Cell" {
             let input = (self.withView(cell, tag: 2) as! UITextField)
+            
+            let isNumber = data.response(forKey: "number")
+            
+            input.keyboardType = isNumber ? .numberPad : .default
             
             input.accessibilityLabel = "%i".format(parameters: indexPath.row)
             
@@ -370,11 +350,25 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if data["ident"] as! String == "QL_Drop_Cell" {
+            let activeData = data["activeData"] as! NSDictionary
+            
+            let plistName = data["pList"]
+            
+            let key = data["key"] as! String
+            
             let drop = (self.withView(cell, tag: 2) as! DropButton)
             
+            drop.pListName = plistName as! NSString
+            
+            drop.setTitle(activeData[key] as? String, for: .normal)
+            
             drop.action(forTouch: [:]) { (objc) in
-                drop.didDropDown(withData: [["title":"ahihi"]], andCompletion: { (result) in
+                drop.didDropDown(withData: data["data"] as! [Any], andCompletion: { (result) in
+                    let data = (result as! NSDictionary)["data"]
                     
+                    (self.dataList![indexPath.row] as! NSMutableDictionary)["activeData"] = data
+                    
+                    drop.setTitle((data as! NSDictionary)[key] as? String, for: .normal)
                 })
             }
         }
@@ -413,15 +407,15 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             if (data["data"] as! NSArray).count != 0 {
-                
+
                 let coor = (data["data"] as! NSArray).firstObject as! NSDictionary
-                
+
                 let X = (self.withView(cell, tag: 3) as! UILabel)
-                
+
                 X.text = coor["lat"] as? String
-                
+
                 let Y = (self.withView(cell, tag: 4) as! UILabel)
-                
+
                 Y.text = coor["lng"] as? String
             }
         }

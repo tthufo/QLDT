@@ -81,11 +81,11 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELJ-Qc-KV0">
-                    <rect key="frame" x="260" y="416" width="44" height="44"/>
+                    <rect key="frame" x="247" y="425" width="73" height="48"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="44" id="HeJ-HO-gh9"/>
-                        <constraint firstAttribute="height" constant="44" id="XyM-gH-016"/>
+                        <constraint firstAttribute="width" constant="73" id="7wC-XY-f22"/>
+                        <constraint firstAttribute="height" constant="48" id="ZrC-JH-F31"/>
                     </constraints>
                     <state key="normal" image="ic_add">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -102,15 +102,15 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="ELJ-Qc-KV0" firstAttribute="trailing" secondItem="Bo2-db-Mhu" secondAttribute="trailing" id="1LY-0m-VQD"/>
                 <constraint firstItem="dtu-XF-rYE" firstAttribute="leading" secondItem="Bo2-db-Mhu" secondAttribute="leading" id="AK8-TJ-LqU"/>
                 <constraint firstItem="8Vn-qj-fgT" firstAttribute="leading" secondItem="Bo2-db-Mhu" secondAttribute="leading" id="Gzd-Qh-edf"/>
-                <constraint firstItem="Bo2-db-Mhu" firstAttribute="bottom" secondItem="ELJ-Qc-KV0" secondAttribute="bottom" constant="20" id="LdC-pO-Ldx"/>
-                <constraint firstItem="Bo2-db-Mhu" firstAttribute="trailing" secondItem="ELJ-Qc-KV0" secondAttribute="trailing" constant="16" id="Lvz-wO-y9T"/>
                 <constraint firstItem="dtu-XF-rYE" firstAttribute="top" secondItem="Bo2-db-Mhu" secondAttribute="top" id="PvS-rB-m9f"/>
                 <constraint firstItem="dtu-XF-rYE" firstAttribute="trailing" secondItem="Bo2-db-Mhu" secondAttribute="trailing" id="SIm-lv-Bkm"/>
                 <constraint firstItem="8Vn-qj-fgT" firstAttribute="trailing" secondItem="Bo2-db-Mhu" secondAttribute="trailing" id="cpL-oe-bhi"/>
                 <constraint firstItem="8Vn-qj-fgT" firstAttribute="bottom" secondItem="Bo2-db-Mhu" secondAttribute="bottom" id="oue-LU-56Z"/>
                 <constraint firstItem="8Vn-qj-fgT" firstAttribute="top" secondItem="dtu-XF-rYE" secondAttribute="bottom" id="xOs-Ua-i26"/>
+                <constraint firstItem="Bo2-db-Mhu" firstAttribute="bottom" secondItem="ELJ-Qc-KV0" secondAttribute="bottom" constant="7" id="y4F-QP-IUE"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Bo2-db-Mhu"/>

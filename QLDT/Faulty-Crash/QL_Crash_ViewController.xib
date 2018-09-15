@@ -53,6 +53,9 @@
                                 <constraint firstAttribute="height" constant="44" id="dJJ-vV-3Cs"/>
                             </constraints>
                             <state key="normal" image="ic_sync_home"/>
+                            <connections>
+                                <action selector="didRequestSubmit" destination="-1" eventType="touchUpInside" id="Lmr-DE-I6M"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.90980392160000001" green="0.49019607840000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
