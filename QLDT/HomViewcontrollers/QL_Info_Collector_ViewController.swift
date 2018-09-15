@@ -20,7 +20,7 @@ class QL_Info_Collector_ViewController: UIViewController {
     
     var images: NSMutableArray? = [["title":"Đường bộ", "img":"ic_2"],["title":"Đường thủy", "img":"ic_3"],["title":"Đường sắt", "img":"ic_4"],["title":"Biểu mẫu", "img":"ic_5"]]
     
-    var images1: NSMutableArray? = [["title":"Tai nạn", "img":"ic_acc", "type":0],["title":"Sự cố", "img":"ic_report", "type":1],["title":"Phản hồi", "img":"ic_speaker", "type":2]]
+    var images1: NSMutableArray? = [["title":"Tai nạn", "img":"ic_acc", "type":0, "id":1032],["title":"Sự cố", "img":"ic_report", "type":1, "id":20],["title":"Phản hồi", "img":"ic_speaker", "type":2, "id":14]]
     
     var images2: NSMutableArray? = [["title":"Kiểm tra", "img":"ic_888", "url":"api/Maintain/listInspection"],["title":"Bảo trì", "img":"ic_999", "url":"api/Maintain/listMaintenance"]]
     

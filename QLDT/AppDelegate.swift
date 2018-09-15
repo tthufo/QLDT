@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "QLDT")
+        let container = NSPersistentContainer(name: "QLDT1")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = Bundle.main.url(forResource: "QLDT", withExtension: "momd")!
+        let modelURL = Bundle.main.url(forResource: "QLDT1", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     

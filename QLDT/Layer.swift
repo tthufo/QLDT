@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LayerList {
+class Layer {
     
     static func contexting() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -25,7 +25,7 @@ class LayerList {
             return
         }
         
-        let entity = NSEntityDescription.entity(forEntityName: "Layer", in: contexting())
+        let entity = NSEntityDescription.entity(forEntityName: "LayerGroup", in: contexting())
         let newUser = NSManagedObject(entity: entity!, insertInto: contexting())
         
         
@@ -38,15 +38,15 @@ class LayerList {
         }
     }
     
-    static func getData(layerId: Int32) -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Layer")
+    static func getData(layerId: Int32) -> [NSMutableDictionary] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LayerGroup")
         request.predicate = NSPredicate(format: "layerId = %i", layerId)
         request.returnsObjectsAsFaults = false
-        var array = [NSManagedObject]()
+        var array = [NSMutableDictionary]()
         do {
             let result = try contexting().fetch(request)
             for data in result as! [NSManagedObject] {
-                array.append(data)
+                array.append(((data as! LayerGroup).layerData?.dictionize().reFormat())!)
             }
         } catch {
             print("Failed")
@@ -55,14 +55,14 @@ class LayerList {
         return array
     }
     
-    static func getAllData() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Layer")
+    static func getAllData() -> [NSMutableDictionary] {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LayerGroup")
         request.returnsObjectsAsFaults = false
-        var array = [NSManagedObject]()
+        var array = [NSMutableDictionary]()
         do {
             let result = try contexting().fetch(request)
             for data in result as! [NSManagedObject] {
-                array.append(data)
+                array.append(((data as! LayerGroup).layerData?.dictionize().reFormat())!)
             }
         } catch {
             print("Failed")
@@ -72,7 +72,7 @@ class LayerList {
     }
     
     static func deleteAllData() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Layer")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "LayerGroup")
         request.returnsObjectsAsFaults = false
         do {
             let results = try contexting().fetch(request)
@@ -81,7 +81,7 @@ class LayerList {
                 contexting().delete(managedObjectData)
             }
         } catch let error as NSError {
-            print("Detele all data in Layer error : \(error) \(error.userInfo)")
+            print("Detele all data in Field error : \(error) \(error.userInfo)")
         }
     }
 }

@@ -28,7 +28,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func syncing() {
-        if LayerList.getAllData().count == 0 {
+        if Layer.getAllData().count == 0 {
             self.showSVHUD("Đang cập nhật thông tin từ trang chủ", andOption: 0)
             
             startTimer()
@@ -61,7 +61,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
 
     
     func didRequestLayerList() {
-        if LayerList.getAllData().count != 0 {
+        if Layer.getAllData().count != 0 {
             return
         }
         
@@ -83,13 +83,13 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 
                 let layerData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
                 
-                LayerList.insertData(layerId: layerId as! Int32, layerData: layerData!)
+                Layer.insertData(layerId: layerId as! Int32, layerData: layerData!)
             }
         }
     }
     
     func didRequestAllField() {
-        if LayerField.getAllData().count != 0 {
+        if Field.getAllData().count != 0 {
             return
         }
         
@@ -107,17 +107,17 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
             }
             
             for layer in (response?.dictionize()["array"] as! NSArray) {
-                let layerId = (layer as! NSDictionary)["LayerId"]
+                let layerId = (layer as! NSDictionary)["Id"]
                 
                 let layerData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
                 
-                LayerField.insertData(layerId: layerId as! Int32, layerData: layerData!)
+                Field.insertData(layerId: layerId as! Int32, layerData: layerData!)
             }
         }
     }
     
     func didRequestCommune() {
-        if CommuneField.getAllData().count != 0 {
+        if Commune.getAllData().count != 0 {
             return
         }
         
@@ -139,13 +139,13 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 
                 let communeData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
                 
-                CommuneField.insertData(layerId: communeId as! Int32, layerData: communeData!)
+                Commune.insertData(layerId: communeId as! Int32, layerData: communeData!)
             }
         }
     }
     
     func didRequestDistrict() {
-        if DistrictField.getAllData().count != 0 {
+        if District.getAllData().count != 0 {
             return
         }
         
@@ -167,7 +167,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 
                 let districtData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
                 
-                DistrictField.insertData(layerId: districtId as! Int32, layerData: districtData!)
+                District.insertData(layerId: districtId as! Int32, layerData: districtData!)
             }
         }
     }
@@ -183,10 +183,10 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
             
             switch (indexing as AnyObject).integerValue {
             case 0:
-                LayerField.deleteAllData()
-                LayerList.deleteAllData()
-                CommuneField.deleteAllData()
-                DistrictField.deleteAllData()
+                Field.deleteAllData()
+                Layer.deleteAllData()
+                Commune.deleteAllData()
+                District.deleteAllData()
                 self.syncing()
                 break
             case 1:

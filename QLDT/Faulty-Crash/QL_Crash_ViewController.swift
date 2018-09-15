@@ -22,9 +22,81 @@ class QL_Crash_ViewController: UIViewController {
     
     var kb: KeyBoard!
     
+    func dataFormat() -> NSMutableArray {
+        
+        let ID = configType["id"]
+        
+        let arr = (Field.getData(layerId: ID as! Int32).first)
+        
+        
+//        filedType = int -> number input   ///   int + xa_id  huyen_id -> drop
+//
+//        fieldType = (numeric + lat or lng) -> location
+//
+//        FieldName = lat/lng
+//
+//        fieldType = numeric không lat or lng  -> number input
+        
+//        fieldType = datetime -->calendar
+//
+//        FieldName = "anh_minh_hoa";  -> image
+        
+//        FieldOrder = 999;
+        
+//        filedType = nvarchar -> input
+
+        
+        for dict in arr!["LayerFields"] as! NSMutableArray {
+            let tempo = dict as! NSMutableDictionary
+            
+            if tempo.getValueFromKey("FieldOrder") == "999" {
+                if tempo.getValueFromKey("FieldName") == "anh_minh_hoa" {
+                    (dict as! NSMutableDictionary)["ident"] = "QL_Image_Cell"
+                }
+            } else {
+                if tempo.getValueFromKey("FieldType") == "nvarchar" || tempo.getValueFromKey("FieldType") == "varchar" {
+                    (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
+                }
+
+                if !(tempo["CategoryType"] as AnyObject).isKind(of: NSString.self) {
+                    (dict as! NSMutableDictionary)["ident"] = "QL_Drop_Cell"
+                }
+
+                if tempo.getValueFromKey("FieldType") == "int" {
+                    if tempo.getValueFromKey("FieldName") == "xa_id" || tempo.getValueFromKey("FieldName") == "huyen_id" {
+                        (dict as! NSMutableDictionary)["ident"] = "QL_Drop_Cell"
+                    } else {
+                        (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
+                    }
+                }
+
+                if tempo.getValueFromKey("FieldType") == "datetime" {
+                    (dict as! NSMutableDictionary)["ident"] = "QL_Calendar_Cell"
+                }
+
+                if tempo.getValueFromKey("FieldType") == "numeric" {
+                    if tempo.getValueFromKey("FieldName") != "lat" && tempo.getValueFromKey("FieldName") != "lng" {
+                        (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
+                    }
+
+                    if tempo.getValueFromKey("FieldName") == "lat" || tempo.getValueFromKey("FieldName") == "lng" {
+                        (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
+                    }
+                }
+            }
+        }
+        
+        print(arr)
+        
+        let temp = NSMutableArray()
+        
+        return temp
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dataFormat()
         
         kb = KeyBoard.shareInstance()
         
@@ -109,6 +181,10 @@ class QL_Crash_ViewController: UIViewController {
         }
     }
     
+    @IBAction func didPressSync() {
+        
+    }
+    
     @IBAction func didRequestSubmit() {
 //        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
 //                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
@@ -145,7 +221,9 @@ class QL_Crash_ViewController: UIViewController {
             switch (camType) {
             case .authorized:
                 Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    self.saveImage(image: image as! UIImage, indexing: indexing)
+                    if image != nil {
+                        self.saveImage(image: image as! UIImage, indexing: indexing)
+                    }
                 })
                 break
             case .denied:
@@ -156,7 +234,9 @@ class QL_Crash_ViewController: UIViewController {
                 break
             case .per_granted:
                 Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    self.saveImage(image: image as! UIImage, indexing: indexing)
+                    if image != nil {
+                        self.saveImage(image: image as! UIImage, indexing: indexing)
+                    }
                 })
                 break
             case .restricted:
@@ -173,7 +253,9 @@ class QL_Crash_ViewController: UIViewController {
             switch (camType) {
             case .authorized:
                 Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    self.saveImage(image: image as! UIImage, indexing: indexing)
+                    if image != nil {
+                        self.saveImage(image: image as! UIImage, indexing: indexing)
+                    }
                 })
                 break
             case .denied:
@@ -184,7 +266,9 @@ class QL_Crash_ViewController: UIViewController {
                 break
             case .per_granted:
                 Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
-                    self.saveImage(image: image as! UIImage, indexing: indexing)
+                    if image != nil {
+                        self.saveImage(image: image as! UIImage, indexing: indexing)
+                    }
                 })
                 break
             case .restricted:

@@ -22,7 +22,13 @@ class QL_Map_ViewController: UIViewController {
     
     var tempLocation: [[String:String]] = []
 
+    var progressView: UIProgressView!
+
+    var coor = [CLLocationCoordinate2D]()
+
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         mapBox.logoView.isHidden = true
@@ -36,8 +42,83 @@ class QL_Map_ViewController: UIViewController {
         mapBox.addGestureRecognizer(tap)
         
         didPressLocation()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(offlinePackProgressDidChange), name: NSNotification.Name.MGLOfflinePackProgressChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveError), name: NSNotification.Name.MGLOfflinePackError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveMaximumAllowedMapboxTiles), name: NSNotification.Name.MGLOfflinePackMaximumMapboxTilesReached, object: nil)
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func startOfflinePackDownload() {
+        
+        let region = MGLTilePyramidOfflineRegion(styleURL: mapBox.styleURL, bounds: mapBox.visibleCoordinateBounds, fromZoomLevel: mapBox.zoomLevel, toZoomLevel: 16)
+        
+        let userInfo = ["name": "My Offline Pack"]
+        let context = NSKeyedArchiver.archivedData(withRootObject: userInfo)
+        
+        
+        MGLOfflineStorage.shared.addPack(for: region, withContext: context) { (pack, error) in
+            guard error == nil else {
+                // The pack couldn’t be created for some reason.
+                print("Error: \(error?.localizedDescription ?? "unknown error")")
+                return
+            }
+            
+            pack!.resume()
+        }
+        
+    }
+    
+    @objc func offlinePackProgressDidChange(notification: NSNotification) {
+
+        if let pack = notification.object as? MGLOfflinePack,
+            let userInfo = NSKeyedUnarchiver.unarchiveObject(with: pack.context) as? [String: String] {
+            let progress = pack.progress
+            // or notification.userInfo![MGLOfflinePackProgressUserInfoKey]!.MGLOfflinePackProgressValue
+            let completedResources = progress.countOfResourcesCompleted
+            let expectedResources = progress.countOfResourcesExpected
+            
+            let progressPercentage = Float(completedResources) / Float(expectedResources)
+            
+            if progressView == nil {
+                progressView = UIProgressView(progressViewStyle: .default)
+                let frame = view.bounds.size
+                progressView.frame = CGRect(x: frame.width / 4, y: frame.height * 0.75, width: frame.width / 2, height: 10)
+                //view.addSubview(progressView)
+            }
+            
+            //progressView.progress = progressPercentage
+            
+            self.showSVHUD("ahihii", andProgress: progressPercentage)
+            
+            if completedResources == expectedResources {
+                let byteCount = ByteCountFormatter.string(fromByteCount: Int64(pack.progress.countOfBytesCompleted), countStyle: ByteCountFormatter.CountStyle.memory)
+                print("Offline pack “\(userInfo["name"] ?? "unknown")” completed: \(byteCount), \(completedResources) resources")
+            } else {
+                print("Offline pack “\(userInfo["name"] ?? "unknown")” has \(completedResources) of \(expectedResources) resources — \(progressPercentage * 100)%.")
+            }
+        }
+    }
+    
+    @objc func offlinePackDidReceiveError(notification: NSNotification) {
+        if let pack = notification.object as? MGLOfflinePack,
+            let userInfo = NSKeyedUnarchiver.unarchiveObject(with: pack.context) as? [String: String],
+            let error = notification.userInfo?[MGLOfflinePackUserInfoKey.error] as? NSError {
+            print("Offline pack “\(userInfo["name"] ?? "unknown")” received error: \(error.localizedFailureReason ?? "unknown error")")
+        }
+    }
+    
+    @objc func offlinePackDidReceiveMaximumAllowedMapboxTiles(notification: NSNotification) {
+        if let pack = notification.object as? MGLOfflinePack,
+            let userInfo = NSKeyedUnarchiver.unarchiveObject(with: pack.context) as? [String: String],
+            let maximumCount = (notification.userInfo?[MGLOfflinePackUserInfoKey.maximumCount] as AnyObject).uint64Value {
+            print("Offline pack “\(userInfo["name"] ?? "unknown")” reached limit of \(maximumCount) tiles.")
+        }
+    }
+    
     @objc func onMapSingleTapped(recognizer: UITapGestureRecognizer)
     {
         let viewLocation: CGPoint = recognizer.location(in: mapBox)
@@ -83,9 +164,15 @@ class QL_Map_ViewController: UIViewController {
         
         mapBox.addAnnotation(marker)
         
+        coor.append(CLLocationCoordinate2D(latitude: mapLocation.latitude , longitude: mapLocation.longitude))
+
         tempLocation.removeAll()
         
         tempLocation.append(["lat":"%f".format(parameters: mapLocation.latitude), "lng":"%f".format(parameters: mapLocation.longitude)])
+        
+//        let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
+//
+//        mapBox.addAnnotation(myTourline)
     }
     
     override func didReceiveMemoryWarning() {
@@ -107,11 +194,17 @@ class QL_Map_ViewController: UIViewController {
 
 extension QL_Map_ViewController: MGLMapViewDelegate {
     
+    func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
+        //startOfflinePackDownload()
+    }
+    
     func mapView(_ mapView: MGLMapView, imageFor annotation: MGLAnnotation) -> MGLAnnotationImage? {
         
-        if annotation is MGLUserLocation && mapBox.userLocation != nil {
+        if annotation.isKind(of: MGLUserLocation.self) {
             return MGLAnnotationImage(image: UIImage.init(named: "direction_arrow")!, reuseIdentifier: "userLocation")
         }
+        
+        print(annotation)
         
         let reuseIdentifier = reuseIdentifierForAnnotation(annotation: annotation)
         

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CommuneField {
+class District {
     
     static func contexting() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -25,7 +25,7 @@ class CommuneField {
             return
         }
         
-        let entity = NSEntityDescription.entity(forEntityName: "Commune", in: contexting())
+        let entity = NSEntityDescription.entity(forEntityName: "DistrictGroup", in: contexting())
         let newUser = NSManagedObject(entity: entity!, insertInto: contexting())
         
         
@@ -39,7 +39,7 @@ class CommuneField {
     }
     
     static func getData(layerId: Int32) -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Commune")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "DistrictGroup")
         request.predicate = NSPredicate(format: "areaId = %i", layerId)
         request.returnsObjectsAsFaults = false
         var array = [NSManagedObject]()
@@ -56,7 +56,7 @@ class CommuneField {
     }
     
     static func getAllData() -> [NSManagedObject] {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Commune")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "DistrictGroup")
         request.returnsObjectsAsFaults = false
         var array = [NSManagedObject]()
         do {
@@ -72,7 +72,7 @@ class CommuneField {
     }
     
     static func deleteAllData() {
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Commune")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "DistrictGroup")
         request.returnsObjectsAsFaults = false
         do {
             let results = try contexting().fetch(request)
@@ -81,7 +81,7 @@ class CommuneField {
                 contexting().delete(managedObjectData)
             }
         } catch let error as NSError {
-            print("Detele all data in Commune error : \(error) \(error.userInfo)")
+            print("Detele all data in District error : \(error) \(error.userInfo)")
         }
     }
 }
