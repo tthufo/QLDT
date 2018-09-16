@@ -65,9 +65,30 @@
                             <constraint firstAttribute="width" constant="40" id="LRQ-je-gJT"/>
                         </constraints>
                     </imageView>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="200" contentMode="scaleToFill" ambiguous="YES" contentInsetAdjustmentBehavior="scrollableAxes" translatesAutoresizingMaskIntoConstraints="NO" id="VKY-AQ-Uro">
+                        <rect key="frame" x="5" y="43" width="262" height="44"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cy-CX-PQd">
+                                <rect key="frame" x="8" y="12" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="266-7b-uh6"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="6r6-bL-330"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="4cy-CX-PQd" firstAttribute="top" secondItem="VKY-AQ-Uro" secondAttribute="top" constant="12" id="HvP-ao-2Yt"/>
+                            <constraint firstAttribute="height" constant="44" id="ilM-B0-eiF"/>
+                            <constraint firstItem="4cy-CX-PQd" firstAttribute="leading" secondItem="VKY-AQ-Uro" secondAttribute="leading" constant="8" id="k8c-ZA-50d"/>
+                        </constraints>
+                    </scrollView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="K1M-Ft-Xqc" firstAttribute="leading" secondItem="jO4-qd-zVh" secondAttribute="leading" id="1Ua-wc-9Pi"/>
+                    <constraint firstItem="hPD-Rp-Knd" firstAttribute="leading" secondItem="VKY-AQ-Uro" secondAttribute="trailing" constant="8" id="2iQ-iu-drx"/>
                     <constraint firstItem="hPD-Rp-Knd" firstAttribute="leading" secondItem="9q0-gS-fs3" secondAttribute="trailing" constant="20" id="55Z-mz-Yvk"/>
                     <constraint firstAttribute="trailing" secondItem="K1M-Ft-Xqc" secondAttribute="trailing" id="67k-Z4-9z8"/>
                     <constraint firstAttribute="trailing" secondItem="hPD-Rp-Knd" secondAttribute="trailing" constant="5" id="BfY-9i-Ptb"/>
@@ -79,9 +100,11 @@
                     <constraint firstItem="K1M-Ft-Xqc" firstAttribute="top" secondItem="jO4-qd-zVh" secondAttribute="top" id="YDj-So-C6x"/>
                     <constraint firstItem="9q0-gS-fs3" firstAttribute="top" secondItem="6Qn-8e-gP6" secondAttribute="bottom" constant="18" id="aBq-Xl-Th9"/>
                     <constraint firstItem="hPD-Rp-Knd" firstAttribute="top" secondItem="6Qn-8e-gP6" secondAttribute="bottom" constant="13" id="acU-85-J5B"/>
+                    <constraint firstItem="VKY-AQ-Uro" firstAttribute="top" secondItem="6Qn-8e-gP6" secondAttribute="bottom" constant="13" id="brw-dT-BLo"/>
                     <constraint firstItem="9q0-gS-fs3" firstAttribute="leading" secondItem="jO4-qd-zVh" secondAttribute="leading" constant="16" id="cVQ-lf-pPg"/>
                     <constraint firstItem="NZ5-fg-cEo" firstAttribute="top" secondItem="6Qn-8e-gP6" secondAttribute="bottom" constant="9" id="cw9-fI-Mjj"/>
                     <constraint firstAttribute="bottom" secondItem="K1M-Ft-Xqc" secondAttribute="bottom" id="fe6-KF-BcM"/>
+                    <constraint firstItem="VKY-AQ-Uro" firstAttribute="leading" secondItem="jO4-qd-zVh" secondAttribute="leading" constant="5" id="jCr-8P-BCG"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="-47" y="-93.5"/>

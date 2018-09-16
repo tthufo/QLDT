@@ -46,27 +46,31 @@ class QL_Common_List_ViewController: UIViewController {
     }
     
     func didRequest() {
-        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
-                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
-                                                   "method":"GET",
-                                                   "overrideLoading":1,
-                                                   "overrideAlert":1,
-                                                   "host":self
-                                                   ], withCache: { (cache) in
-                                                    
-        }) { (response, errorCode, error, isValid) in
-            
-            if errorCode != "200" {
-                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+        if self.configType.getValueFromKey("url") == "" {
+
+        } else {
+            LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: self.configType.getValueFromKey("url")),
+                                                       "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                       "method":"GET",
+                                                       "overrideLoading":1,
+                                                       "overrideAlert":1,
+                                                       "host":self
+                                                       ], withCache: { (cache) in
+                                                        
+            }) { (response, errorCode, error, isValid) in
                 
-                return
+                if errorCode != "200" {
+                    self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                    
+                    return
+                }
+            
+                self.dataList.removeAllObjects()
+                
+                self.dataList.addObjects(from: response?.dictionize()["array"] as! [Any])
+                
+                self.tableView.reloadData()
             }
-        
-            self.dataList.removeAllObjects()
-            
-            self.dataList.addObjects(from: response?.dictionize()["array"] as! [Any])
-            
-            self.tableView.reloadData()
         }
     }
     
@@ -115,9 +119,27 @@ extension QL_Common_List_ViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let data = dataList![indexPath.row] as! NSDictionary
+
+        let isOnline = configType.response(forKey: "online")
+
+        if isOnline {
+            
+            let online = QL_Online_ViewController()
+            
+            online.icon = data.getValueFromKey("Icon")
+                
+            online.configType = ["title":data["Description"] as! String]
+            
+            online.data = data
+            
+            self.navigationController?.pushViewController(online, animated: true)
+            
+            return
+        }
+        
         let isModule = !configType.response(forKey: "url")
 
-        let data = dataList![indexPath.row] as! NSDictionary
         
         if isModule {
             let list = QL_List_ViewController()

@@ -30,23 +30,13 @@ class QL_Crash_ViewController: UIViewController {
     
     var entityId: Int32 = -1
     
-    func dataFormat() -> NSMutableArray {
-        
-        let ID = configType["id"]
-        
-        if entityId  == -1 {
-            self.dataTemp = (Field.getData(layerId: ID as! Int32).first)
-        } else {
-            self.dataTemp = (Temp.getData(id: entityId, parentId: ID as! Int32).first)
-            
-            return self.dataTemp!["LayerFields"] as! NSMutableArray
-        }
+    func prepareData() {
         
         for dict in self.dataTemp!["LayerFields"] as! NSMutableArray {
             let tempo = dict as! NSMutableDictionary
             
             (dict as! NSMutableDictionary)["data"] = ""
-
+            
             if tempo.getValueFromKey("FieldOrder") == "999" {
                 if tempo.getValueFromKey("FieldName") == "anh_minh_hoa" {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Image_Cell"
@@ -55,7 +45,7 @@ class QL_Crash_ViewController: UIViewController {
                 if tempo.getValueFromKey("FieldType") == "nvarchar" || tempo.getValueFromKey("FieldType") == "varchar" {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
                 }
-
+                
                 if !(tempo["CategoryType"] as AnyObject).isKind(of: NSString.self) {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Drop_Cell"
                     let data = (tempo["CategoryType"] as! NSDictionary)["Categories"]
@@ -69,7 +59,7 @@ class QL_Crash_ViewController: UIViewController {
                          "CategoryTypeId": -1]
                     (dict as! NSMutableDictionary)["color"] = (data as! NSArray).count != 0 ? UIColor.black : UIColor.red
                 }
-
+                
                 if tempo.getValueFromKey("FieldType") == "int" {
                     if tempo.getValueFromKey("FieldName") == "xa_id" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Drop_Cell"
@@ -90,7 +80,7 @@ class QL_Crash_ViewController: UIViewController {
                         (dict as! NSMutableDictionary)["number"] = "number"
                     }
                 }
-
+                
                 if tempo.getValueFromKey("FieldType") == "float" || tempo.getValueFromKey("FieldType") == "smallint" || tempo.getValueFromKey("FieldType") == "decimal" {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
                     (dict as! NSMutableDictionary)["number"] = "number"
@@ -99,7 +89,7 @@ class QL_Crash_ViewController: UIViewController {
                 if tempo.getValueFromKey("FieldType") == "datetime" || tempo.getValueFromKey("FieldType") == "datetime1" || tempo.getValueFromKey("FieldType") == "datetime2"{
                     (dict as! NSMutableDictionary)["ident"] = "QL_Calendar_Cell"
                 }
-
+                
                 if tempo.getValueFromKey("FieldName") == "geom_text" {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Geo_Cell"
                     (dict as! NSMutableDictionary)["data"] = []
@@ -110,10 +100,7 @@ class QL_Crash_ViewController: UIViewController {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
                         (dict as! NSMutableDictionary)["number"] = "number"
                     }
-
-//                    if tempo.getValueFromKey("FieldName") == "lat" {//|| tempo.getValueFromKey("FieldName") == "lng" {
-//                        (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
-//                    }
+                    
                     
                     if tempo.getValueFromKey("FieldName") == "lat" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
@@ -129,8 +116,21 @@ class QL_Crash_ViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func dataFormat() -> NSMutableArray {
         
-        print(self.dataTemp!["LayerFields"])
+        let ID = self.configType["id"]
+        
+        if entityId  == -1 {
+            self.dataTemp = (Field.getData(layerId: ID as! Int32).first)
+        } else {
+            self.dataTemp = (Temp.getData(id: entityId, parentId: ID as! Int32).first)
+            
+            return self.dataTemp!["LayerFields"] as! NSMutableArray
+        }
+        
+        prepareData()
         
         return self.dataTemp!["LayerFields"] as! NSMutableArray
     }
@@ -139,6 +139,7 @@ class QL_Crash_ViewController: UIViewController {
         super.viewDidLoad()
         
         kb = KeyBoard.shareInstance()
+        
         
         titleLabel.text = configType.getValueFromKey("title")
         
@@ -157,7 +158,41 @@ class QL_Crash_ViewController: UIViewController {
         
         dataList = NSMutableArray()
         
-        dataList.addObjects(from: dataFormat() as! [Any])
+        if self.configType.response(forKey: "online") {
+            didRequestDetail()
+        } else {
+            dataList.addObjects(from: dataFormat() as! [Any])
+        }
+    }
+    
+    func didRequestDetail() {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "/api/Form/detail"),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "method":"GET",
+                                                   "Getparam":["id":self.configType["id"]],
+                                                   "overrideLoading":1,
+                                                   "overrideAlert":1,
+                                                   "host":self
+            ], withCache: { (cache) in
+                
+        }) { (response, errorCode, error, isValid) in
+            
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
+            
+            let result = (response?.dictionize()["Layer"] as! NSDictionary).reFormat()
+            
+            self.dataTemp = result
+                        
+            self.prepareData()
+
+            self.dataList.addObjects(from: self.dataTemp!["LayerFields"] as! [Any])
+
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -329,8 +364,15 @@ class QL_Crash_ViewController: UIViewController {
         self.tableView.reloadData()
     }
     
-    func geoText() {
+    func geoText(data: NSArray) -> String {
         
+        var geo = ""
+        
+        for i in stride(from: 0, to: data.count, by: 1) {
+            geo.append("(X%i: %@ Y%i: %@); ".format(parameters:i + 1, (data[i] as! NSDictionary)["lat"] as! String, i + 1, (data[i] as! NSDictionary)["lng"] as! String))
+        }
+        
+        return geo
     }
     
     override func didReceiveMemoryWarning() {
@@ -486,6 +528,8 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 map.indexing = "%i".format(parameters: indexPath.row)
                 
+                map.tempLocation = data["data"] as! [[String : String]]
+
                 map.isMulti = false
 
                 map.delegate = self
@@ -517,6 +561,8 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 map.indexing = "%i".format(parameters: indexPath.row)
                 
+                map.tempLocation = data["data"] as! [[String : String]] 
+                
                 map.isMulti = true
                 
                 map.delegate = self
@@ -526,10 +572,16 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 })
             }
             
-            let geo = (self.withView(cell, tag: 3) as! UITextField)
+            let te = (self.withView(cell, tag: 100) as! UILabel)
+
+            let scroll = (self.withView(cell, tag: 200) as! UIScrollView)
+
             
             if (data["data"] as! NSArray).count != 0 {
-               // geo.text = data["data"] as? String
+                
+                te.text = self.geoText(data: (data["data"] as? NSArray)!)
+
+                scroll.contentSize = CGSize.init(width: te.getSize().width + 10, height: 44)
             }
         }
         

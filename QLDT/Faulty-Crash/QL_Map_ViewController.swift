@@ -53,11 +53,44 @@ class QL_Map_ViewController: UIViewController {
         
         mapBox.addGestureRecognizer(tap)
         
-        didPressLocation()
+        
+        if tempLocation.count != 0 {
+            for dict in tempLocation {
+                coor.append(CLLocationCoordinate2D(latitude: (dict["lat"]! as NSString).doubleValue , longitude: (dict["lng"]! as NSString).doubleValue))
+            }
+            
+            self.perform(#selector(showMarkers), with: nil, afterDelay: 0.5)
+        } else {
+            didPressLocation()
+        }
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(offlinePackProgressDidChange), name: NSNotification.Name.MGLOfflinePackProgressChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveError), name: NSNotification.Name.MGLOfflinePackError, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveMaximumAllowedMapboxTiles), name: NSNotification.Name.MGLOfflinePackMaximumMapboxTilesReached, object: nil)
+    }
+    
+    @objc func showMarkers() {
+        if let annotations = mapBox.annotations {
+            mapBox.removeAnnotations(annotations)
+        }
+
+        for cor in self.coor {
+            let marker = MGLPointAnnotation()
+
+            marker.coordinate = cor
+
+            mapBox.addAnnotation(marker)
+        }
+
+        if isMulti {
+            
+            let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
+            
+            mapBox.addAnnotation(myTourline)
+        }
+
+        mapBox.setVisibleCoordinates(&coor, count: UInt(coor.count), edgePadding: UIEdgeInsetsMake(30, 30, 30, 30), animated: false)
     }
 
     deinit {
@@ -200,6 +233,15 @@ class QL_Map_ViewController: UIViewController {
     }
     
     @IBAction func didPressBack() {
+        
+        if isMulti {
+            if tempLocation.count < 2 {
+                self.showToast("Tọa độ cần chọn ít nhất 2 điểm", andPos: 0)
+                
+                return
+            }
+        } 
+        
         delegate?.didReloadData(data: tempLocation as NSArray, indexing: self.indexing)
         
         self.dismiss(animated: true) {
@@ -207,12 +249,18 @@ class QL_Map_ViewController: UIViewController {
         }
     }
     
+    func latLng() -> CLLocationCoordinate2D {
+       let currentCorr = Permission.shareInstance().currentLocation()
+        
+        return CLLocationCoordinate2D(latitude: (currentCorr!["lat"]! as! NSNumber).doubleValue , longitude: (currentCorr!["lng"]! as! NSNumber).doubleValue)
+    }
+    
     @IBAction func didPressLocation() {
-        mapBox.userTrackingMode = .follow
+        mapBox.setCenter(latLng(), zoomLevel: 15, animated: false)
     }
     
     @IBAction func didPressTimer() {
-        
+     //////
     }
     
     

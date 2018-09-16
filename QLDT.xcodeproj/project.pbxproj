@@ -64,9 +64,11 @@
 		FCE61747210EAB0A00000438 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE61746210EAB0900000438 /* CoreDataStack.swift */; };
 		FCFA5EE021458E15003D5442 /* QL_Comment_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFA5EDF21458E15003D5442 /* QL_Comment_Cell.xib */; };
 		FCFE39AD214E167F00E85515 /* TG_List_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE39AC214E167F00E85515 /* TG_List_Cell.xib */; };
-		FCFE39B1214E60CB00E85515 /* QL_Input_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE39AF214E60CB00E85515 /* QL_Input_ViewController.swift */; };
-		FCFE39B2214E60CB00E85515 /* QL_Input_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE39B0214E60CB00E85515 /* QL_Input_ViewController.xib */; };
+		FCFE39B1214E60CB00E85515 /* QL_Form_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE39AF214E60CB00E85515 /* QL_Form_ViewController.swift */; };
+		FCFE39B2214E60CB00E85515 /* QL_Form_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE39B0214E60CB00E85515 /* QL_Form_ViewController.xib */; };
 		FCFE39B4214E7F8B00E85515 /* QL_Geo_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE39B3214E7F8B00E85515 /* QL_Geo_Cell.xib */; };
+		FCFE39B7214ED10B00E85515 /* QL_Online_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE39B5214ED10B00E85515 /* QL_Online_ViewController.swift */; };
+		FCFE39B8214ED10B00E85515 /* QL_Online_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE39B6214ED10B00E85515 /* QL_Online_ViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -134,9 +136,11 @@
 		FCE61746210EAB0900000438 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		FCFA5EDF21458E15003D5442 /* QL_Comment_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Comment_Cell.xib; sourceTree = "<group>"; };
 		FCFE39AC214E167F00E85515 /* TG_List_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_List_Cell.xib; sourceTree = "<group>"; };
-		FCFE39AF214E60CB00E85515 /* QL_Input_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Input_ViewController.swift; sourceTree = "<group>"; };
-		FCFE39B0214E60CB00E85515 /* QL_Input_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Input_ViewController.xib; sourceTree = "<group>"; };
+		FCFE39AF214E60CB00E85515 /* QL_Form_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Form_ViewController.swift; sourceTree = "<group>"; };
+		FCFE39B0214E60CB00E85515 /* QL_Form_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Form_ViewController.xib; sourceTree = "<group>"; };
 		FCFE39B3214E7F8B00E85515 /* QL_Geo_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Geo_Cell.xib; sourceTree = "<group>"; };
+		FCFE39B5214ED10B00E85515 /* QL_Online_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Online_ViewController.swift; sourceTree = "<group>"; };
+		FCFE39B6214ED10B00E85515 /* QL_Online_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Online_ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,8 +302,10 @@
 		FCFE39AE214E609B00E85515 /* InputGroup */ = {
 			isa = PBXGroup;
 			children = (
-				FCFE39AF214E60CB00E85515 /* QL_Input_ViewController.swift */,
-				FCFE39B0214E60CB00E85515 /* QL_Input_ViewController.xib */,
+				FCFE39AF214E60CB00E85515 /* QL_Form_ViewController.swift */,
+				FCFE39B0214E60CB00E85515 /* QL_Form_ViewController.xib */,
+				FCFE39B5214ED10B00E85515 /* QL_Online_ViewController.swift */,
+				FCFE39B6214ED10B00E85515 /* QL_Online_ViewController.xib */,
 			);
 			path = InputGroup;
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 				FC5386A8210C875600F00873 /* Assets.xcassets in Resources */,
 				FC1BB5922149761F0090D454 /* QL_Map_ViewController.xib in Resources */,
 				04E7283E214123D100C40CCE /* QL_Common_List_ViewController.xib in Resources */,
+				FCFE39B8214ED10B00E85515 /* QL_Online_ViewController.xib in Resources */,
 				FCCC3D67213C30550005D519 /* QL_Recover_ViewController.xib in Resources */,
 				FCFA5EE021458E15003D5442 /* QL_Comment_Cell.xib in Resources */,
 				FCAF7AC121404BC4007A1181 /* QL_Info_Collector_ViewController.xib in Resources */,
@@ -389,7 +396,7 @@
 				FC84F1D3214D66EF0025E213 /* drop.plist in Resources */,
 				044F7154214229CB003CB99A /* QL_Check_Cell.xib in Resources */,
 				FC8E4FF42147A14B00588836 /* QL_Drop_Cell.xib in Resources */,
-				FCFE39B2214E60CB00E85515 /* QL_Input_ViewController.xib in Resources */,
+				FCFE39B2214E60CB00E85515 /* QL_Form_ViewController.xib in Resources */,
 				FCFE39AD214E167F00E85515 /* TG_List_Cell.xib in Resources */,
 				044F715221421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.xib in Resources */,
 				FC8E4FF82147A64700588836 /* QL_Location_Cell.xib in Resources */,
@@ -471,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC4354A82146E2DA0016A4CB /* QL_List_ViewController.swift in Sources */,
+				FCFE39B7214ED10B00E85515 /* QL_Online_ViewController.swift in Sources */,
 				044F715121421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.swift in Sources */,
 				FCAF7AC021404BC4007A1181 /* QL_Info_Collector_ViewController.swift in Sources */,
 				04E7283D214123D100C40CCE /* QL_Common_List_ViewController.swift in Sources */,
@@ -486,7 +494,7 @@
 				FCCC3D6E213C51330005D519 /* Layer.swift in Sources */,
 				FC5386B5210CBB6600F00873 /* QL_LogIn_ViewController.swift in Sources */,
 				FC935AF0210CC5880067D480 /* TL_ChangeHost_ViewController.swift in Sources */,
-				FCFE39B1214E60CB00E85515 /* QL_Input_ViewController.swift in Sources */,
+				FCFE39B1214E60CB00E85515 /* QL_Form_ViewController.swift in Sources */,
 				FC4354A42146DE480016A4CB /* QL_Crash_ViewController.swift in Sources */,
 				FCE372F9213AA96D00F79D7A /* Information.swift in Sources */,
 				FCCC3D66213C30540005D519 /* QL_Recover_ViewController.swift in Sources */,
