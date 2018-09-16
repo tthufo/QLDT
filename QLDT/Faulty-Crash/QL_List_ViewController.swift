@@ -24,7 +24,7 @@ class QL_List_ViewController: UIViewController {
         
         titleLabel.text = configType.getValueFromKey("title")
         
-        tableView.withCell("TG_Cell")
+        tableView.withCell("TG_List_Cell")
         
         dataList = NSMutableArray()
     }
@@ -32,17 +32,17 @@ class QL_List_ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let ID = configType["id"]
+//        let ID = configType["id"]
         
-        let arr = Temp.getData(parentId: ID as! Int32)
+//        let arr = Temp.getData(parentId: ID as! Int32)
+        
+        let arr = Temp.getDataTemp(parentId: -1)
         
         dataList.removeAllObjects()
         
         dataList.addObjects(from: arr)
         
         self.tableView.reloadData()
-        
-        print(arr.last)
     }
     
     @IBAction func didPressAdd() {
@@ -50,8 +50,12 @@ class QL_List_ViewController: UIViewController {
 
         crash.configType = self.configType
 
+        crash.entityId = -1
+        
+        crash.delegate = self
+        
         self.present(crash, animated: true) {
-
+          
         }
     }
     
@@ -61,6 +65,12 @@ class QL_List_ViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+extension QL_List_ViewController: EditDelegate {
+    func editDidReloadData(data: NSDictionary) {
+
     }
 }
 
@@ -75,20 +85,42 @@ extension QL_List_ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TG_Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TG_List_Cell", for: indexPath)
         
         if dataList.count == 0 {
             return cell
         }
         
-        let data = dataList![indexPath.row] as! NSDictionary
+        let data = dataList![indexPath.row] as! TempData
                 
-        //(self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data["Name"] as? String)!)
+        (self.withView(cell, tag: 104) as! UIImageView).image = UIImage(named: "ic_fire")
+
+        (self.withView(cell, tag: 101) as! UILabel).text = "Mã: %@".format(parameters: data.title!)
         
+        (self.withView(cell, tag: 102) as! UILabel).text = "Tạo: %@ - Sửa: %@".format(parameters: data.createDate!, data.modifyDate!)
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if dataList.count == 0 {
+            return
+        }
+        
+        let data = dataList![indexPath.row] as! TempData
+        
+        let crash = QL_Crash_ViewController()
+
+        crash.configType = self.configType
+
+        crash.entityId = data.id
+
+        crash.delegate = self
+        
+        self.present(crash, animated: true) {
+
+        }
     }
 }

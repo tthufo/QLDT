@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol EditDelegate:class {
+    func editDidReloadData(data: NSDictionary)
+}
+
 class QL_Crash_ViewController: UIViewController {
+
+    weak var delegate: EditDelegate?
 
     @IBOutlet var tableView: UITableView!
     
@@ -22,13 +28,21 @@ class QL_Crash_ViewController: UIViewController {
     
     var kb: KeyBoard!
     
+    var entityId: Int32 = -1
+    
     func dataFormat() -> NSMutableArray {
         
         let ID = configType["id"]
         
 //        let arr = (Field.getData(layerId: ID as! Int32).first)
         
-        self.dataTemp = (Field.getData(layerId: ID as! Int32).first)
+        if entityId  == -1 {
+            self.dataTemp = (Field.getData(layerId: ID as! Int32).first)
+        } else {
+            self.dataTemp = (Temp.getData(id: entityId, parentId: ID as! Int32).first)
+            
+            return self.dataTemp!["LayerFields"] as! NSMutableArray
+        }
         
         for dict in self.dataTemp!["LayerFields"] as! NSMutableArray {
             let tempo = dict as! NSMutableDictionary
@@ -174,7 +188,11 @@ class QL_Crash_ViewController: UIViewController {
             //            self.tableView.reloadData()
             //        }
 
-            Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: "ahihi")
+            if entityId == -1 {
+                Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: "ahihi", date: self.currentDate("yyyy-MM-dd HH:ss"))
+            } else {
+                Temp.modifyData(id: entityId, parentId: configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), date: self.currentDate("yyyy-MM-dd HH:ss"))
+            }
             
             didPressBack()
         } else {
@@ -364,11 +382,13 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             
             drop.action(forTouch: [:]) { (objc) in
                 drop.didDropDown(withData: data["data"] as! [Any], andCompletion: { (result) in
-                    let data = (result as! NSDictionary)["data"]
-                    
-                    (self.dataList![indexPath.row] as! NSMutableDictionary)["activeData"] = data
-                    
-                    drop.setTitle((data as! NSDictionary)[key] as? String, for: .normal)
+                    if result != nil {
+                        let data = (result as! NSDictionary)["data"]
+                        
+                        (self.dataList![indexPath.row] as! NSMutableDictionary)["activeData"] = data
+                        
+                        drop.setTitle((data as! NSDictionary)[key] as? String, for: .normal)
+                    }
                 })
             }
         }

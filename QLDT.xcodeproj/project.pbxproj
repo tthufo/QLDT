@@ -63,6 +63,7 @@
 		FCE61745210EAA4600000438 /* TG_Image_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE61742210EAA4600000438 /* TG_Image_Cell.xib */; };
 		FCE61747210EAB0A00000438 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE61746210EAB0900000438 /* CoreDataStack.swift */; };
 		FCFA5EE021458E15003D5442 /* QL_Comment_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFA5EDF21458E15003D5442 /* QL_Comment_Cell.xib */; };
+		FCFE39AD214E167F00E85515 /* TG_List_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE39AC214E167F00E85515 /* TG_List_Cell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 		FCE61742210EAA4600000438 /* TG_Image_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TG_Image_Cell.xib; path = QLDT/ViewControllers/TG_Image_Cell.xib; sourceTree = SOURCE_ROOT; };
 		FCE61746210EAB0900000438 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		FCFA5EDF21458E15003D5442 /* QL_Comment_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Comment_Cell.xib; sourceTree = "<group>"; };
+		FCFE39AC214E167F00E85515 /* TG_List_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_List_Cell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 				FCE61741210EAA4600000438 /* format.plist */,
 				FC84F1D2214D66EF0025E213 /* drop.plist */,
 				FC84F1D6214D7B670025E213 /* region.plist */,
+				FCFE39AC214E167F00E85515 /* TG_List_Cell.xib */,
 				FCE61740210EAA4600000438 /* TG_Drop_Cell.xib */,
 				04E7283821410F8100C40CCE /* TG_Cell.xib */,
 				FC84F1D4214D7B1F0025E213 /* TG_Region_Cell.xib */,
@@ -368,6 +371,7 @@
 				FC84F1D3214D66EF0025E213 /* drop.plist in Resources */,
 				044F7154214229CB003CB99A /* QL_Check_Cell.xib in Resources */,
 				FC8E4FF42147A14B00588836 /* QL_Drop_Cell.xib in Resources */,
+				FCFE39AD214E167F00E85515 /* TG_List_Cell.xib in Resources */,
 				044F715221421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.xib in Resources */,
 				FC8E4FF82147A64700588836 /* QL_Location_Cell.xib in Resources */,
 				FC8E4FF221479F8300588836 /* QL_Input_Cell.xib in Resources */,
