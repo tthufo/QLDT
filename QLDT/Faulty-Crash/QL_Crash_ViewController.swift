@@ -34,8 +34,6 @@ class QL_Crash_ViewController: UIViewController {
         
         let ID = configType["id"]
         
-//        let arr = (Field.getData(layerId: ID as! Int32).first)
-        
         if entityId  == -1 {
             self.dataTemp = (Field.getData(layerId: ID as! Int32).first)
         } else {
@@ -64,7 +62,12 @@ class QL_Crash_ViewController: UIViewController {
                     (dict as! NSMutableDictionary)["data"] = data
                     (dict as! NSMutableDictionary)["pList"] = "drop"
                     (dict as! NSMutableDictionary)["key"] = "ItemName"
-                    (dict as! NSMutableDictionary)["activeData"] = (data as! NSArray).firstObject
+                    (dict as! NSMutableDictionary)["activeData"] = (data as! NSArray).count != 0 ? (data as! NSArray).firstObject :
+                        ["ItemCode": "",
+                         "ItemName": "Dữ liệu trống",
+                         "Style": "",
+                         "CategoryTypeId": -1]
+                    (dict as! NSMutableDictionary)["color"] = (data as! NSArray).count != 0 ? UIColor.black : UIColor.red
                 }
 
                 if tempo.getValueFromKey("FieldType") == "int" {
@@ -88,11 +91,16 @@ class QL_Crash_ViewController: UIViewController {
                     }
                 }
 
-                if tempo.getValueFromKey("FieldType") == "datetime" {
+                if tempo.getValueFromKey("FieldType") == "float" || tempo.getValueFromKey("FieldType") == "smallint" || tempo.getValueFromKey("FieldType") == "decimal" {
+                    (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
+                    (dict as! NSMutableDictionary)["number"] = "number"
+                }
+                
+                if tempo.getValueFromKey("FieldType") == "datetime" || tempo.getValueFromKey("FieldType") == "datetime1" || tempo.getValueFromKey("FieldType") == "datetime2"{
                     (dict as! NSMutableDictionary)["ident"] = "QL_Calendar_Cell"
                 }
 
-                if tempo.getValueFromKey("FieldType") == "numeric" {
+                if tempo.getValueFromKey("FieldType") == "numeric" || tempo.getValueFromKey("FieldType") == "decimal" {
                     if tempo.getValueFromKey("FieldName") != "lat" && tempo.getValueFromKey("FieldName") != "lng" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
                         (dict as! NSMutableDictionary)["number"] = "number"
@@ -116,6 +124,8 @@ class QL_Crash_ViewController: UIViewController {
                 }
             }
         }
+        
+        print(self.dataTemp!["LayerFields"])
         
         return self.dataTemp!["LayerFields"] as! NSMutableArray
     }
@@ -158,46 +168,82 @@ class QL_Crash_ViewController: UIViewController {
         }
     }
     
-    @IBAction func didPressSync() {
+    func didRequestUpdate() {
+        //                LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
+        //                                                           "header":["Authorization":Information.token == nil ? "" : Information.token!],
+        //                                                           "method":"GET",
+        //                                                           "overrideLoading":1,
+        //                                                           "overrideAlert":1,
+        //                                                           "host":self
+        //                    ], withCache: { (cache) in
+        //
+        //                }) { (response, errorCode, error, isValid) in
+        //
+        //                    if errorCode != "200" {
+        //                        self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+        //
+        //                        return
+        //                    }
+        //
+        //                    self.dataList.removeAllObjects()
+        //
+        //                    self.dataList.addObjects(from: response?.dictionize()["array"] as! [Any])
+        //
+        //                    self.tableView.reloadData()
+        //                }
+    }
+    
+    func checkValid() -> Bool {
         
+        var isValid = true
+        
+        let data = self.dataTemp!["LayerFields"] as! NSMutableArray
+        
+        for dict in data {
+            if (dict as! NSDictionary)["Require"] as! Bool {
+                if ((dict as! NSDictionary)["data"] as AnyObject).isKind(of: NSString.self) {
+                    if (dict as! NSDictionary).getValueFromKey("data") == "" {
+                        self.showToast("Bạn nhập đủ thông tin %@".format(parameters: (dict as! NSDictionary)["FieldLabel"] as! String) , andPos: 0)
+                        
+                        isValid = false
+                        
+                        break
+                    }
+                }
+            }
+        }
+        
+        return isValid
     }
     
     @IBAction func didRequestSubmit() {
         
         if LTRequest.isConnectionAvailable() {
-            //        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
-            //                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
-            //                                                   "method":"GET",
-            //                                                   "overrideLoading":1,
-            //                                                   "overrideAlert":1,
-            //                                                   "host":self
-            //            ], withCache: { (cache) in
-            //
-            //        }) { (response, errorCode, error, isValid) in
-            //
-            //            if errorCode != "200" {
-            //                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
-            //
-            //                return
-            //            }
-            //
-            //            self.dataList.removeAllObjects()
-            //
-            //            self.dataList.addObjects(from: response?.dictionize()["array"] as! [Any])
-            //
-            //            self.tableView.reloadData()
-            //        }
-
-            if entityId == -1 {
-                Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: "ahihi", date: self.currentDate("yyyy-MM-dd HH:ss"))
-            } else {
-                Temp.modifyData(id: entityId, parentId: configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), date: self.currentDate("yyyy-MM-dd HH:ss"))
+            
+            if checkValid() {
+                
+                DropAlert.shareInstance().alert(withInfor: ["title":"Thông báo", "buttons":["Lưu lại"], "cancel":"Cập nhật", "message":"Mạng đang khả dụng. Bạn có muốn cập nhật dữ liệu ?"], andCompletion: { (index, result) in
+                    if index != 0 {
+                        self.didRequestUpdate()
+                    } else {
+                        self.didSyncData()
+                    }
+                })
             }
-            
-            didPressBack()
+        
         } else {
-            
+           self.didSyncData()
         }
+    }
+    
+    func didSyncData() {
+        if entityId == -1 {
+            Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: "ahihi", date: self.currentDate("yyyy-MM-dd HH:ss"))
+        } else {
+            Temp.modifyData(id: entityId, parentId: configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), date: self.currentDate("yyyy-MM-dd HH:ss"))
+        }
+        
+        didPressBack()
     }
     
     @IBAction func didPressBack() {
@@ -368,28 +414,38 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if data["ident"] as! String == "QL_Drop_Cell" {
-            let activeData = data["activeData"] as! NSDictionary
             
-            let plistName = data["pList"]
+//            if !(data["activeData"] as AnyObject).isKind(of: NSDictionary.self) {
+//
+//                (self.withView(cell, tag: 2) as! DropButton).setTitle("Dữ liệu trống", for: .normal)
+//
+//            } else {
             
-            let key = data["key"] as! String
+                let activeData = data["activeData"] as! NSDictionary
+                
+                let plistName = data["pList"]
+                
+                let key = data["key"] as! String
+                
+                let drop = (self.withView(cell, tag: 2) as! DropButton)
+                
+                drop.pListName = plistName as! NSString
+                
+                drop.setTitle(activeData[key] as? String, for: .normal)
             
-            let drop = (self.withView(cell, tag: 2) as! DropButton)
+            drop.setTitleColor(data["color"] as? UIColor, for: .normal)
             
-            drop.pListName = plistName as! NSString
-            
-            drop.setTitle(activeData[key] as? String, for: .normal)
-            
-            drop.action(forTouch: [:]) { (objc) in
-                drop.didDropDown(withData: data["data"] as! [Any], andCompletion: { (result) in
-                    if result != nil {
-                        let data = (result as! NSDictionary)["data"]
-                        
-                        (self.dataList![indexPath.row] as! NSMutableDictionary)["activeData"] = data
-                        
-                        drop.setTitle((data as! NSDictionary)[key] as? String, for: .normal)
-                    }
-                })
+                drop.action(forTouch: [:]) { (objc) in
+                    drop.didDropDown(withData: data["data"] as! [Any], andCompletion: { (result) in
+                        if result != nil {
+                            let data = (result as! NSDictionary)["data"]
+                            
+                            (self.dataList![indexPath.row] as! NSMutableDictionary)["activeData"] = data
+                            
+                            drop.setTitle((data as! NSDictionary)[key] as? String, for: .normal)
+                        }
+                    })
+//                }
             }
         }
         

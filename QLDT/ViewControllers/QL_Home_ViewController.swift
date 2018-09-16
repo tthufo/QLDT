@@ -109,9 +109,11 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
             for layer in (response?.dictionize()["array"] as! NSArray) {
                 let layerId = (layer as! NSDictionary)["Id"]
                 
+                let moduleId = (layer as! NSDictionary)["ModuleId"]
+
                 let layerData = (layer as! NSDictionary).bv_jsonString(withPrettyPrint: true)
                 
-                Field.insertData(layerId: layerId as! Int32, layerData: layerData!)
+                Field.insertData(layerId: layerId as! Int32, layerData: layerData!, moduleId: moduleId as! Int32)
             }
         }
     }

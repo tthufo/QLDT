@@ -28,7 +28,7 @@ class Temp {
         newUser.setValue(parentId, forKey: "parentId")
         newUser.setValue(tempData, forKey: "tempData")
         newUser.setValue(title, forKey: "title")
-        newUser.setValue(Int32(contexting().autoIncrement("auto")), forKey: "id")
+        newUser.setValue(Int32(contexting().autoIncrement("%i".format(parameters: parentId))), forKey: "id")
         newUser.setValue(date, forKey: "createDate")
         newUser.setValue(date, forKey: "modifyDate")
 
@@ -115,9 +115,9 @@ class Temp {
         return array
     }
     
-    static func deleteData(id: Int32) {
+    static func deleteData(id: Int32, parentId: Int32) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "TempData")
-        request.predicate = NSPredicate(format: "id = %i", id)
+        request.predicate = NSPredicate(format: "id = %i AND parentId = %i", id, parentId)
         request.returnsObjectsAsFaults = false
         do {
             let results = try contexting().fetch(request)

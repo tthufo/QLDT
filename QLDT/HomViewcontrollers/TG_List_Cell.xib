@@ -43,16 +43,26 @@
                         <color key="textColor" red="0.33333334329999997" green="0.33333334329999997" blue="0.33333334329999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqE-YO-W3U" customClass="DropButton">
+                        <rect key="frame" x="4" y="5" width="312" height="55.5"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="pListName" value="format"/>
+                        </userDefinedRuntimeAttributes>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="mqE-YO-W3U" firstAttribute="top" secondItem="I78-zh-qnZ" secondAttribute="top" constant="5" id="0bu-80-Wkc"/>
                     <constraint firstItem="l6Q-Ke-Y5O" firstAttribute="top" secondItem="I78-zh-qnZ" secondAttribute="top" constant="4" id="2gU-Yg-9Vn"/>
                     <constraint firstAttribute="trailing" secondItem="3gb-MG-K3K" secondAttribute="trailing" constant="4" id="9s0-Yd-VaV"/>
                     <constraint firstItem="l6Q-Ke-Y5O" firstAttribute="leading" secondItem="I78-zh-qnZ" secondAttribute="leading" constant="4" id="NOB-jd-wwR"/>
                     <constraint firstItem="3gb-MG-K3K" firstAttribute="leading" secondItem="l6Q-Ke-Y5O" secondAttribute="trailing" constant="8" id="P7d-f7-nM4"/>
+                    <constraint firstItem="mqE-YO-W3U" firstAttribute="leading" secondItem="I78-zh-qnZ" secondAttribute="leading" constant="4" id="Re4-Wf-ViR"/>
                     <constraint firstAttribute="trailing" secondItem="PSt-ns-iDc" secondAttribute="trailing" constant="4" id="cJX-Oc-hwP"/>
                     <constraint firstItem="PSt-ns-iDc" firstAttribute="leading" secondItem="l6Q-Ke-Y5O" secondAttribute="trailing" constant="8" id="e0p-g8-wpj"/>
+                    <constraint firstAttribute="bottom" secondItem="mqE-YO-W3U" secondAttribute="bottom" constant="5" id="el6-ke-DS8"/>
                     <constraint firstItem="PSt-ns-iDc" firstAttribute="top" secondItem="I78-zh-qnZ" secondAttribute="top" constant="4" id="jyy-yc-06V"/>
                     <constraint firstItem="3gb-MG-K3K" firstAttribute="top" secondItem="PSt-ns-iDc" secondAttribute="bottom" id="mNs-8z-frF"/>
+                    <constraint firstAttribute="trailing" secondItem="mqE-YO-W3U" secondAttribute="trailing" constant="4" id="peE-7S-5jJ"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

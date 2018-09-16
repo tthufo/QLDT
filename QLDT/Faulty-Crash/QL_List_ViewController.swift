@@ -31,12 +31,13 @@ class QL_List_ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+ 
+        getData()
+    }
+    
+    func getData() {
         
-//        let ID = configType["id"]
-        
-//        let arr = Temp.getData(parentId: ID as! Int32)
-        
-        let arr = Temp.getDataTemp(parentId: -1)
+        let arr = Temp.getDataTemp(parentId: configType["id"] as! Int32)
         
         dataList.removeAllObjects()
         
@@ -99,6 +100,42 @@ extension QL_List_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         (self.withView(cell, tag: 102) as! UILabel).text = "Tạo: %@ - Sửa: %@".format(parameters: data.createDate!, data.modifyDate!)
 
+        let drop = self.withView(cell, tag: 103) as! DropButton
+
+        drop.action(forTouch: [:]) { (obj) in
+            drop.didDropDown(withData: [["title":"Cập nhật"], ["title":"Sửa"], ["title":"Xóa"]] as [Any], andCompletion: { (result) in
+                if result != nil {
+                    
+                    let indexing = (result as! NSDictionary)["index"]
+                    
+                    switch indexing as! Int {
+                    case 0:
+                        break
+                    case 1:
+                        let crash = QL_Crash_ViewController()
+                        
+                        crash.configType = self.configType
+                        
+                        crash.entityId = data.id
+                        
+                        crash.delegate = self
+                        
+                        self.present(crash, animated: true) {
+                            
+                        }
+                        break
+                    case 2:
+                        Temp.deleteData(id: data.id, parentId: self.configType["id"] as! Int32)
+                        
+                        self.getData()
+                        break
+                    default:
+                        break
+                    }
+                }
+            })
+        }
+        
         return cell
     }
     
@@ -109,18 +146,18 @@ extension QL_List_ViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        let data = dataList![indexPath.row] as! TempData
-        
-        let crash = QL_Crash_ViewController()
-
-        crash.configType = self.configType
-
-        crash.entityId = data.id
-
-        crash.delegate = self
-        
-        self.present(crash, animated: true) {
-
-        }
+//        let data = dataList![indexPath.row] as! TempData
+//
+//        let crash = QL_Crash_ViewController()
+//
+//        crash.configType = self.configType
+//
+//        crash.entityId = data.id
+//
+//        crash.delegate = self
+//
+//        self.present(crash, animated: true) {
+//
+//        }
     }
 }

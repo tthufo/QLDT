@@ -18,16 +18,27 @@ class QL_Info_Collector_ViewController: UIViewController {
     
     var dataList: NSMutableArray!
     
-    var images: NSMutableArray? = [["title":"Đường bộ", "img":"ic_2"],["title":"Đường thủy", "img":"ic_3"],["title":"Đường sắt", "img":"ic_4"],["title":"Biểu mẫu", "img":"ic_5"]]
+    var images: NSMutableArray? = [["title":"Đường bộ", "img":"ic_2", "id":1],["title":"Đường thủy", "img":"ic_3", "id":3],["title":"Đường sắt", "img":"ic_4", "id":4], ["title":"Biểu mẫu", "img":"ic_5", "id":-1, "url":""]]
     
-    var images1: NSMutableArray? = [["title":"Tai nạn", "img":"ic_acc", "type":0, "id":1032],["title":"Sự cố", "img":"ic_report", "type":1, "id":20],["title":"Phản hồi", "img":"ic_speaker", "type":2, "id":14]]
+    var images1: NSMutableArray? = [] //[["title":"Tai nạn", "img":"ic_acc", "type":0, "id":1032],["title":"Sự cố", "img":"ic_report", "type":1, "id":20],["title":"Phản hồi", "img":"ic_speaker", "type":2, "id":14]]
     
     var images2: NSMutableArray? = [["title":"Kiểm tra", "img":"ic_888", "url":"api/Maintain/listInspection"],["title":"Bảo trì", "img":"ic_999", "url":"api/Maintain/listMaintenance"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         titleLabel.text = type == 0 ? "Thu thập dữ liệu" : type == 1 ? "Sự cố" : "Kiểm tả - bảo trì"
+        
+        if type == 1 {
+            
+            let temp = NSMutableArray()
+            
+            for dict in Field.getDataModule(moduleId: 2) {
+                temp.add(["title":(dict as NSDictionary)["Description"], "imageUrl":(dict as NSDictionary)["Icon"], "id":(dict as NSDictionary)["Id"]])
+            }
+            
+            images1 = temp
+        }
         
         dataList = type == 0 ? images : type == 1 ? images1 : images2
         
@@ -58,7 +69,11 @@ extension QL_Info_Collector_ViewController: UITableViewDataSource, UITableViewDe
         
         let data = dataList![indexPath.row] as! NSDictionary
         
-        (self.withView(cell, tag: 104) as! UIImageView).image = UIImage.init(named: (data["img"] as? String)!)
+        if data.response(forKey: "imageUrl") {
+            (self.withView(cell, tag: 104) as! UIImageView).imageUrl(url: data["imageUrl"] as! String)
+        } else {
+            (self.withView(cell, tag: 104) as! UIImageView).image = UIImage.init(named: (data["img"] as? String)!)
+        }
         
         (self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data["title"] as? String)!)
         
@@ -73,6 +88,14 @@ extension QL_Info_Collector_ViewController: UITableViewDataSource, UITableViewDe
         let configData = NSMutableDictionary()
         
         configData.addEntries(from: data as! [AnyHashable : Any])
+        
+        if type == 0 {
+            let commonList = QL_Common_List_ViewController()
+
+            commonList.configType = configData
+
+            self.navigationController?.pushViewController(commonList, animated: true)
+        }
         
         if type == 1 {
             let list = QL_List_ViewController()

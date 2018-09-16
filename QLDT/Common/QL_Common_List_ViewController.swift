@@ -29,9 +29,22 @@ class QL_Common_List_ViewController: UIViewController {
         
         if configType.response(forKey: "url") {
             didRequest()
+        } else {
+            getData()
         }
     }
 
+    func getData() {
+        
+        let arr = Field.getDataModule(moduleId: self.configType["id"] as! Int32)
+        
+        dataList.removeAllObjects()
+        
+        dataList.addObjects(from: arr)
+        
+        self.tableView.reloadData()
+    }
+    
     func didRequest() {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
@@ -86,9 +99,15 @@ extension QL_Common_List_ViewController: UITableViewDataSource, UITableViewDeleg
         
         let data = dataList![indexPath.row] as! NSDictionary
         
-        (self.withView(cell, tag: 104) as! UIImageView).image = UIImage.init(named: (configType["img"] as? String)!)
+        let isModule = !configType.response(forKey: "url")
         
-        (self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data["Name"] as? String)!)
+        if !isModule {
+            (self.withView(cell, tag: 104) as! UIImageView).image = UIImage.init(named: (configType["img"] as? String)!)
+        } else {
+            (self.withView(cell, tag: 104) as! UIImageView).imageUrl(url: data.getValueFromKey("Icon"))
+        }
+
+        (self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data[isModule ? "Description" : "Name"] as? String)!)
         
         return cell
     }
@@ -96,13 +115,23 @@ extension QL_Common_List_ViewController: UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let data = dataList![indexPath.row] as! NSDictionary
+        let isModule = !configType.response(forKey: "url")
 
-        let checkUp = QL_Maintain_CheckUp_ViewController()
+        let data = dataList![indexPath.row] as! NSDictionary
         
-        checkUp.checkUpData = data
-        
-        self.navigationController?.pushViewController(checkUp, animated: true)
+        if isModule {
+            let list = QL_List_ViewController()
+            
+            list.configType = ["title":data["Description"] ?? "", "id":data["Id"] as! Int32]
+            
+            self.navigationController?.pushViewController(list, animated: true)
+        } else {
+            let checkUp = QL_Maintain_CheckUp_ViewController()
+            
+            checkUp.checkUpData = data
+            
+            self.navigationController?.pushViewController(checkUp, animated: true)
+        }
     }
 }
 
