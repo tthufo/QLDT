@@ -26,11 +26,23 @@ class QL_Map_ViewController: UIViewController {
 
     var coor = [CLLocationCoordinate2D]()
 
+    var isMulti: Bool!
+    
+    @IBOutlet var auto: UIButton!
+    
+    @IBOutlet var delete: UIButton!
+
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
 
+        
+        auto.isHidden = !isMulti
+        
+        delete.isHidden = !isMulti
+
+        
         mapBox.logoView.isHidden = true
         
         mapBox.attributionButton.isHidden = true
@@ -149,7 +161,9 @@ class QL_Map_ViewController: UIViewController {
         }
         
         if let annotations = mapBox.annotations {
-            mapBox.removeAnnotations(annotations)
+            if !isMulti {
+                mapBox.removeAnnotations(annotations)
+            }
         }
         
         let mapLocation: CLLocationCoordinate2D = mapBox.convert(viewLocation, toCoordinateFrom: mapBox)
@@ -164,15 +178,21 @@ class QL_Map_ViewController: UIViewController {
         
         mapBox.addAnnotation(marker)
         
+        if !isMulti {
+            coor.removeAll()
+            
+            tempLocation.removeAll()
+        }
+        
         coor.append(CLLocationCoordinate2D(latitude: mapLocation.latitude , longitude: mapLocation.longitude))
 
-        tempLocation.removeAll()
-        
         tempLocation.append(["lat":"%f".format(parameters: mapLocation.latitude), "lng":"%f".format(parameters: mapLocation.longitude)])
         
-//        let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
-//
-//        mapBox.addAnnotation(myTourline)
+        if isMulti {
+            let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
+    
+            mapBox.addAnnotation(myTourline)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -189,6 +209,21 @@ class QL_Map_ViewController: UIViewController {
     
     @IBAction func didPressLocation() {
         mapBox.userTrackingMode = .follow
+    }
+    
+    @IBAction func didPressTimer() {
+        
+    }
+    
+    
+    @IBAction func didPressClear() {
+        if let annotations = mapBox.annotations {
+            mapBox.removeAnnotations(annotations)
+        }
+        
+        coor.removeAll()
+        
+        tempLocation.removeAll()
     }
 }
 

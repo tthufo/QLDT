@@ -66,6 +66,7 @@
 		FCFE39AD214E167F00E85515 /* TG_List_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE39AC214E167F00E85515 /* TG_List_Cell.xib */; };
 		FCFE39B1214E60CB00E85515 /* QL_Input_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE39AF214E60CB00E85515 /* QL_Input_ViewController.swift */; };
 		FCFE39B2214E60CB00E85515 /* QL_Input_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE39B0214E60CB00E85515 /* QL_Input_ViewController.xib */; };
+		FCFE39B4214E7F8B00E85515 /* QL_Geo_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFE39B3214E7F8B00E85515 /* QL_Geo_Cell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +136,7 @@
 		FCFE39AC214E167F00E85515 /* TG_List_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_List_Cell.xib; sourceTree = "<group>"; };
 		FCFE39AF214E60CB00E85515 /* QL_Input_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Input_ViewController.swift; sourceTree = "<group>"; };
 		FCFE39B0214E60CB00E85515 /* QL_Input_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Input_ViewController.xib; sourceTree = "<group>"; };
+		FCFE39B3214E7F8B00E85515 /* QL_Geo_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Geo_Cell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				FC8E4FF32147A14B00588836 /* QL_Drop_Cell.xib */,
 				FC8E4FF52147A4BC00588836 /* QL_Calendar_Cell.xib */,
 				FC8E4FF72147A64700588836 /* QL_Location_Cell.xib */,
+				FCFE39B3214E7F8B00E85515 /* QL_Geo_Cell.xib */,
 				FC8E4FF92147AD0C00588836 /* QL_Image_Cell.xib */,
 				FC7257E32147C77800D17A63 /* MNViewController.h */,
 				FC7257E42147C77900D17A63 /* MNViewController.m */,
@@ -380,6 +383,7 @@
 				FC84F1D5214D7B1F0025E213 /* TG_Region_Cell.xib in Resources */,
 				FC5386A3210C875600F00873 /* Main.storyboard in Resources */,
 				044F715821427FC9003CB99A /* QL_Comment_ViewController.xib in Resources */,
+				FCFE39B4214E7F8B00E85515 /* QL_Geo_Cell.xib in Resources */,
 				FC935AF1210CC5880067D480 /* TL_ChangeHost_ViewController.xib in Resources */,
 				FC5386B6210CBB6600F00873 /* QL_LogIn_ViewController.xib in Resources */,
 				FC84F1D3214D66EF0025E213 /* drop.plist in Resources */,

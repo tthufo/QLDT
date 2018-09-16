@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Map_ViewController" customModule="QLDT" customModuleProvider="target">
             <connections>
+                <outlet property="auto" destination="mwV-OI-l0U" id="gKW-g6-Du3"/>
+                <outlet property="delete" destination="xWP-uf-eEC" id="hZ2-xE-vc8"/>
                 <outlet property="mapBox" destination="JYG-E4-62u" id="AKf-iO-zjk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,7 +27,7 @@
                     <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JxD-rv-A13">
-                            <rect key="frame" x="263" y="346" width="49" height="49"/>
+                            <rect key="frame" x="263" y="354" width="49" height="49"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="49" id="G6l-Mf-TCa"/>
                                 <constraint firstAttribute="height" constant="49" id="rIg-cb-KlP"/>
@@ -46,13 +48,39 @@
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="nAj-6k-ImB"/>
                             </connections>
                         </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwV-OI-l0U">
+                            <rect key="frame" x="263" y="256" width="49" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="49" id="Nnx-v3-QXO"/>
+                                <constraint firstAttribute="width" constant="49" id="lK3-Dp-t5K"/>
+                            </constraints>
+                            <state key="normal" image="ic_add_fire_auto"/>
+                            <connections>
+                                <action selector="didPressTimer" destination="-1" eventType="touchUpInside" id="xW3-LF-IXE"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWP-uf-eEC">
+                            <rect key="frame" x="263" y="305" width="49" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="49" id="e2J-Mr-Jiv"/>
+                                <constraint firstAttribute="width" constant="49" id="o5m-0U-daZ"/>
+                            </constraints>
+                            <state key="normal" image="ic_add_fire"/>
+                            <connections>
+                                <action selector="didPressClear" destination="-1" eventType="touchUpInside" id="vcs-5c-E29"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="upa-Na-9YW" secondAttribute="bottom" constant="8" id="9Cd-Sf-dTg"/>
                         <constraint firstAttribute="trailing" secondItem="upa-Na-9YW" secondAttribute="trailing" constant="8" id="B0p-Te-LaP"/>
                         <constraint firstAttribute="trailing" secondItem="JxD-rv-A13" secondAttribute="trailing" constant="8" id="J3s-h4-U0L"/>
-                        <constraint firstItem="upa-Na-9YW" firstAttribute="top" secondItem="JxD-rv-A13" secondAttribute="bottom" constant="8" id="PFi-8f-v1n"/>
+                        <constraint firstItem="upa-Na-9YW" firstAttribute="top" secondItem="JxD-rv-A13" secondAttribute="bottom" id="PFi-8f-v1n"/>
+                        <constraint firstItem="xWP-uf-eEC" firstAttribute="top" secondItem="mwV-OI-l0U" secondAttribute="bottom" id="PcQ-4g-sM6"/>
+                        <constraint firstAttribute="trailing" secondItem="xWP-uf-eEC" secondAttribute="trailing" constant="8" id="kzE-tw-S3v"/>
+                        <constraint firstAttribute="trailing" secondItem="mwV-OI-l0U" secondAttribute="trailing" constant="8" id="ugh-mX-Ufg"/>
+                        <constraint firstItem="JxD-rv-A13" firstAttribute="top" secondItem="xWP-uf-eEC" secondAttribute="bottom" id="ykF-XD-JgA"/>
                     </constraints>
                     <connections>
                         <outlet property="delegate" destination="-1" id="E7I-kC-zKN"/>
@@ -72,6 +100,8 @@
     </objects>
     <resources>
         <image name="btn_update_point_presss" width="49" height="49"/>
+        <image name="ic_add_fire" width="49" height="49"/>
+        <image name="ic_add_fire_auto" width="49" height="49"/>
         <image name="ic_gps" width="49" height="49"/>
     </resources>
 </document>

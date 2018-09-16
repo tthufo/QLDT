@@ -100,6 +100,11 @@ class QL_Crash_ViewController: UIViewController {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Calendar_Cell"
                 }
 
+                if tempo.getValueFromKey("FieldName") == "geom_text" {
+                    (dict as! NSMutableDictionary)["ident"] = "QL_Geo_Cell"
+                    (dict as! NSMutableDictionary)["data"] = []
+                }
+                
                 if tempo.getValueFromKey("FieldType") == "numeric" || tempo.getValueFromKey("FieldType") == "decimal" {
                     if tempo.getValueFromKey("FieldName") != "lat" && tempo.getValueFromKey("FieldName") != "lng" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Input_Cell"
@@ -144,6 +149,8 @@ class QL_Crash_ViewController: UIViewController {
         tableView.withCell("QL_Calendar_Cell")
 
         tableView.withCell("QL_Location_Cell")
+
+        tableView.withCell("QL_Geo_Cell")
 
         tableView.withCell("QL_Image_Cell")
 
@@ -322,6 +329,10 @@ class QL_Crash_ViewController: UIViewController {
         self.tableView.reloadData()
     }
     
+    func geoText() {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -475,6 +486,8 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 map.indexing = "%i".format(parameters: indexPath.row)
                 
+                map.isMulti = false
+
                 map.delegate = self
                 
                 self.present(map, animated: true, completion: {
@@ -493,6 +506,30 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 let Y = (self.withView(cell, tag: 4) as! UILabel)
 
                 Y.text = coor["lng"] as? String
+            }
+        }
+        
+        if data["ident"] as! String == "QL_Geo_Cell" {
+            let loc = (self.withView(cell, tag: 2) as! UIImageView)
+            
+            loc.action(forTouch: [:]) { (objc) in
+                let map = QL_Map_ViewController()
+                
+                map.indexing = "%i".format(parameters: indexPath.row)
+                
+                map.isMulti = true
+                
+                map.delegate = self
+                
+                self.present(map, animated: true, completion: {
+                    
+                })
+            }
+            
+            let geo = (self.withView(cell, tag: 3) as! UITextField)
+            
+            if (data["data"] as! NSArray).count != 0 {
+               // geo.text = data["data"] as? String
             }
         }
         
