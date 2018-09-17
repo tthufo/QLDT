@@ -30,6 +30,8 @@ class QL_Crash_ViewController: UIViewController {
     
     var entityId: Int32 = -1
     
+    var updateUrl: String = ""
+    
     func prepareData() {
         
         for dict in self.dataTemp!["LayerFields"] as! NSMutableArray {
@@ -166,7 +168,7 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     func didRequestDetail() {
-        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "/api/Form/detail"),
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Form/detail"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
                                                    "Getparam":["id":self.configType["id"]],
@@ -183,10 +185,23 @@ class QL_Crash_ViewController: UIViewController {
                 return
             }
             
-            let result = (response?.dictionize()["Layer"] as! NSDictionary).reFormat()
+            let result = (response?.dictionize()["FormFields"] as! NSArray)
             
-            self.dataTemp = result
-                        
+            self.updateUrl = ((response?.dictionize()["Layer"] as! NSDictionary)["MobileCreateURL"] as! String)
+            
+//            self.updateUrl.removeLast()
+            
+            self.updateUrl.removeFirst()
+
+            
+            let tempArray = NSMutableArray()
+            
+            for dict in result {
+                tempArray.add(((dict as! NSDictionary)["LayerField"] as! NSDictionary).reFormat())
+            }
+            
+            self.dataTemp = ["LayerFields":tempArray]
+            
             self.prepareData()
 
             self.dataList.addObjects(from: self.dataTemp!["LayerFields"] as! [Any])
@@ -210,29 +225,32 @@ class QL_Crash_ViewController: UIViewController {
         }
     }
     
-    func didRequestUpdate() {
-        //                LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: configType.getValueFromKey("url")),
-        //                                                           "header":["Authorization":Information.token == nil ? "" : Information.token!],
-        //                                                           "method":"GET",
-        //                                                           "overrideLoading":1,
-        //                                                           "overrideAlert":1,
-        //                                                           "host":self
-        //                    ], withCache: { (cache) in
-        //
-        //                }) { (response, errorCode, error, isValid) in
-        //
-        //                    if errorCode != "200" {
-        //                        self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
-        //
-        //                        return
-        //                    }
-        //
-        //                    self.dataList.removeAllObjects()
-        //
-        //                    self.dataList.addObjects(from: response?.dictionize()["array"] as! [Any])
-        //
-        //                    self.tableView.reloadData()
-        //                }
+    func didRequestUpdate(postData: NSDictionary) {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: self.updateUrl),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!, "Content-type":"application/x-www-form-urlencoded", "Accept":"application/x-www-form-urlencoded"],
+//                                                   "method":"GET",
+                                                   "Postparam":postData,
+                                                   "overrideLoading":1,
+                                                   "overrideAlert":1,
+                                                   "host":self
+            ], withCache: { (cache) in
+                
+        }) { (response, errorCode, error, isValid) in
+            
+            print(error)
+
+            
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
+            
+            let result = response?.dictionize()
+            
+            print(result)
+       
+        }
     }
     
     func checkValid() -> Bool {
@@ -260,21 +278,52 @@ class QL_Crash_ViewController: UIViewController {
     
     @IBAction func didRequestSubmit() {
         
-        if LTRequest.isConnectionAvailable() {
-            
+        if self.configType.response(forKey: "online") {
             if checkValid() {
+                let postData = NSMutableDictionary()
                 
-                DropAlert.shareInstance().alert(withInfor: ["title":"Thông báo", "buttons":["Lưu lại"], "cancel":"Cập nhật", "message":"Mạng đang khả dụng. Bạn có muốn cập nhật dữ liệu ?"], andCompletion: { (index, result) in
-                    if index != 0 {
-                        self.didRequestUpdate()
-                    } else {
-                        self.didSyncData()
+                for dict in self.dataList {
+                    if (dict as! NSDictionary)["IsVisible"] as! Bool {
+                        
+                        let key = (dict as! NSDictionary)["FieldName"] ?? ""
+                        
+                        if ((dict as! NSDictionary)["data"] as AnyObject).isKind(of: NSArray.self) {
+                            if ((dict as! NSDictionary)["data"] as! NSArray).count != 0 {
+                                
+                                let latLng = ((dict as! NSDictionary)["data"] as! NSArray).firstObject as! NSDictionary
+                                
+                                postData["lat"] = latLng["lat"]
+                                
+                                postData["lng"] = latLng["lng"]
+
+                            }
+                        } else {
+                            if ((dict as! NSDictionary)["data"] as! String) != "" {
+                                postData[key] = ((dict as! NSDictionary)["data"] as! String)
+                            }
+                        }
                     }
-                })
+                }
+                
+                didRequestUpdate(postData: postData)
+                
+                print(postData)
             }
-        
         } else {
-           self.didSyncData()
+            if LTRequest.isConnectionAvailable() {
+                if checkValid() {
+                    DropAlert.shareInstance().alert(withInfor: ["title":"Thông báo", "buttons":["Lưu lại"], "cancel":"Cập nhật", "message":"Mạng đang khả dụng. Bạn có muốn cập nhật dữ liệu ?"], andCompletion: { (index, result) in
+                        if index != 0 {
+                            //self.didRequestUpdate()
+                        } else {
+                            self.didSyncData()
+                        }
+                    })
+                }
+                
+            } else {
+                self.didSyncData()
+            }
         }
     }
     
