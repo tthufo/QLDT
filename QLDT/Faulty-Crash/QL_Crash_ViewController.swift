@@ -226,31 +226,36 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     func didRequestUpdate(postData: NSDictionary) {
-        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: self.updateUrl),
-                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!, "Content-type":"application/x-www-form-urlencoded", "Accept":"application/x-www-form-urlencoded"],
-//                                                   "method":"GET",
-                                                   "Postparam":postData,
-                                                   "overrideLoading":1,
-                                                   "overrideAlert":1,
-                                                   "host":self
-            ], withCache: { (cache) in
-                
-        }) { (response, errorCode, error, isValid) in
+//        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: self.updateUrl),
+//                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!, "Content-type":"application/x-www-form-urlencoded", "Accept":"application/x-www-form-urlencoded"],
+////                                                   "method":"GET",
+//                                                   "Postparam":postData,
+//                                                   "overrideLoading":1,
+//                                                   "overrideAlert":1,
+//                                                   "host":self
+//            ], withCache: { (cache) in
+//
+//        }) { (response, errorCode, error, isValid) in
+//
+//            print(error)
+//
+//
+//            if errorCode != "200" {
+//                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+//
+//                return
+//            }
+//
+//            let result = response?.dictionize()
+//
+//            print(result)
+//
+//        }
+        
+        (CustomField.shareText() as! CustomField).requesting("".urlGet(postFix: self.updateUrl), andInfo: postData as! [AnyHashable : Any], andCompletion: { (done, respond) in
             
-            print(error)
-
-            
-            if errorCode != "200" {
-                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
-                
-                return
-            }
-            
-            let result = response?.dictionize()
-            
-            print(result)
-       
-        }
+            print(respond)
+        })
     }
     
     func checkValid() -> Bool {

@@ -47,6 +47,7 @@
 		FC935AF3210CCD750067D480 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC935AF2210CCD750067D480 /* Macro.swift */; };
 		FCAF7AC021404BC4007A1181 /* QL_Info_Collector_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7ABE21404BC3007A1181 /* QL_Info_Collector_ViewController.swift */; };
 		FCAF7AC121404BC4007A1181 /* QL_Info_Collector_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7ABF21404BC4007A1181 /* QL_Info_Collector_ViewController.xib */; };
+		FCC6D9062150354E00191E1B /* CustomField.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC6D9052150354E00191E1B /* CustomField.m */; };
 		FCCC3D62213BFD2A0005D519 /* QL_Setting_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D60213BFD290005D519 /* QL_Setting_ViewController.swift */; };
 		FCCC3D63213BFD2A0005D519 /* QL_Setting_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCC3D61213BFD2A0005D519 /* QL_Setting_ViewController.xib */; };
 		FCCC3D66213C30540005D519 /* QL_Recover_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D64213C30540005D519 /* QL_Recover_ViewController.swift */; };
@@ -119,6 +120,8 @@
 		FC935AF2210CCD750067D480 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		FCAF7ABE21404BC3007A1181 /* QL_Info_Collector_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Info_Collector_ViewController.swift; sourceTree = "<group>"; };
 		FCAF7ABF21404BC4007A1181 /* QL_Info_Collector_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Info_Collector_ViewController.xib; sourceTree = "<group>"; };
+		FCC6D9042150354D00191E1B /* CustomField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomField.h; sourceTree = "<group>"; };
+		FCC6D9052150354E00191E1B /* CustomField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomField.m; sourceTree = "<group>"; };
 		FCCC3D60213BFD290005D519 /* QL_Setting_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Setting_ViewController.swift; sourceTree = "<group>"; };
 		FCCC3D61213BFD2A0005D519 /* QL_Setting_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Setting_ViewController.xib; sourceTree = "<group>"; };
 		FCCC3D64213C30540005D519 /* QL_Recover_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Recover_ViewController.swift; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 		FCFE39AE214E609B00E85515 /* InputGroup */ = {
 			isa = PBXGroup;
 			children = (
+				FCC6D9042150354D00191E1B /* CustomField.h */,
+				FCC6D9052150354E00191E1B /* CustomField.m */,
 				FCFE39AF214E60CB00E85515 /* QL_Form_ViewController.swift */,
 				FCFE39B0214E60CB00E85515 /* QL_Form_ViewController.xib */,
 				FCFE39B5214ED10B00E85515 /* QL_Online_ViewController.swift */,
@@ -488,6 +493,7 @@
 				FCE6173F210EAA3500000438 /* QL_Home_ViewController.swift in Sources */,
 				FCCC3D70213C65BC0005D519 /* Field.swift in Sources */,
 				FCE61747210EAB0A00000438 /* CoreDataStack.swift in Sources */,
+				FCC6D9062150354E00191E1B /* CustomField.m in Sources */,
 				FCCC3D62213BFD2A0005D519 /* QL_Setting_ViewController.swift in Sources */,
 				FC5386A0210C875600F00873 /* ViewController.swift in Sources */,
 				FC53869E210C875600F00873 /* AppDelegate.swift in Sources */,
