@@ -16,7 +16,7 @@ class QL_Setting_ViewController: UIViewController {
         super.viewDidLoad()
 
         if self.getObject("timer") == nil {
-            self.add(["title":"    1 phút", "value":1], andKey:"timer")
+            self.add(["title":"    1 phút", "time":1], andKey:"timer")
         }
         
         let setting = self.getObject("timer")["title"]
@@ -43,12 +43,11 @@ class QL_Setting_ViewController: UIViewController {
             if objc != nil {
                 let result = ((objc as! NSDictionary)["data"] as! NSDictionary)["title"]
                 
-                let time = (objc as! NSDictionary)["index"]
-
-                
+                let time = ((objc as! NSDictionary)["data"] as! NSDictionary)["time"]
+                                
                 menu.setTitle(result as? String, for: .normal)
                 
-                self.add(["title":result ?? "", "value":time], andKey: "timer")
+                self.add(["title":result ?? "", "time":time], andKey: "timer")
                 
                 self.showToast("Cập nhật thành công", andPos: 0)
             }

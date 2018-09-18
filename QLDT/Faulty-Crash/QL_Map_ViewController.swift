@@ -31,12 +31,16 @@ class QL_Map_ViewController: UIViewController {
     @IBOutlet var auto: UIButton!
     
     @IBOutlet var delete: UIButton!
+    
+    @IBOutlet var countDown: UILabel!
 
+    var timer: Timer!
+    
+    var count = 0
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
         
         auto.isHidden = !isMulti
         
@@ -64,10 +68,62 @@ class QL_Map_ViewController: UIViewController {
             didPressLocation()
         }
         
-        
         NotificationCenter.default.addObserver(self, selector: #selector(offlinePackProgressDidChange), name: NSNotification.Name.MGLOfflinePackProgressChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveError), name: NSNotification.Name.MGLOfflinePackError, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveMaximumAllowedMapboxTiles), name: NSNotification.Name.MGLOfflinePackMaximumMapboxTilesReached, object: nil)
+    }
+
+    func resetCount() {
+        let minutes = self.getObject("timer")["time"]
+        
+        count = Int(minutes as! NSNumber) * 60
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if timer != nil {
+            timer.invalidate()
+            
+            timer = nil
+        }
+    }
+    
+    @objc func update() {
+        
+        if(count == 0) {
+            
+            let marker = MGLPointAnnotation()
+            
+            marker.title = ""
+            
+            marker.subtitle = ""
+            
+            marker.coordinate = latLng()
+            
+            mapBox.addAnnotation(marker)
+            
+            coor.append(latLng())
+            
+            tempLocation.append(["lat":"%f".format(parameters: latLng().latitude), "lng":"%f".format(parameters: latLng().longitude)])
+            
+            let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
+            
+            mapBox.addAnnotation(myTourline)
+            
+            resetCount()
+
+            timer.invalidate()
+            
+            timer = nil
+            
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(update), userInfo: nil, repeats: true)
+        }
+        
+        let minutes = String(count / 60)
+        let seconds = String(count % 60)
+        countDown.text = (Int(minutes)! < 10 ? "0" : "") + minutes + ":" + (Int(seconds)! < 10 ? "0" : "") + seconds
+        count -= 1
     }
     
     @objc func showMarkers() {
@@ -174,21 +230,7 @@ class QL_Map_ViewController: UIViewController {
             {
                 if(annotation.isKind(of: MGLAnnotation.self))
                 {
-//                    let pin: MGLAnnotation = annotation
-//
-//                    if let pinView = pin.view
-//                    {
-//                        print("pinview \(pinView.frame.origin)")
-//
-//                        if(viewLocation.x >= pinView.frame.origin.x && viewLocation.x < pinView.frame.origin.x + pinView.frame.width)
-//                        {
-//                            if(viewLocation.y >= pinView.frame.origin.y && viewLocation.y < pinView.frame.origin.y + pinView.frame.height)
-//                            {
-//                                mapView(mapBox, didSelectAnnotationView: pinView)
-                                return
-//                            }
-//                        }
-//                    }
+                    return
                 }
             }
         }
@@ -260,9 +302,19 @@ class QL_Map_ViewController: UIViewController {
     }
     
     @IBAction func didPressTimer() {
-     //////
+        
+        self.countDown.isHidden = false
+        
+        resetCount()
+
+        if timer != nil {
+            timer.invalidate()
+            
+            timer = nil
+        }
+        
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(update), userInfo: nil, repeats: true)
     }
-    
     
     @IBAction func didPressClear() {
         if let annotations = mapBox.annotations {

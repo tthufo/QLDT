@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Map_ViewController" customModule="QLDT" customModuleProvider="target">
             <connections>
                 <outlet property="auto" destination="mwV-OI-l0U" id="gKW-g6-Du3"/>
+                <outlet property="countDown" destination="h9t-Nl-cA6" id="GJb-GS-WNb"/>
                 <outlet property="delete" destination="xWP-uf-eEC" id="hZ2-xE-vc8"/>
                 <outlet property="mapBox" destination="JYG-E4-62u" id="AKf-iO-zjk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -70,6 +71,17 @@
                                 <action selector="didPressClear" destination="-1" eventType="touchUpInside" id="vcs-5c-E29"/>
                             </connections>
                         </button>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9t-Nl-cA6">
+                            <rect key="frame" x="16" y="407" width="67" height="40"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="PEO-ch-F33"/>
+                                <constraint firstAttribute="width" constant="67" id="dzK-Iy-Hmh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -78,7 +90,9 @@
                         <constraint firstAttribute="trailing" secondItem="JxD-rv-A13" secondAttribute="trailing" constant="8" id="J3s-h4-U0L"/>
                         <constraint firstItem="upa-Na-9YW" firstAttribute="top" secondItem="JxD-rv-A13" secondAttribute="bottom" id="PFi-8f-v1n"/>
                         <constraint firstItem="xWP-uf-eEC" firstAttribute="top" secondItem="mwV-OI-l0U" secondAttribute="bottom" id="PcQ-4g-sM6"/>
+                        <constraint firstItem="h9t-Nl-cA6" firstAttribute="leading" secondItem="JYG-E4-62u" secondAttribute="leading" constant="16" id="gqk-QR-LWO"/>
                         <constraint firstAttribute="trailing" secondItem="xWP-uf-eEC" secondAttribute="trailing" constant="8" id="kzE-tw-S3v"/>
+                        <constraint firstAttribute="bottom" secondItem="h9t-Nl-cA6" secondAttribute="bottom" constant="13" id="mxA-HY-Bwl"/>
                         <constraint firstAttribute="trailing" secondItem="mwV-OI-l0U" secondAttribute="trailing" constant="8" id="ugh-mX-Ufg"/>
                         <constraint firstItem="JxD-rv-A13" firstAttribute="top" secondItem="xWP-uf-eEC" secondAttribute="bottom" id="ykF-XD-JgA"/>
                     </constraints>

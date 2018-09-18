@@ -129,10 +129,22 @@ class QL_Crash_ViewController: UIViewController {
         } else {
             self.dataTemp = (Temp.getData(id: entityId, parentId: ID as! Int32).first)
             
+            self.updateUrl = self.dataTemp["MobileCreateURL"] as! String
+            
+            self.updateUrl.removeLast()
+            
+            self.updateUrl.removeFirst()
+            
             return self.dataTemp!["LayerFields"] as! NSMutableArray
         }
         
         prepareData()
+        
+        self.updateUrl = self.dataTemp["MobileCreateURL"] as! String
+        
+        self.updateUrl.removeLast()
+        
+        self.updateUrl.removeFirst()
         
         return self.dataTemp!["LayerFields"] as! NSMutableArray
     }
@@ -189,7 +201,7 @@ class QL_Crash_ViewController: UIViewController {
             
             self.updateUrl = ((response?.dictionize()["Layer"] as! NSDictionary)["MobileCreateURL"] as! String)
             
-//            self.updateUrl.removeLast()
+            self.updateUrl.removeLast()
             
             self.updateUrl.removeFirst()
 
@@ -226,35 +238,15 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     func didRequestUpdate(postData: NSDictionary) {
-//        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: self.updateUrl),
-//                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!, "Content-type":"application/x-www-form-urlencoded", "Accept":"application/x-www-form-urlencoded"],
-////                                                   "method":"GET",
-//                                                   "Postparam":postData,
-//                                                   "overrideLoading":1,
-//                                                   "overrideAlert":1,
-//                                                   "host":self
-//            ], withCache: { (cache) in
-//
-//        }) { (response, errorCode, error, isValid) in
-//
-//            print(error)
-//
-//
-//            if errorCode != "200" {
-//                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
-//
-//                return
-//            }
-//
-//            let result = response?.dictionize()
-//
-//            print(result)
-//
-//        }
-        
         (CustomField.shareText() as! CustomField).requesting("".urlGet(postFix: self.updateUrl), andInfo: postData as! [AnyHashable : Any], andCompletion: { (done, respond) in
             
-            print(respond)
+            if done {
+                self.dismiss(animated: true, completion: {
+                    self.showToast("Cập nhật thành công", andPos: 0)
+                })
+            } else {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+            }
         })
     }
     
@@ -292,15 +284,39 @@ class QL_Crash_ViewController: UIViewController {
                         
                         let key = (dict as! NSDictionary)["FieldName"] ?? ""
                         
+                        if (dict as! NSDictionary).response(forKey: "activeData") {
+                            if key as! String == "huyen_id" || key as! String == "xa_id" {
+                                postData[key] = ((dict as! NSDictionary)["activeData"] as! NSDictionary)["area_id"]
+                            } else {
+                                postData[key] = ((dict as! NSDictionary)["activeData"] as! NSDictionary)["ItemCode"]
+                            }
+                        }
+                        
                         if ((dict as! NSDictionary)["data"] as AnyObject).isKind(of: NSArray.self) {
                             if ((dict as! NSDictionary)["data"] as! NSArray).count != 0 {
-                                
-                                let latLng = ((dict as! NSDictionary)["data"] as! NSArray).firstObject as! NSDictionary
-                                
-                                postData["lat"] = latLng["lat"]
-                                
-                                postData["lng"] = latLng["lng"]
-
+                                if ((dict as! NSDictionary)["data"] as! NSArray).count == 1 {
+                                    if key as! String == "lat" || key as! String == "lng" {
+                                        let latLng = ((dict as! NSDictionary)["data"] as! NSArray).firstObject as! NSDictionary
+                                        
+                                        postData["lat"] = latLng["lat"]
+                                        
+                                        postData["lng"] = latLng["lng"]
+                                    }
+                                } else {
+                                    if key as! String == "geom_text" {
+                                        var tempString = "LINESTRING ("
+                                        
+                                        for inner in ((dict as! NSDictionary)["data"] as! NSArray) {
+                                            tempString.append(((inner as! NSDictionary)["lat"] as! String) + " " + ((inner as! NSDictionary)["lng"] as! String) + ",")
+                                        }
+                                        
+                                        tempString.removeLast()
+                                        
+                                        tempString.append(")")
+                                        
+                                        postData[key] = tempString
+                                    }
+                                }
                             }
                         } else {
                             if ((dict as! NSDictionary)["data"] as! String) != "" {
@@ -311,15 +327,66 @@ class QL_Crash_ViewController: UIViewController {
                 }
                 
                 didRequestUpdate(postData: postData)
-                
-                print(postData)
             }
         } else {
             if LTRequest.isConnectionAvailable() {
                 if checkValid() {
                     DropAlert.shareInstance().alert(withInfor: ["title":"Thông báo", "buttons":["Lưu lại"], "cancel":"Cập nhật", "message":"Mạng đang khả dụng. Bạn có muốn cập nhật dữ liệu ?"], andCompletion: { (index, result) in
                         if index != 0 {
-                            //self.didRequestUpdate()
+                            
+                            let postData = NSMutableDictionary()
+                            
+                            for dict in self.dataList {
+                                if (dict as! NSDictionary)["IsVisible"] as! Bool {
+                                    
+                                    let key = (dict as! NSDictionary)["FieldName"] ?? ""
+                                    
+                                    if (dict as! NSDictionary).response(forKey: "activeData") {
+                                        if key as! String == "huyen_id" || key as! String == "xa_id" {
+                                            postData[key] = ((dict as! NSDictionary)["activeData"] as! NSDictionary)["area_id"]
+                                        } else {
+                                            postData[key] = ((dict as! NSDictionary)["activeData"] as! NSDictionary)["ItemCode"]
+                                        }
+                                    }
+                                    
+                                    if ((dict as! NSDictionary)["data"] as AnyObject).isKind(of: NSArray.self) {
+                                        if ((dict as! NSDictionary)["data"] as! NSArray).count != 0 {
+                                            if ((dict as! NSDictionary)["data"] as! NSArray).count == 1 {
+                                                if key as! String == "lat" || key as! String == "lng" {
+                                                    let latLng = ((dict as! NSDictionary)["data"] as! NSArray).firstObject as! NSDictionary
+                                                    
+                                                    postData["lat"] = latLng["lat"]
+                                                    
+                                                    postData["lng"] = latLng["lng"]
+                                                }
+                                            } else {
+                                                if key as! String == "geom_text" {
+                                                    var tempString = "LINESTRING ("
+                                                    
+                                                    for inner in ((dict as! NSDictionary)["data"] as! NSArray) {
+                                                        tempString.append(((inner as! NSDictionary)["lat"] as! String) + " " + ((inner as! NSDictionary)["lng"] as! String) + ",")
+                                                    }
+                                                    
+                                                    tempString.removeLast()
+                                                    
+                                                    tempString.append(")")
+                                                    
+                                                    postData[key] = tempString
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        if ((dict as! NSDictionary)["data"] as! String) != "" {
+                                            postData[key] = ((dict as! NSDictionary)["data"] as! String)
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            print(postData)
+                            
+                            self.didRequestUpdate(postData: postData)
+
                         } else {
                             self.didSyncData()
                         }
@@ -503,7 +570,9 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
 
         (self.withView(cell, tag: 1) as! UILabel).text = data["FieldLabel"] as? String
 
-        
+        let isRequired = data["Require"] as! Bool
+
+        (self.withView(cell, tag: 1) as! UILabel).textColor = isRequired ? UIColor.red : UIColor.black
         
         
         if data["ident"] as! String == "QL_Input_Cell" {
