@@ -241,6 +241,13 @@ class QL_Crash_ViewController: UIViewController {
         (CustomField.shareText() as! CustomField).requesting("".urlGet(postFix: self.updateUrl), andInfo: postData as! [AnyHashable : Any], andCompletion: { (done, respond) in
             
             if done {
+                
+                if self.entityId != -1 {
+                    let ID = self.configType["id"]
+
+                    Temp.deleteData(id: self.entityId, parentId: ID as! Int32)
+                }
+                
                 self.dismiss(animated: true, completion: {
                     self.showToast("Cập nhật thành công", andPos: 0)
                 })
@@ -382,9 +389,7 @@ class QL_Crash_ViewController: UIViewController {
                                     }
                                 }
                             }
-                            
-                            print(postData)
-                            
+                                                        
                             self.didRequestUpdate(postData: postData)
 
                         } else {
