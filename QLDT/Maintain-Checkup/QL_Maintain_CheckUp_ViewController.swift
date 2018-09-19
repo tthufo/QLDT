@@ -24,9 +24,15 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
     
     var kb: KeyBoard!
 
+    var timer: Timer!
+
+    var count = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        resetCount()
         
         kb = KeyBoard.shareInstance()
 
@@ -41,6 +47,34 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
         chat.isHidden = !isMaintain()
         
         didRequest()
+        
+        if !isMaintain() {
+            didTracking()
+            
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(update), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func update() {
+        
+        if(count == 0) {
+        
+            didTracking()
+            
+            resetCount()
+            
+            timer.invalidate()
+            
+            timer = nil
+            
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(update), userInfo: nil, repeats: true)
+        }
+        
+        count -= 1
+    }
+    
+    func resetCount() {
+        count = 60
     }
     
     func isMaintain() -> Bool {
@@ -59,6 +93,33 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
 //    "User": null,
 //    "UserId": "f92db026-7c7d-4143-98bf-a572da41c950"
 //}
+    
+    func latLng() -> CLLocationCoordinate2D {
+        let currentCorr = Permission.shareInstance().currentLocation()
+        
+        return CLLocationCoordinate2D(latitude: (currentCorr!["lat"]! as! NSNumber).doubleValue , longitude: (currentCorr!["lng"]! as! NSNumber).doubleValue)
+    }
+    
+    func didTracking() {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Tracking/Push"),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "Postparam":[["Id": checkUpData["Id"],
+                                                                 "Lat": latLng().latitude,
+                                                                 "Lng": latLng().longitude,
+                                                                 "MaintenanceId": checkUpData["Id"],
+                                                                 "Time": Date().toMillis(),
+                                                                 "UserId": checkUpData["UserId"]]],
+                                                   "overrideAlert":1], withCache: { (cache) in
+                                                    
+        }) { (response, errorCode, error, isValid) in
+            
+            if errorCode != "200" {                
+                return
+            }
+            
+            print(response)
+        }
+    }
     
     func didRequest() {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/detail"),
@@ -126,15 +187,19 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        tableView.estimatedRowHeight = UITableViewAutomaticDimension
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
+        if timer != nil {
+            timer.invalidate()
+            
+            timer = nil
+        }
         
         kb.keyboardOff()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+                
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         kb.keyboard(on: ["bar":bar, "host":self]) { (height, isOn) in
             

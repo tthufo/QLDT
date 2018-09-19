@@ -39,15 +39,15 @@ class QL_Comment_ViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        tableView.estimatedRowHeight = 60
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
         kb.keyboardOff()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        tableView.estimatedRowHeight = 60
+        
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         kb.keyboard { (height, isOn) in
          
@@ -163,7 +163,7 @@ extension QL_Comment_ViewController: UITableViewDataSource, UITableViewDelegate 
         
         let data = dataList[indexPath.row] as! NSDictionary
         
-        let isMe = (data["User"] as! NSDictionary)["UserName"] as? String == Information.userName
+        let isMe = (data["User"] as! NSDictionary)["UserName"] as? String != Information.userName
 
         
         let dayLeft = self.withView(cell, tag: 10) as! UILabel
