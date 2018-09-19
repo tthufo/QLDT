@@ -59,7 +59,7 @@ class QL_Crash_ViewController: UIViewController {
                          "ItemName": "Dữ liệu trống",
                          "Style": "",
                          "CategoryTypeId": -1]
-                    (dict as! NSMutableDictionary)["color"] = (data as! NSArray).count != 0 ? UIColor.black : UIColor.red
+                    (dict as! NSMutableDictionary)["color"] = (data as! NSArray).count != 0 ? "black" : "red"
                 }
                 
                 if tempo.getValueFromKey("FieldType") == "int" {
@@ -405,6 +405,7 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     func didSyncData() {
+                
         if entityId == -1 {
             Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: "ahihi", date: self.currentDate("yyyy-MM-dd HH:ss"))
         } else {
@@ -614,7 +615,7 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 drop.setTitle(activeData[key] as? String, for: .normal)
             
-            drop.setTitleColor(data["color"] as? UIColor, for: .normal)
+                drop.setTitleColor((data["color"] as? String) == "black" ? UIColor.black : UIColor.red , for: .normal)
             
                 drop.action(forTouch: [:]) { (objc) in
                     drop.didDropDown(withData: data["data"] as! [Any], andCompletion: { (result) in

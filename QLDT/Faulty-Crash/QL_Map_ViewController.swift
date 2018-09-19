@@ -51,12 +51,14 @@ class QL_Map_ViewController: UIViewController {
         
         mapBox.attributionButton.isHidden = true
         
-        mapBox.showsUserLocation = true
         
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(onMapSingleTapped(recognizer:)))
         
         mapBox.addGestureRecognizer(tap)
         
+        if self.getValue("offline") == nil {
+            self.addValue("0", andKey: "offline")
+        }
         
         if tempLocation.count != 0 {
             for dict in tempLocation {
@@ -81,6 +83,8 @@ class QL_Map_ViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        self.hideSVHUD()
         
         if timer != nil {
             timer.invalidate()
@@ -151,6 +155,7 @@ class QL_Map_ViewController: UIViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+        self.hideSVHUD()
     }
     
     func startOfflinePackDownload() {
@@ -188,16 +193,18 @@ class QL_Map_ViewController: UIViewController {
                 progressView = UIProgressView(progressViewStyle: .default)
                 let frame = view.bounds.size
                 progressView.frame = CGRect(x: frame.width / 4, y: frame.height * 0.75, width: frame.width / 2, height: 10)
-                view.addSubview(progressView)
+                //view.addSubview(progressView)
             }
             
             progressView.progress = progressPercentage
             
-//            self.showSVHUD("ahihii", andProgress: progressPercentage)
+            self.showSVHUD("Đang tải bản đồ offline, bạn vui lòng chờ (chỉ tải 1 lần duy nhất)", andProgress: progressPercentage)
             
             if completedResources == expectedResources {
                 let byteCount = ByteCountFormatter.string(fromByteCount: Int64(pack.progress.countOfBytesCompleted), countStyle: ByteCountFormatter.CountStyle.memory)
                 print("Offline pack “\(userInfo["name"] ?? "unknown")” completed: \(byteCount), \(completedResources) resources")
+                self.hideSVHUD()
+                self.addValue("1", andKey: "offline")
             } else {
                 print("Offline pack “\(userInfo["name"] ?? "unknown")” has \(completedResources) of \(expectedResources) resources — \(progressPercentage * 100)%.")
             }
@@ -209,6 +216,7 @@ class QL_Map_ViewController: UIViewController {
             let userInfo = NSKeyedUnarchiver.unarchiveObject(with: pack.context) as? [String: String],
             let error = notification.userInfo?[MGLOfflinePackUserInfoKey.error] as? NSError {
             print("Offline pack “\(userInfo["name"] ?? "unknown")” received error: \(error.localizedFailureReason ?? "unknown error")")
+            self.hideSVHUD()
         }
     }
     
@@ -217,6 +225,7 @@ class QL_Map_ViewController: UIViewController {
             let userInfo = NSKeyedUnarchiver.unarchiveObject(with: pack.context) as? [String: String],
             let maximumCount = (notification.userInfo?[MGLOfflinePackUserInfoKey.maximumCount] as AnyObject).uint64Value {
             print("Offline pack “\(userInfo["name"] ?? "unknown")” reached limit of \(maximumCount) tiles.")
+            self.hideSVHUD()
         }
     }
     
@@ -330,16 +339,29 @@ class QL_Map_ViewController: UIViewController {
 extension QL_Map_ViewController: MGLMapViewDelegate {
     
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
-        //startOfflinePackDownload()
+        if (self.getValue("offline") != nil) && self.getValue("offline") == "0" {
+            startOfflinePackDownload()
+        }
+        
+        mapBox.showsUserLocation = true
+    }
+    
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+        
+        if annotation is MGLUserLocation {
+            var userLocationAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "direction_arrow") as? CustomUserLocationAnnotationView
+            
+            if userLocationAnnotationView == nil {
+                userLocationAnnotationView = CustomUserLocationAnnotationView(reuseIdentifier: "direction_arrow")
+            }
+
+            return userLocationAnnotationView
+        }
+        
+        return nil
     }
     
     func mapView(_ mapView: MGLMapView, imageFor annotation: MGLAnnotation) -> MGLAnnotationImage? {
-        
-        if annotation.isKind(of: MGLUserLocation.self) {
-            return MGLAnnotationImage(image: UIImage.init(named: "direction_arrow")!, reuseIdentifier: "userLocation")
-        }
-        
-        print(annotation)
         
         let reuseIdentifier = reuseIdentifierForAnnotation(annotation: annotation)
         
@@ -368,14 +390,39 @@ extension QL_Map_ViewController: MGLMapViewDelegate {
     
     func imageForAnnotation(annotation: MGLAnnotation) -> UIImage {
         
-//        let type = (annotation as! MGLPointAnnotation).accessibilityLabel
-        
         return UIImage(named: "point")!
-
-//        return UIImage(named: "maker_%@".format(parameters:type!))!
     }
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
+    }
+}
+
+final class CustomUserLocationAnnotationView: MGLUserLocationAnnotationView {
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        
+        let imageView = UIImageView(image: UIImage(named: "direction_arrow"))
+        self.addSubview(imageView)
+        self.frame = imageView.frame
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        scalesWithViewingDistance = false
+        
+        layer.contentsScale = UIScreen.main.scale
+        layer.contentsGravity = kCAGravityCenter
+        
+        layer.contents = UIImage(named: "direction_arrow")?.cgImage
     }
 }

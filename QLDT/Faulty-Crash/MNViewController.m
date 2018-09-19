@@ -39,14 +39,17 @@
   return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
   [super viewDidLoad];
   
   self.view.backgroundColor = UIColor.whiteColor;
   
   self.currentDate = [NSDate date];
 
-  chosenDate = [self.currentDate stringWithFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+//  chosenDate = [self.currentDate stringWithFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+  chosenDate = [self.currentDate stringWithFormat:@"yyyy-MM-dd"];
+
     
   self.calendarView.calendar = self.calendar;
   self.calendarView.selectedDate = [NSDate date];
@@ -84,7 +87,8 @@
 #pragma mark - MNCalendarViewDelegate
 
 - (void)calendarView:(MNCalendarView *)calendarView didSelectDate:(NSDate *)date {
-    chosenDate = [date stringWithFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+//    chosenDate = [date stringWithFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+    chosenDate = [date stringWithFormat:@"yyyy-MM-dd"];
 }
 
 - (BOOL)calendarView:(MNCalendarView *)calendarView shouldSelectDate:(NSDate *)date {

@@ -59,7 +59,6 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
 //    "User": null,
 //    "UserId": "f92db026-7c7d-4143-98bf-a572da41c950"
 //}
-    //
     
     func didRequest() {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/detail"),
