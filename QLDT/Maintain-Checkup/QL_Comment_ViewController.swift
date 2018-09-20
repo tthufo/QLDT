@@ -34,6 +34,9 @@ class QL_Comment_ViewController: UIViewController {
         dataList = NSMutableArray()
         
         didRequestMessage()
+        
+        print(checkUpData)
+        
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -56,6 +59,9 @@ class QL_Comment_ViewController: UIViewController {
     }
     
     func didRequestSend() {
+        
+        print(self.textField.text)
+        
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/putChatMessage"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "Id":"0",
@@ -63,7 +69,7 @@ class QL_Comment_ViewController: UIViewController {
                                                    "Message":self.textField.text,
                                                    "Time":NSDate().string(withFormat: "yyyy-MM-dd'T'HH:mm:ss"),
                                                    "User":NSNull(),
-                                                   "UserId":checkUpData["Inspector"],
+                                                   "UserId":checkUpData["UserId"],
                                                    "host":self,
                                                    "overrideLoading":1,
                                                    "overrideAlert":1], withCache: { (cache) in
@@ -84,6 +90,8 @@ class QL_Comment_ViewController: UIViewController {
     
     @objc func didScrollToBottom() {
         self.tableView.didScrolltoBottom(true)
+        
+        self.textField.text = ""
     }
     
     @IBAction func didRequestMessage() {
@@ -123,8 +131,6 @@ class QL_Comment_ViewController: UIViewController {
         if !self.textField.hasText {
             return
         }
-        
-        self.textField.text = ""
         
         didRequestSend()
     }

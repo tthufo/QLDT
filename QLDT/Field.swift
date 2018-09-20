@@ -15,9 +15,11 @@ class Field {
     static func contexting() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        let context = appDelegate.persistentContainer.viewContext
-        
-        return context
+        if #available(iOS 10.0, *) {
+            return appDelegate.persistentContainer.viewContext
+        } else {
+            return CoreDataStack.managedObjectContext
+        }
     }
     
     static func insertData(layerId: Int32, layerData: String, moduleId: Int32) {

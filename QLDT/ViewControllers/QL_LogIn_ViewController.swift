@@ -79,6 +79,8 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func didAuthorize() {
+        self.showSVHUD("Đang đăng nhập", andOption: 0)
+        
         let config = OIDServiceConfiguration.init(authorizationEndpoint: URL.init(string: "%@/connect/authorize".format(parameters: authenHost))!, tokenEndpoint: URL.init(string: "%@/connect/token".format(parameters: authenHost))!)
 
         let token1 = OIDTokenRequest.init(configuration: config, grantType: "password", authorizationCode: nil, redirectURL: nil, clientID: "htgt.bn.app", clientSecret: "secret", scopes: nil, refreshToken: nil, codeVerifier: nil, additionalParameters: ["username":uName.text!,"password":pass.text!])
@@ -108,6 +110,8 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
             
             Information.saveToken()
             
+            self.hideSVHUD()
+
             self.navigationController?.pushViewController(QL_Home_ViewController(), animated: true)
         }
     }
