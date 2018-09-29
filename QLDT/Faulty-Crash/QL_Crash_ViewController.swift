@@ -179,6 +179,22 @@ class QL_Crash_ViewController: UIViewController {
         }
     }
     
+    func toolBar() -> UIToolbar {
+        
+        let toolBar = UIToolbar.init(frame: CGRect.init(x: 0, y: 0, width: Int(self.screenWidth()), height: 50))
+        
+        toolBar.barStyle = .default
+        
+        toolBar.items = [UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+                         UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+                         UIBarButtonItem.init(title: "Thoát", style: .done, target: self, action: #selector(disMiss))]
+        return toolBar
+    }
+    
+    @objc func disMiss() {
+        self.view.endEditing(true)
+    }
+    
     func didRequestDetail() {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Form/detail"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
@@ -257,6 +273,8 @@ class QL_Crash_ViewController: UIViewController {
         })
     }
     
+    var titleString = "Thông tin trống./"
+    
     func checkValid() -> Bool {
         
         var isValid = true
@@ -272,6 +290,8 @@ class QL_Crash_ViewController: UIViewController {
                         isValid = false
                         
                         break
+                    } else {
+                        titleString = (dict as! NSDictionary).getValueFromKey("data")
                     }
                 }
             }
@@ -405,11 +425,14 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     func didSyncData() {
-                
+        
+        
+        print(self.titleString)
+        
         if entityId == -1 {
-            Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: "ahihi", date: self.currentDate("yyyy-MM-dd HH:ss"))
+            Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: self.titleString, date: self.currentDate("yyyy-MM-dd HH:ss"))
         } else {
-            Temp.modifyData(id: entityId, parentId: configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), date: self.currentDate("yyyy-MM-dd HH:ss"))
+            Temp.modifyData(id: entityId, parentId: configType["id"] as! Int32, title: self.titleString, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), date: self.currentDate("yyyy-MM-dd HH:ss"))
         }
         
         didPressBack()
@@ -588,6 +611,8 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             
             input.keyboardType = isNumber ? .numberPad : .default
             
+            input.inputAccessoryView = isNumber ? self.toolBar() : nil
+            
             input.accessibilityLabel = "%i".format(parameters: indexPath.row)
             
             input.delegate = self
@@ -618,6 +643,9 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 drop.setTitleColor((data["color"] as? String) == "black" ? UIColor.black : UIColor.red , for: .normal)
             
                 drop.action(forTouch: [:]) { (objc) in
+                    
+                    self.view.endEditing(true)
+                    
                     drop.didDropDown(withData: data["data"] as! [Any], andCompletion: { (result) in
                         if result != nil {
                             let data = (result as! NSDictionary)["data"]
@@ -635,6 +663,9 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             let cal = (self.withView(cell, tag: 2) as! UIImageView)
             
             cal.action(forTouch: [:]) { (objc) in
+                
+                self.view.endEditing(true)
+
                 let cal = MNViewController.init(calendar: Calendar.init(identifier: .gregorian), title: "%i".format(parameters: indexPath.row))
         
                 cal?.delegate = self
@@ -653,6 +684,16 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             let loc = (self.withView(cell, tag: 2) as! UIImageView)
             
             loc.action(forTouch: [:]) { (objc) in
+                
+                if !Permission.shareInstance().isLocationEnable() {
+                    
+                    self.showToast("Truy cập vị trí không khả dụng", andPos: 0)
+                    
+                    return
+                }
+                
+                self.view.endEditing(true)
+
                 let map = QL_Map_ViewController()
                 
                 map.indexing = "%i".format(parameters: indexPath.row)
@@ -686,6 +727,16 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             let loc = (self.withView(cell, tag: 2) as! UIImageView)
             
             loc.action(forTouch: [:]) { (objc) in
+                
+                if !Permission.shareInstance().isLocationEnable() {
+                    
+                    self.showToast("Truy cập vị trí không khả dụng", andPos: 0)
+                    
+                    return
+                }
+                
+                self.view.endEditing(true)
+
                 let map = QL_Map_ViewController()
                 
                 map.indexing = "%i".format(parameters: indexPath.row)
@@ -719,12 +770,18 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             let gallery = (self.withView(cell, tag: 2) as! UIButton)
             
             gallery.action(forTouch: [:]) { (objc) in
+                
+                self.view.endEditing(true)
+
                 self.didAskForMedia(indexing: "%i".format(parameters: indexPath.row))
             }
             
             let cam = (self.withView(cell, tag: 3) as! UIButton)
             
             cam.action(forTouch: [:]) { (objc) in
+                
+                self.view.endEditing(true)
+
                 self.didAskForCamera(indexing: "%i".format(parameters: indexPath.row))
             }
             

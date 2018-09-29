@@ -41,7 +41,7 @@ class Temp {
         }
     }
     
-    static func modifyData(id: Int32, parentId: Int32, tempData: String, date: String) {
+    static func modifyData(id: Int32, parentId: Int32, title: String, tempData: String, date: String) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "TempData")
         request.predicate = NSPredicate(format: "id = %i AND parentId = %i", id, parentId)
         request.returnsObjectsAsFaults = false
@@ -52,6 +52,8 @@ class Temp {
             
             object.setValue(tempData, forKey: "tempData")
             
+            object.setValue(title, forKey: "title")
+
             object.setValue(date, forKey: "modifyDate")
 
             try contexting().save()

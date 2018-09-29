@@ -51,6 +51,25 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
         self.view.action(forTouch: [:]) { (obj) in
             self.view.endEditing(true)
         }
+        
+        Permission.shareInstance().initLocation(false) { (type) in
+            switch type {
+            case .lAlways:
+                break
+            case .lWhenUse:
+                break
+            case .lDenied:
+                break
+            case .lDisabled:
+                break
+            case .lNotSure:
+                break
+            case .lRestricted:
+                break
+            default:
+                break
+            }
+        }
     }
     
     @IBAction func didPressCheck() {
