@@ -107,6 +107,21 @@ extension QL_Online_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = dataList![indexPath.row] as! NSDictionary
         
+        let hasInclude = data.getValueFromKey("IncludeData") == "1"
+        
+        if hasInclude {
+            let search = QL_Search_ViewController()
+            
+            search.icon = self.icon
+            
+            search.dataInfo = data
+            
+            self.navigationController?.pushViewController(search, animated: true)
+            
+            return
+        }
+        
+        
         let crash = QL_Crash_ViewController()
         
         crash.configType = ["title":(data["FormName"] as! String), "id":(data["Id"] as! NSNumber), "online":""]

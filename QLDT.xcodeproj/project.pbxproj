@@ -56,6 +56,10 @@
 		FCCC3D70213C65BC0005D519 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D6F213C65BC0005D519 /* Field.swift */; };
 		FCCC3D72213C6D440005D519 /* Commune.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D71213C6D440005D519 /* Commune.swift */; };
 		FCCC3D74213C6D540005D519 /* District.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D73213C6D540005D519 /* District.swift */; };
+		FCD38E6621653BC700241F39 /* QL_Form_New_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD38E6421653BC700241F39 /* QL_Form_New_ViewController.swift */; };
+		FCD38E6721653BC700241F39 /* QL_Form_New_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD38E6521653BC700241F39 /* QL_Form_New_ViewController.xib */; };
+		FCD38E6A2165412000241F39 /* QL_Search_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD38E682165412000241F39 /* QL_Search_ViewController.swift */; };
+		FCD38E6B2165412000241F39 /* QL_Search_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD38E692165412000241F39 /* QL_Search_ViewController.xib */; };
 		FCE372F9213AA96D00F79D7A /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE372F8213AA96D00F79D7A /* Information.swift */; };
 		FCE6173E210EAA3500000438 /* QL_Home_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */; };
 		FCE6173F210EAA3500000438 /* QL_Home_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */; };
@@ -130,6 +134,10 @@
 		FCCC3D6F213C65BC0005D519 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		FCCC3D71213C6D440005D519 /* Commune.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commune.swift; sourceTree = "<group>"; };
 		FCCC3D73213C6D540005D519 /* District.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = District.swift; sourceTree = "<group>"; };
+		FCD38E6421653BC700241F39 /* QL_Form_New_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Form_New_ViewController.swift; sourceTree = "<group>"; };
+		FCD38E6521653BC700241F39 /* QL_Form_New_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Form_New_ViewController.xib; sourceTree = "<group>"; };
+		FCD38E682165412000241F39 /* QL_Search_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Search_ViewController.swift; sourceTree = "<group>"; };
+		FCD38E692165412000241F39 /* QL_Search_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Search_ViewController.xib; sourceTree = "<group>"; };
 		FCE372F8213AA96D00F79D7A /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QL_Home_ViewController.xib; path = QLDT/ViewControllers/QL_Home_ViewController.xib; sourceTree = SOURCE_ROOT; };
 		FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QL_Home_ViewController.swift; path = QLDT/ViewControllers/QL_Home_ViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -311,6 +319,10 @@
 				FCFE39B0214E60CB00E85515 /* QL_Form_ViewController.xib */,
 				FCFE39B5214ED10B00E85515 /* QL_Online_ViewController.swift */,
 				FCFE39B6214ED10B00E85515 /* QL_Online_ViewController.xib */,
+				FCD38E6421653BC700241F39 /* QL_Form_New_ViewController.swift */,
+				FCD38E6521653BC700241F39 /* QL_Form_New_ViewController.xib */,
+				FCD38E682165412000241F39 /* QL_Search_ViewController.swift */,
+				FCD38E692165412000241F39 /* QL_Search_ViewController.xib */,
 			);
 			path = InputGroup;
 			sourceTree = "<group>";
@@ -394,7 +406,9 @@
 				FCE6173E210EAA3500000438 /* QL_Home_ViewController.xib in Resources */,
 				FC84F1D5214D7B1F0025E213 /* TG_Region_Cell.xib in Resources */,
 				FC5386A3210C875600F00873 /* Main.storyboard in Resources */,
+				FCD38E6B2165412000241F39 /* QL_Search_ViewController.xib in Resources */,
 				044F715821427FC9003CB99A /* QL_Comment_ViewController.xib in Resources */,
+				FCD38E6721653BC700241F39 /* QL_Form_New_ViewController.xib in Resources */,
 				FCFE39B4214E7F8B00E85515 /* QL_Geo_Cell.xib in Resources */,
 				FC935AF1210CC5880067D480 /* TL_ChangeHost_ViewController.xib in Resources */,
 				FC5386B6210CBB6600F00873 /* QL_LogIn_ViewController.xib in Resources */,
@@ -482,6 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCD38E6621653BC700241F39 /* QL_Form_New_ViewController.swift in Sources */,
 				FC4354A82146E2DA0016A4CB /* QL_List_ViewController.swift in Sources */,
 				FCFE39B7214ED10B00E85515 /* QL_Online_ViewController.swift in Sources */,
 				044F715121421E1A003CB99A /* QL_Maintain_CheckUp_ViewController.swift in Sources */,
@@ -494,6 +509,7 @@
 				FCCC3D70213C65BC0005D519 /* Field.swift in Sources */,
 				FCE61747210EAB0A00000438 /* CoreDataStack.swift in Sources */,
 				FCC6D9062150354E00191E1B /* CustomField.m in Sources */,
+				FCD38E6A2165412000241F39 /* QL_Search_ViewController.swift in Sources */,
 				FCCC3D62213BFD2A0005D519 /* QL_Setting_ViewController.swift in Sources */,
 				FC5386A0210C875600F00873 /* ViewController.swift in Sources */,
 				FC53869E210C875600F00873 /* AppDelegate.swift in Sources */,

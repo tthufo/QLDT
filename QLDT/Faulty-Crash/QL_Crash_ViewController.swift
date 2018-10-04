@@ -426,9 +426,6 @@ class QL_Crash_ViewController: UIViewController {
     
     func didSyncData() {
         
-        
-        print(self.titleString)
-        
         if entityId == -1 {
             Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: self.titleString, date: self.currentDate("yyyy-MM-dd HH:ss"))
         } else {
