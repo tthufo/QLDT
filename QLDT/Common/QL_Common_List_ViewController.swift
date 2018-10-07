@@ -139,14 +139,27 @@ extension QL_Common_List_ViewController: UITableViewDataSource, UITableViewDeleg
         }
         
         let isModule = !configType.response(forKey: "url")
-
         
         if isModule {
-            let list = QL_List_ViewController()
+//            let list = QL_List_ViewController()
+//
+//            list.configType = ["title":data["Description"] ?? "", "id":data["Id"] as! Int32]
+//
+//            self.navigationController?.pushViewController(list, animated: true)
             
-            list.configType = ["title":data["Description"] ?? "", "id":data["Id"] as! Int32]
+            let crash = QL_Crash_ViewController()
             
-            self.navigationController?.pushViewController(list, animated: true)
+            crash.configType = ["title":data["Description"] ?? "", "id":data["Id"] as! Int32]; //self.configType
+            
+            crash.entityId = -1
+            
+            self.navigationController?.pushViewController(crash, animated: true)
+//            crash.delegate = self
+            
+//            self.present(crash, animated: true) {
+//
+//            }
+            
         } else {
             let checkUp = QL_Maintain_CheckUp_ViewController()
             

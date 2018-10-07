@@ -71,7 +71,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="2GQ-UM-agp">
-                    <rect key="frame" x="0.0" y="84" width="320" height="396"/>
+                    <rect key="frame" x="0.0" y="114" width="320" height="366"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bir-HF-15R">
                         <size key="itemSize" width="50" height="50"/>
@@ -87,7 +87,7 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="2GQ-UM-agp" firstAttribute="top" secondItem="QO7-Uy-VoK" secondAttribute="bottom" id="RzF-Fk-hnC"/>
+                <constraint firstItem="2GQ-UM-agp" firstAttribute="top" secondItem="QO7-Uy-VoK" secondAttribute="bottom" constant="30" id="RzF-Fk-hnC"/>
                 <constraint firstItem="QO7-Uy-VoK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Vxm-Sn-ETh"/>
                 <constraint firstItem="2GQ-UM-agp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ZLE-3b-jFd"/>
                 <constraint firstItem="2GQ-UM-agp" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="aHK-8v-1RO"/>

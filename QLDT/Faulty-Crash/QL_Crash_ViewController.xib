@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Crash_ViewController" customModule="QLDT" customModuleProvider="target">
             <connections>
+                <outlet property="layout" destination="zZ5-A6-R85" id="E4i-Yc-Pyu"/>
                 <outlet property="tableView" destination="1qv-av-2N9" id="1xZ-Lc-hmT"/>
                 <outlet property="titleLabel" destination="u0e-za-Ivn" id="51o-ZG-wjv"/>
                 <outlet property="view" destination="xVq-me-L21" id="zi4-Aa-dN5"/>
@@ -31,7 +32,7 @@
                                 <constraint firstAttribute="width" constant="44" id="Hhk-JI-rzu"/>
                                 <constraint firstAttribute="height" constant="44" id="jgu-1B-ABt"/>
                             </constraints>
-                            <state key="normal" image="x"/>
+                            <state key="normal" image="back_a"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="dDU-qr-gza"/>
                             </connections>
@@ -52,9 +53,9 @@
                                 <constraint firstAttribute="width" constant="44" id="4CE-er-Wnj"/>
                                 <constraint firstAttribute="height" constant="44" id="dJJ-vV-3Cs"/>
                             </constraints>
-                            <state key="normal" image="ic_sync_home"/>
+                            <state key="normal" image="dot"/>
                             <connections>
-                                <action selector="didRequestSubmit" destination="-1" eventType="touchUpInside" id="Lmr-DE-I6M"/>
+                                <action selector="didPressList" destination="-1" eventType="touchUpInside" id="57u-fA-d5Y"/>
                             </connections>
                         </button>
                     </subviews>
@@ -145,7 +146,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_sync_home" width="49" height="49"/>
-        <image name="x" width="74" height="74"/>
+        <image name="back_a" width="170" height="170"/>
+        <image name="dot" width="85" height="85"/>
     </resources>
 </document>

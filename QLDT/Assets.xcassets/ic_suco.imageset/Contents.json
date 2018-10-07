@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic_suco.png",
+      "filename" : "07_Suco.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic_suco@2x.png",
+      "filename" : "07_Suco@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic_suco@3x.png",
+      "filename" : "07_Suco@3x.png",
       "scale" : "3x"
     }
   ],

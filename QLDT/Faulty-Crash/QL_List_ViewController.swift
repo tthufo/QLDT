@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol ListDelegate:class {
+    func listDidReloadData(data: NSDictionary)
+}
+
 class QL_List_ViewController: UIViewController {
+
+    weak var delegate: ListDelegate?
 
     @IBOutlet var tableView: UITableView!
     
@@ -269,7 +275,10 @@ class QL_List_ViewController: UIViewController {
     }
     
     @IBAction func didPressBack() {
-        self.navigationController?.popViewController(animated: true)
+//        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true) {
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -325,17 +334,24 @@ extension QL_List_ViewController: UITableViewDataSource, UITableViewDelegate {
                         self.didRequestUpdate(entityId: data.id)
                         break
                     case 1:
-                        let crash = QL_Crash_ViewController()
                         
-                        crash.configType = self.configType
+                        self.delegate?.listDidReloadData(data: ["data":self.configType, "entityId": data.id])
                         
-                        crash.entityId = data.id
-                        
-                        crash.delegate = self
-                        
-                        self.present(crash, animated: true) {
+                        self.dismiss(animated: true, completion: {
                             
-                        }
+                        })
+                        
+//                        let crash = QL_Crash_ViewController()
+//
+//                        crash.configType = self.configType
+//
+//                        crash.entityId = data.id
+//
+//                        crash.delegate = self
+//
+//                        self.present(crash, animated: true) {
+//
+//                        }
                         break
                     case 2:
                         Temp.deleteData(id: data.id, parentId: self.configType["id"] as! Int32)

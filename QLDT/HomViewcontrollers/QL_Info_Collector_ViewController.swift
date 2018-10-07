@@ -107,11 +107,19 @@ extension QL_Info_Collector_ViewController: UITableViewDataSource, UITableViewDe
         }
         
         if type == 1 {
-            let list = QL_List_ViewController()
+//            let list = QL_List_ViewController()
+//
+//            list.configType = configData
+//
+//            self.navigationController?.pushViewController(list, animated: true)
             
-            list.configType = configData
+            let crash = QL_Crash_ViewController()
             
-            self.navigationController?.pushViewController(list, animated: true)
+            crash.configType = data//self.configType
+            
+            crash.entityId = -1
+            
+            self.navigationController?.pushViewController(crash, animated: true)
         }
 
         if type == 2 {

@@ -24,7 +24,13 @@ class QL_Crash_ViewController: UIViewController {
     
     var configType: NSDictionary!
     
+    var saveInfo: NSDictionary!
+    
     var dataTemp: NSMutableDictionary!
+    
+    @IBOutlet var layout: NSLayoutConstraint!
+    
+    var isHide: Bool = false
     
     var kb: KeyBoard!
     
@@ -33,6 +39,10 @@ class QL_Crash_ViewController: UIViewController {
     var updateUrl: String = ""
     
     func prepareData() {
+        
+        if self.dataTemp == nil {
+            return
+        }
         
         for dict in self.dataTemp!["LayerFields"] as! NSMutableArray {
             let tempo = dict as! NSMutableDictionary
@@ -140,13 +150,13 @@ class QL_Crash_ViewController: UIViewController {
         
         prepareData()
         
-        self.updateUrl = self.dataTemp["MobileCreateURL"] as! String
+        self.updateUrl = self.dataTemp != nil ? self.dataTemp["MobileCreateURL"] as! String : "   "
         
         self.updateUrl.removeLast()
         
         self.updateUrl.removeFirst()
         
-        return self.dataTemp!["LayerFields"] as! NSMutableArray
+        return self.dataTemp != nil ? self.dataTemp!["LayerFields"] as! NSMutableArray : []
     }
     
     override func viewDidLoad() {
@@ -154,6 +164,9 @@ class QL_Crash_ViewController: UIViewController {
         
         kb = KeyBoard.shareInstance()
         
+        if isHide {
+            layout.constant = 0
+        }
         
         titleLabel.text = configType.getValueFromKey("title")
         
@@ -231,10 +244,62 @@ class QL_Crash_ViewController: UIViewController {
             self.dataTemp = ["LayerFields":tempArray]
             
             self.prepareData()
-
+            
+            if self.saveInfo != nil {
+                self.reFormatData()
+            }
+            
             self.dataList.addObjects(from: self.dataTemp!["LayerFields"] as! [Any])
 
             self.tableView.reloadData()
+        }
+    }
+    
+    func reFormatData() {
+        for key in self.saveInfo.allKeys {
+            for dict in self.dataTemp["LayerFields"] as! NSArray {
+                if ((dict as! NSDictionary)["FieldName"] as! String) == (key as! String) {
+                    if ((dict as! NSDictionary)["CategoryType"] as AnyObject).isKind(of: NSString.self) {
+                        if (dict as! NSDictionary)["FieldName"] as! String == "lat" || (dict as! NSDictionary)["FieldName"] as! String == "lng" {
+                            (dict as! NSMutableDictionary)["data"] = [["lat":self.saveInfo.getValueFromKey("lat"), "lng":self.saveInfo.getValueFromKey("lng")]]
+                        } else {
+                            (dict as! NSMutableDictionary)["data"] = self.saveInfo.getValueFromKey(key as! String)
+                        }
+                        
+                        if ((dict as! NSDictionary)["FieldName"] as! String) == "xa_id" {
+                            let data = Commune.getAllData()
+                            for commune in data {
+                                if commune.getValueFromKey("area_id") == self.saveInfo.getValueFromKey(key as! String) {
+                                    (dict as! NSMutableDictionary)["activeData"] = commune
+                                }
+                            }
+                            (dict as! NSMutableDictionary)["data"] = data
+                        }
+                        
+                        if ((dict as! NSDictionary)["FieldName"] as! String) == "huyen_id" {
+                            let data = District.getAllData()
+                            for district in data {
+                                if district.getValueFromKey("area_id") == self.saveInfo.getValueFromKey(key as! String) {
+                                    (dict as! NSMutableDictionary)["activeData"] = district
+                                }
+                            }
+                            (dict as! NSMutableDictionary)["data"] = data
+                        }
+                        
+                    } else {
+                        let data = ((dict as! NSDictionary)["CategoryType"] as! NSDictionary)["Categories"] as! NSArray
+                        for inner in data {
+                            if (inner as! NSDictionary)["ItemCode"] as! String == self.saveInfo[key] as! String {
+                                (dict as! NSMutableDictionary)["activeData"] = data.count != 0 ? inner :
+                                ["ItemCode": "",
+                                "ItemName": "Dữ liệu trống",
+                                "Style": "",
+                                "CategoryTypeId": -1]
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -257,15 +322,17 @@ class QL_Crash_ViewController: UIViewController {
         (CustomField.shareText() as! CustomField).requesting("".urlGet(postFix: self.updateUrl), andInfo: postData as! [AnyHashable : Any], andCompletion: { (done, respond) in
             
             if done {
-                
                 if self.entityId != -1 {
                     let ID = self.configType["id"]
 
                     Temp.deleteData(id: self.entityId, parentId: ID as! Int32)
                 }
                 
+                self.navigationController?.popViewController(animated: true)
+                
+                self.showToast("Cập nhật thành công", andPos: 0)
+
                 self.dismiss(animated: true, completion: {
-                    self.showToast("Cập nhật thành công", andPos: 0)
                 })
             } else {
                 self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
@@ -298,6 +365,19 @@ class QL_Crash_ViewController: UIViewController {
         }
         
         return isValid
+    }
+    
+    @IBAction func didPressList() {
+        let list = QL_List_ViewController()
+
+        list.configType = self.configType
+
+        list.delegate = self
+//        self.navigationController?.pushViewController(list, animated: true)
+        
+        self.present(list, animated: true) {
+            
+        }
     }
     
     @IBAction func didRequestSubmit() {
@@ -425,7 +505,6 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     func didSyncData() {
-        
         if entityId == -1 {
             Temp.insertData(parentId: self.configType["id"] as! Int32, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), title: self.titleString, date: self.currentDate("yyyy-MM-dd HH:ss"))
         } else {
@@ -436,8 +515,10 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     @IBAction func didPressBack() {
+        self.navigationController?.popViewController(animated: true)
+        
         self.dismiss(animated: true) {
-
+            
         }
     }
     
@@ -524,6 +605,18 @@ class QL_Crash_ViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+extension QL_Crash_ViewController: ListDelegate {
+    func listDidReloadData(data: NSDictionary) {
+        self.entityId = data["entityId"] as! Int32
+        
+        self.dataList.removeAllObjects()
+        
+        dataList.addObjects(from: dataFormat() as! [Any])
+        
+        self.tableView.reloadData()
     }
 }
 
@@ -707,13 +800,16 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             if (data["data"] as! NSArray).count != 0 {
-
+                
                 let coor = (data["data"] as! NSArray).firstObject as! NSDictionary
 
+                
                 let X = (self.withView(cell, tag: 3) as! UILabel)
 
                 X.text = coor["lat"] as? String
-
+                
+                
+                
                 let Y = (self.withView(cell, tag: 4) as! UILabel)
 
                 Y.text = coor["lng"] as? String

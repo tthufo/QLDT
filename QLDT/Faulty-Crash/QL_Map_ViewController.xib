@@ -16,6 +16,7 @@
                 <outlet property="countDown" destination="h9t-Nl-cA6" id="GJb-GS-WNb"/>
                 <outlet property="delete" destination="xWP-uf-eEC" id="hZ2-xE-vc8"/>
                 <outlet property="mapBox" destination="JYG-E4-62u" id="AKf-iO-zjk"/>
+                <outlet property="save" destination="upa-Na-9YW" id="nwt-d3-C8n"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

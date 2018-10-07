@@ -60,6 +60,56 @@ class QL_Online_ViewController: UIViewController {
         }
     }
     
+    func didRequestDetail(hasData: Bool, id: String, data: NSDictionary) {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Form/detail"),
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "method":"GET",
+                                                   "Getparam":["id":id],
+                                                   "overrideLoading":1,
+                                                   "overrideAlert":1,
+                                                   "host":self
+            ], withCache: { (cache) in
+                
+        }) { (response, errorCode, error, isValid) in
+            
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
+            
+            let result = response?.dictionize()["Layer"]
+                        
+            let tagName = ["codeField":(result as! NSDictionary)["CodeField"], "labelField":(result as! NSDictionary)["LabelField"]]
+            
+            if hasData {
+                let search = QL_Search_ViewController()
+
+                search.icon = self.icon
+
+                search.dataInfo = data
+                
+                search.tagName = tagName as NSDictionary
+
+                self.navigationController?.pushViewController(search, animated: true)
+
+                return
+            }
+
+            let formNew = QL_Form_New_ViewController()
+            
+            let currentCorr = Permission.shareInstance().currentLocation()! as NSDictionary
+
+            formNew.configType = ["title":(data["FormName"] as! String), "id":(data["Id"] as! NSNumber), "online":"", "coor": data.response(forKey: "lat") ? [["lat":data.getValueFromKey("lat"), "lng":data.getValueFromKey("lng")]] : [["lat":currentCorr.getValueFromKey("lat"), "lng":currentCorr.getValueFromKey("lng")]]]
+
+            formNew.dataInfo = data
+
+            self.present(formNew, animated: true) {
+
+            }
+        }
+    }
+    
     @IBAction func didPressBack() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -95,8 +145,14 @@ extension QL_Online_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = dataList![indexPath.row] as! NSDictionary
 
-        (self.withView(cell, tag: 104) as! UIImageView).imageUrl(url: icon)
-
+        let hasInclude = data.getValueFromKey("IncludeData") == "1"
+        
+        if hasInclude {
+            (self.withView(cell, tag: 104) as! UIImageView).image = UIImage(named: "ic_fire")
+        } else {
+            (self.withView(cell, tag: 104) as! UIImageView).imageUrl(url: icon)
+        }
+        
         (self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data["FormName"] as? String)!)
         
         return cell
@@ -109,28 +165,39 @@ extension QL_Online_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let hasInclude = data.getValueFromKey("IncludeData") == "1"
         
-        if hasInclude {
-            let search = QL_Search_ViewController()
-            
-            search.icon = self.icon
-            
-            search.dataInfo = data
-            
-            self.navigationController?.pushViewController(search, animated: true)
-            
-            return
-        }
+        self.didRequestDetail(hasData: hasInclude, id: data.getValueFromKey("Id"), data: data)
         
+//        if hasInclude {
+//            let search = QL_Search_ViewController()
+//
+//            search.icon = self.icon
+//
+//            search.dataInfo = data
+//
+//            self.navigationController?.pushViewController(search, animated: true)
+//
+//            return
+//        }
+//
+//        let formNew = QL_Form_New_ViewController()
+//
+//        formNew.configType = ["title":(data["FormName"] as! String), "id":(data["Id"] as! NSNumber), "online":""]
+//
+//        formNew.dataInfo = data
+//
+//        self.present(formNew, animated: true) {
+//
+//        }
         
-        let crash = QL_Crash_ViewController()
-        
-        crash.configType = ["title":(data["FormName"] as! String), "id":(data["Id"] as! NSNumber), "online":""]
-        
-        crash.delegate = self
-        
-        self.present(crash, animated: true) {
-            
-        }
+//        let crash = QL_Crash_ViewController()
+//        
+//        crash.configType = ["title":(data["FormName"] as! String), "id":(data["Id"] as! NSNumber), "online":""]
+//        
+//        crash.delegate = self
+//        
+//        self.present(crash, animated: true) {
+//            
+//        }
     }
 }
 

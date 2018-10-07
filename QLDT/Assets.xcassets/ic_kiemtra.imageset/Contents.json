@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic_kiemtra.png",
+      "filename" : "03_Baotricongtrinhgiaothong.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic_kiemtra@2x.png",
+      "filename" : "03_Baotricongtrinhgiaothong@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic_kiemtra@3x.png",
+      "filename" : "03_Baotricongtrinhgiaothong@3x.png",
       "scale" : "3x"
     }
   ],

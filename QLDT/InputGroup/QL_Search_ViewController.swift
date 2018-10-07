@@ -18,12 +18,13 @@ class QL_Search_ViewController: UIViewController {
     
     var dataInfo: NSDictionary!
     
+    var tagName: NSDictionary!
+    
     var icon: String!
     
     @IBOutlet var search: UITextField!
     
     @IBOutlet var distance: UITextField!
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,32 +35,28 @@ class QL_Search_ViewController: UIViewController {
         
         self.distance.inputAccessoryView = self.toolBar()
         
+        didRequest()
         
         dataList = NSMutableArray()
     }
-    
-//    http://117.4.242.159:3333/api/Data/Filter?lng=106.071042&lat=21.177905&keyword=&formId=2135&radius=10000
     
     func didRequest() {
         
         let distance = self.distance.text
         
         let currentCorr = Permission.shareInstance().currentLocation()
-
         
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "/api/Data/Filter"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
-                                                   "Getparam":["radius":distance, "lat":currentCorr!["lat"], "lng":currentCorr!["lng"]!, "keyword":self.search.text, "formId":dataInfo["Id"]],
+                                                   "Getparam":["radius":distance == "" ? 10000 : distance, "lat":currentCorr!["lat"], "lng":currentCorr!["lng"]!, "keyword":self.search.text, "formId":dataInfo["Id"]],
                                                    "overrideLoading":1,
                                                    "overrideAlert":1,
                                                    "host":self
             ], withCache: { (cache) in
                 
         }) { (response, errorCode, error, isValid) in
-            
-            print(response)
-            
+                        
             if errorCode != "200" {
                 self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
                 
@@ -147,24 +144,40 @@ extension QL_Search_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = dataList![indexPath.row] as! NSDictionary
         
-        (self.withView(cell, tag: 104) as! UIImageView).imageUrl(url: icon)
+//        (self.withView(cell, tag: 104) as! UIImageView).imageUrl(url: icon)
         
-        (self.withView(cell, tag: 101) as! UILabel).text = "  %@".format(parameters: (data["tuyen_id"] as? String)!)
+        (self.withView(cell, tag: 104) as! UIImageView).image = UIImage(named: "ic_fire")
         
+        (self.withView(cell, tag: 101) as! UILabel).text = "Mã %@ - %@".format(parameters: data.getValueFromKey(tagName["codeField"] as! String), data.getValueFromKey(tagName["labelField"] as! String))
+
         return cell
     }
+    
+//    func latLng() -> CLLocationCoordinate2D {
+//        let currentCorr = Permission.shareInstance().currentLocation()
+//
+//        return CLLocationCoordinate2D(latitude: (currentCorr!["lat"]! as! NSNumber).doubleValue , longitude: (currentCorr!["lng"]! as! NSNumber).doubleValue)
+//    }
+//
+//    func customlatLng(data: NSDictionary) -> CLLocationCoordinate2D {
+//        return CLLocationCoordinate2D(latitude: (data["lat"]! as! NSNumber).doubleValue , longitude: (data["lng"]! as! NSNumber).doubleValue)
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let data = dataList![indexPath.row] as! NSDictionary
         
+        let currentCorr = Permission.shareInstance().currentLocation()! as NSDictionary
+
         let newForm = QL_Form_New_ViewController()
-        
-        newForm.configType = ["title":"chưa có", "id":(data["id"] as! NSNumber), "online":""]
+
+        newForm.configType = ["title":(dataInfo["FormName"] as! String), "id":(dataInfo["Id"] as! NSNumber), "online":"", "coor": data.response(forKey: "lat") ? [["lat":data.getValueFromKey("lat"), "lng":data.getValueFromKey("lng")]] : [["lat":currentCorr.getValueFromKey("lat"), "lng":currentCorr.getValueFromKey("lng")]]]
+
+        newForm.saveInfo = data
         
         self.present(newForm, animated: true) {
-            
+
         }
     }
 }

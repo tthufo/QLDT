@@ -28,9 +28,15 @@ class QL_Map_ViewController: UIViewController {
 
     var isMulti: Bool!
     
+    var isForShow: Bool = false
+    
+//    var customCoor: CLLocationCoordinate2D!
+    
     @IBOutlet var auto: UIButton!
     
     @IBOutlet var delete: UIButton!
+    
+    @IBOutlet var save: UIButton!
     
     @IBOutlet var countDown: UILabel!
 
@@ -60,15 +66,37 @@ class QL_Map_ViewController: UIViewController {
             self.addValue("0", andKey: "offline")
         }
         
+        print(tempLocation)
+        
         if tempLocation.count != 0 {
             for dict in tempLocation {
                 coor.append(CLLocationCoordinate2D(latitude: (dict["lat"]! as NSString).doubleValue , longitude: (dict["lng"]! as NSString).doubleValue))
             }
-            
             self.perform(#selector(showMarkers), with: nil, afterDelay: 0.5)
         } else {
+//            if customCoor != nil {
+//                mapBox.setCenter(customCoor, zoomLevel: 15, animated: false)
+//
+//                let marker = MGLPointAnnotation()
+//
+//                marker.title = ""
+//
+//                marker.subtitle = ""
+//
+//                marker.coordinate = customCoor
+//
+//                mapBox.addAnnotation(marker)
+//            } else {
+//                didPressLocation()
+//            }
             didPressLocation()
         }
+        
+        save.isHidden = isForShow
+        
+        auto.isHidden = isForShow
+    
+        delete.isHidden = isForShow
         
         NotificationCenter.default.addObserver(self, selector: #selector(offlinePackProgressDidChange), name: NSNotification.Name.MGLOfflinePackProgressChanged, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveError), name: NSNotification.Name.MGLOfflinePackError, object: nil)
@@ -231,6 +259,9 @@ class QL_Map_ViewController: UIViewController {
     
     @objc func onMapSingleTapped(recognizer: UITapGestureRecognizer)
     {
+        
+        if isForShow {return}
+        
         let viewLocation: CGPoint = recognizer.location(in: mapBox)
         
         if(mapBox.annotations != nil)
@@ -389,7 +420,6 @@ extension QL_Map_ViewController: MGLMapViewDelegate {
     }
     
     func imageForAnnotation(annotation: MGLAnnotation) -> UIImage {
-        
         return UIImage(named: "point")!
     }
     

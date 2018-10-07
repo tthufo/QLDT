@@ -18,11 +18,17 @@ class QL_Form_New_ViewController: ViewPagerController {
 
     var dataInfo: NSDictionary!
     
+    var saveInfo: NSDictionary!
+    
     var configType: NSDictionary!
+    
+    @IBOutlet var titleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.titleLabel.text = self.configType.response(forKey: "title") ? self.configType["title"] as! String : self.configType.response(forKey: "FormName") ? self.configType["FormName"] as! String : "QLGTVT Bắc Ninh"
+        
         self.dataSource = self
         
         self.delegate = self
@@ -33,20 +39,33 @@ class QL_Form_New_ViewController: ViewPagerController {
         
         let form = QL_Crash_ViewController()
         
+        form.saveInfo = self.saveInfo
+        
         form.configType = self.configType
+                
+        form.isHide = true
         
         controllers.add(form)
         
         let map = QL_Map_ViewController()
+                
+        map.tempLocation = self.configType["coor"] as! [[String : String]]
         
-        map.isMulti = false
+        map.isMulti = (self.configType["coor"] as! NSArray).count != 1 ? true : false
         
+        map.isForShow = true
+                
         controllers.add(map)
     }
 
+    @IBAction func didPressBack() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     func modelLabel(index: Int) -> UILabel {
         let label = UILabel()
         label.backgroundColor = UIColor.clear
@@ -76,7 +95,7 @@ extension QL_Form_New_ViewController: ViewPagerDelegate, ViewPagerDataSource {
         for view in viewPager.tabsView.subviews {
             for tab in view.subviews {
                 if (tab as AnyObject).isKind(of: UILabel.self) {
-                    (tab as! UILabel).textColor = (viewPager.tabsView.subviews.index(of: view) as! Int) != index ? UIColor.lightGray : AVHexColor.color(withHexString: "#1ec354")
+                    (tab as! UILabel).textColor = (viewPager.tabsView.subviews.index(of: view) as! Int) != index ? UIColor.lightGray : UIColor.orange
                 }
             }
         }
@@ -85,7 +104,7 @@ extension QL_Form_New_ViewController: ViewPagerDelegate, ViewPagerDataSource {
     func viewPager(_ viewPager: ViewPagerController!, valueFor option: ViewPagerOption, withDefault value: CGFloat) -> CGFloat {
         
         if option == .tabWidth {
-            return CGFloat((Int(self.screenWidth()) / titles.count) + 10)
+            return CGFloat((Int(self.screenWidth()) / titles.count))
         } else if option == .tabHeight {
             return 35
         } else if option == .tabLocation {
@@ -98,7 +117,7 @@ extension QL_Form_New_ViewController: ViewPagerDelegate, ViewPagerDataSource {
     func viewPager(_ viewPager: ViewPagerController!, colorFor component: ViewPagerComponent, withDefault color: UIColor!) -> UIColor! {
         
         if component == .indicator {
-            return UIColor.clear
+            return UIColor.orange
         } else if component == .tabsView {
             return UIColor.clear
         } else if component == .content {

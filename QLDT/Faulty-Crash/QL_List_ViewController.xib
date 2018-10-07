@@ -31,7 +31,7 @@
                                 <constraint firstAttribute="height" constant="44" id="P6B-E6-MNu"/>
                                 <constraint firstAttribute="width" constant="44" id="xXG-XH-Qy1"/>
                             </constraints>
-                            <state key="normal" image="back_a"/>
+                            <state key="normal" image="x"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="JaV-Xo-aNG"/>
                             </connections>
@@ -80,7 +80,7 @@
                         <outlet property="delegate" destination="-1" id="Xuy-JN-czy"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELJ-Qc-KV0">
+                <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELJ-Qc-KV0">
                     <rect key="frame" x="247" y="425" width="73" height="48"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -118,8 +118,8 @@
         </view>
     </objects>
     <resources>
-        <image name="back_a" width="170" height="170"/>
         <image name="ic_add" width="49" height="49"/>
         <image name="ic_sync_home" width="49" height="49"/>
+        <image name="x" width="74" height="74"/>
     </resources>
 </document>
