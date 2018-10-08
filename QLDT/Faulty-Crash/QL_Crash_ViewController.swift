@@ -314,7 +314,7 @@ class QL_Crash_ViewController: UIViewController {
                         }
                         
                         if ((dict as! NSDictionary)["FieldName"] as! String) == "geom_text" {
-                            print(dict)
+                            (dict as! NSMutableDictionary)["data"] = self.revertGeoText(geoText: self.saveInfo.getValueFromKey(key as! String))
                         }
                         
                     } else {
@@ -332,6 +332,27 @@ class QL_Crash_ViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func revertGeoText(geoText: String) -> NSArray {
+        
+ //LINESTRING (106.18326997500009 21.135535005000065, 106.18171565500006 21.13642666100003)
+
+        
+        var text = geoText.replacingOccurrences(of: "LINESTRING", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
+        
+        text.removeFirst()
+        
+        let array = NSMutableArray()
+        
+        for coor in text.components(separatedBy: ", ") {
+            
+            let coors = coor.components(separatedBy: " ")
+            
+            array.add(["lat":coors[0], "lng":coors[1]])
+        }
+        
+        return array
     }
     
     override func viewWillDisappear(_ animated: Bool) {
