@@ -26,11 +26,11 @@ class QL_Map_ViewController: UIViewController {
 
     var coor = [CLLocationCoordinate2D]()
 
-    var isMulti: Bool!
+    var isMulti: Bool = false
     
     var isForShow: Bool = false
     
-//    var customCoor: CLLocationCoordinate2D!
+    var mutliType: String = "Point"
     
     @IBOutlet var auto: UIButton!
     
@@ -48,15 +48,9 @@ class QL_Map_ViewController: UIViewController {
         
         super.viewDidLoad()
         
-        auto.isHidden = !isMulti
-        
-        delete.isHidden = !isMulti
-
-        
         mapBox.logoView.isHidden = true
         
         mapBox.attributionButton.isHidden = true
-        
         
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(onMapSingleTapped(recognizer:)))
         
@@ -66,43 +60,36 @@ class QL_Map_ViewController: UIViewController {
             self.addValue("0", andKey: "offline")
         }
         
-        print(tempLocation)
+        NotificationCenter.default.addObserver(self, selector: #selector(offlinePackProgressDidChange), name: NSNotification.Name.MGLOfflinePackProgressChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveError), name: NSNotification.Name.MGLOfflinePackError, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveMaximumAllowedMapboxTiles), name: NSNotification.Name.MGLOfflinePackMaximumMapboxTilesReached, object: nil)
         
+        self.reloadType()
+    }
+
+    func reloadType () {
+        isMulti = self.mutliType != "Point"
+        
+        auto.isHidden = !isMulti
+        
+        delete.isHidden = !isMulti
+
         if tempLocation.count != 0 {
             for dict in tempLocation {
                 coor.append(CLLocationCoordinate2D(latitude: (dict["lat"]! as NSString).doubleValue , longitude: (dict["lng"]! as NSString).doubleValue))
             }
-            self.perform(#selector(showMarkers), with: nil, afterDelay: 0.5)
+            if self.getValue("offline") == "1" {
+                self.perform(#selector(showMarkers), with: nil, afterDelay: 0.5)
+            } else {
+                didPressLocation()
+            }
         } else {
-//            if customCoor != nil {
-//                mapBox.setCenter(customCoor, zoomLevel: 15, animated: false)
-//
-//                let marker = MGLPointAnnotation()
-//
-//                marker.title = ""
-//
-//                marker.subtitle = ""
-//
-//                marker.coordinate = customCoor
-//
-//                mapBox.addAnnotation(marker)
-//            } else {
-//                didPressLocation()
-//            }
             didPressLocation()
         }
         
         save.isHidden = isForShow
-        
-        auto.isHidden = isForShow
-    
-        delete.isHidden = isForShow
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(offlinePackProgressDidChange), name: NSNotification.Name.MGLOfflinePackProgressChanged, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveError), name: NSNotification.Name.MGLOfflinePackError, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(offlinePackDidReceiveMaximumAllowedMapboxTiles), name: NSNotification.Name.MGLOfflinePackMaximumMapboxTilesReached, object: nil)
     }
-
+    
     func resetCount() {
         let minutes = self.getObject("timer")["time"]
         
@@ -139,9 +126,15 @@ class QL_Map_ViewController: UIViewController {
             
             tempLocation.append(["lat":"%f".format(parameters: latLng().latitude), "lng":"%f".format(parameters: latLng().longitude)])
             
-            let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
-            
-            mapBox.addAnnotation(myTourline)
+            if self.mutliType == "PolyLine" {
+                let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
+                
+                mapBox.addAnnotation(myTourline)
+            } else {
+                let myTourline = MGLPolygon(coordinates: &self.coor, count: UInt(self.coor.count))
+                
+                mapBox.addAnnotation(myTourline)
+            }
             
             resetCount()
 
@@ -172,10 +165,15 @@ class QL_Map_ViewController: UIViewController {
         }
 
         if isMulti {
-            
-            let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
-            
-            mapBox.addAnnotation(myTourline)
+            if self.mutliType == "PolyLine" {
+                let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
+                
+                mapBox.addAnnotation(myTourline)
+            } else {
+                let myTourline = MGLPolygon(coordinates: &self.coor, count: UInt(self.coor.count))
+                
+                mapBox.addAnnotation(myTourline)
+            }
         }
 
         mapBox.setVisibleCoordinates(&coor, count: UInt(coor.count), edgePadding: UIEdgeInsetsMake(30, 30, 30, 30), animated: false)
@@ -233,6 +231,7 @@ class QL_Map_ViewController: UIViewController {
                 print("Offline pack “\(userInfo["name"] ?? "unknown")” completed: \(byteCount), \(completedResources) resources")
                 self.hideSVHUD()
                 self.addValue("1", andKey: "offline")
+                self.perform(#selector(showMarkers), with: nil, afterDelay: 0.5)
             } else {
                 print("Offline pack “\(userInfo["name"] ?? "unknown")” has \(completedResources) of \(expectedResources) resources — \(progressPercentage * 100)%.")
             }
@@ -304,9 +303,15 @@ class QL_Map_ViewController: UIViewController {
         tempLocation.append(["lat":"%f".format(parameters: mapLocation.latitude), "lng":"%f".format(parameters: mapLocation.longitude)])
         
         if isMulti {
-            let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
-    
-            mapBox.addAnnotation(myTourline)
+            if self.mutliType == "PolyLine" {
+                let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
+                
+                mapBox.addAnnotation(myTourline)
+            } else {
+                let myTourline = MGLPolygon(coordinates: &self.coor, count: UInt(self.coor.count))
+                
+                mapBox.addAnnotation(myTourline)
+            }
         }
     }
     
@@ -317,10 +322,18 @@ class QL_Map_ViewController: UIViewController {
     @IBAction func didPressBack() {
         
         if isMulti {
-            if tempLocation.count < 2 {
-                self.showToast("Tọa độ cần chọn ít nhất 2 điểm", andPos: 0)
-                
-                return
+            if self.mutliType == "PolyLine" {
+                if tempLocation.count < 2 {
+                    self.showToast("Tọa độ cần chọn ít nhất 2 điểm", andPos: 0)
+                    
+                    return
+                }
+            } else {
+                if tempLocation.count < 3 {
+                    self.showToast("Tọa độ cần chọn ít nhất 3 điểm", andPos: 0)
+                    
+                    return
+                }
             }
         } 
         

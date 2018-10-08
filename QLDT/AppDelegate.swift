@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.addValue("http://117.4.242.159:3333", andKey: "url")
         }
         
+        if self.getObject("timer") == nil {
+            self.add(["title":"    1 phút", "time":1], andKey:"timer")
+        }
+        
         LTRequest.sharedInstance().initRequest()
         
         let nav = UINavigationController.init(rootViewController: QL_LogIn_ViewController())

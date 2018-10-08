@@ -37,6 +37,10 @@ class QL_Form_New_ViewController: ViewPagerController {
         
         controllers = NSMutableArray()
         
+        
+        
+        
+        
         let form = QL_Crash_ViewController()
         
         form.saveInfo = self.saveInfo
@@ -46,6 +50,10 @@ class QL_Form_New_ViewController: ViewPagerController {
         form.isHide = true
         
         controllers.add(form)
+        
+        
+        
+        
         
         let map = QL_Map_ViewController()
                 
@@ -58,6 +66,12 @@ class QL_Form_New_ViewController: ViewPagerController {
         controllers.add(map)
     }
 
+    func upDateMapType() {
+        (controllers.lastObject as! QL_Map_ViewController).mutliType = ""
+        
+        
+    }
+    
     @IBAction func didPressBack() {
         self.dismiss(animated: true, completion: nil)
     }

@@ -105,6 +105,7 @@ class QL_Crash_ViewController: UIViewController {
                 if tempo.getValueFromKey("FieldName") == "geom_text" {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Geo_Cell"
                     (dict as! NSMutableDictionary)["data"] = []
+                    (dict as! NSMutableDictionary)["shapeType"] = self.dataTemp["ShapeType"]
                 }
                 
                 if tempo.getValueFromKey("FieldType") == "numeric" || tempo.getValueFromKey("FieldType") == "decimal" {
@@ -118,12 +119,14 @@ class QL_Crash_ViewController: UIViewController {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
                         (dict as! NSMutableDictionary)["FieldLabel"] = "Tọa độ"
                         (dict as! NSMutableDictionary)["data"] = []
+                        (dict as! NSMutableDictionary)["shapeType"] = self.dataTemp["ShapeType"]
                     }
                     
                     if tempo.getValueFromKey("FieldName") == "lng" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
                         (dict as! NSMutableDictionary)["IsVisible"] = false
                         (dict as! NSMutableDictionary)["data"] = []
+                        (dict as! NSMutableDictionary)["shapeType"] = self.dataTemp["ShapeType"]
                     }
                 }
             }
@@ -192,6 +195,18 @@ class QL_Crash_ViewController: UIViewController {
         }
     }
     
+    func parent() -> UIViewController {
+        if !(self.parent?.isKind(of: UINavigationController.self))! {
+            return (self.parent?.parent)!
+        }
+        
+        return self.parent!
+    }
+    
+    func isForm() -> Bool {
+        return !(self.parent?.isKind(of: UINavigationController.self))!
+    }
+    
     func toolBar() -> UIToolbar {
         
         let toolBar = UIToolbar.init(frame: CGRect.init(x: 0, y: 0, width: Int(self.screenWidth()), height: 50))
@@ -233,7 +248,6 @@ class QL_Crash_ViewController: UIViewController {
             self.updateUrl.removeLast()
             
             self.updateUrl.removeFirst()
-
             
             let tempArray = NSMutableArray()
             
@@ -241,7 +255,11 @@ class QL_Crash_ViewController: UIViewController {
                 tempArray.add(((dict as! NSDictionary)["LayerField"] as! NSDictionary).reFormat())
             }
             
-            self.dataTemp = ["LayerFields":tempArray]
+            self.dataTemp = response?.dictionize().reFormat()
+            
+            self.dataTemp["LayerFields"] = tempArray
+            
+//            self.dataTemp = ["LayerFields":tempArray]
             
             self.prepareData()
             
@@ -790,7 +808,9 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 map.tempLocation = data["data"] as! [[String : String]]
 
-                map.isMulti = false
+//                map.isMulti = false
+                
+                map.mutliType = data["shapeType"] as! String
 
                 map.delegate = self
                 
@@ -836,7 +856,9 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 map.tempLocation = data["data"] as! [[String : String]] 
                 
-                map.isMulti = true
+//                map.isMulti = true
+                
+                map.mutliType = data["shapeType"] as! String
                 
                 map.delegate = self
                 
