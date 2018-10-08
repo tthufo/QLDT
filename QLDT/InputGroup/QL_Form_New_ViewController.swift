@@ -66,10 +66,14 @@ class QL_Form_New_ViewController: ViewPagerController {
         controllers.add(map)
     }
 
-    func upDateMapType() {
-        (controllers.lastObject as! QL_Map_ViewController).mutliType = ""
+    func upDateMapType(update: NSDictionary) {
+        (controllers.lastObject as! QL_Map_ViewController).mutliType = update["type"] as! String
         
-        
+        (controllers.lastObject as! QL_Map_ViewController).reloadType()
+    }
+    
+    func moveToMap() {
+        self.selectTab(at: 1)
     }
     
     @IBAction func didPressBack() {

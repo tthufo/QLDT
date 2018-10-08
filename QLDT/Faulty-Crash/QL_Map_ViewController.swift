@@ -68,7 +68,7 @@ class QL_Map_ViewController: UIViewController {
     }
 
     func reloadType () {
-        isMulti = self.mutliType != "Point"
+        isMulti = self.mutliType != "Point" ? true : false
         
         auto.isHidden = !isMulti
         

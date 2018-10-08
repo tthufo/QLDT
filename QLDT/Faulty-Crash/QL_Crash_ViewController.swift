@@ -105,7 +105,7 @@ class QL_Crash_ViewController: UIViewController {
                 if tempo.getValueFromKey("FieldName") == "geom_text" {
                     (dict as! NSMutableDictionary)["ident"] = "QL_Geo_Cell"
                     (dict as! NSMutableDictionary)["data"] = []
-                    (dict as! NSMutableDictionary)["shapeType"] = self.dataTemp["ShapeType"]
+                    (dict as! NSMutableDictionary)["shapeType"] = self.isForm() ? (self.dataTemp["Layer"] as! NSDictionary)["ShapeType"] : self.dataTemp["ShapeType"]
                 }
                 
                 if tempo.getValueFromKey("FieldType") == "numeric" || tempo.getValueFromKey("FieldType") == "decimal" {
@@ -119,14 +119,14 @@ class QL_Crash_ViewController: UIViewController {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
                         (dict as! NSMutableDictionary)["FieldLabel"] = "Tọa độ"
                         (dict as! NSMutableDictionary)["data"] = []
-                        (dict as! NSMutableDictionary)["shapeType"] = self.dataTemp["ShapeType"]
+                        (dict as! NSMutableDictionary)["shapeType"] = self.isForm() ? (self.dataTemp["Layer"] as! NSDictionary)["ShapeType"] : self.dataTemp["ShapeType"]
                     }
                     
                     if tempo.getValueFromKey("FieldName") == "lng" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
                         (dict as! NSMutableDictionary)["IsVisible"] = false
                         (dict as! NSMutableDictionary)["data"] = []
-                        (dict as! NSMutableDictionary)["shapeType"] = self.dataTemp["ShapeType"]
+                        (dict as! NSMutableDictionary)["shapeType"] = self.isForm() ? (self.dataTemp["Layer"] as! NSDictionary)["ShapeType"] : self.dataTemp["ShapeType"]
                     }
                 }
             }
@@ -193,9 +193,11 @@ class QL_Crash_ViewController: UIViewController {
         } else {
             dataList.addObjects(from: dataFormat() as! [Any])
         }
+        
+        print(self.saveInfo)
     }
     
-    func parent() -> UIViewController {
+    func parentView() -> UIViewController {
         if !(self.parent?.isKind(of: UINavigationController.self))! {
             return (self.parent?.parent)!
         }
@@ -204,7 +206,7 @@ class QL_Crash_ViewController: UIViewController {
     }
     
     func isForm() -> Bool {
-        return !(self.parent?.isKind(of: UINavigationController.self))!
+        return !(self.parentView().isKind(of: UINavigationController.self))
     }
     
     func toolBar() -> UIToolbar {
@@ -261,6 +263,13 @@ class QL_Crash_ViewController: UIViewController {
             
 //            self.dataTemp = ["LayerFields":tempArray]
             
+            if self.isForm() {
+//                (self.parentView() as! QL_Form_New_ViewController).upDateMapType(update: ["type":self.dataTemp["ShapeType"] as! String])
+            }
+            
+            
+//            print(self.dataTemp)
+            
             self.prepareData()
             
             if self.saveInfo != nil {
@@ -302,6 +311,10 @@ class QL_Crash_ViewController: UIViewController {
                                 }
                             }
                             (dict as! NSMutableDictionary)["data"] = data
+                        }
+                        
+                        if ((dict as! NSDictionary)["FieldName"] as! String) == "geom_text" {
+                            print(dict)
                         }
                         
                     } else {
@@ -802,16 +815,23 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 self.view.endEditing(true)
 
+                if self.isForm() {
+                    
+                    (self.parentView() as! QL_Form_New_ViewController).upDateMapType(update: ["type":data["shapeType"] as! String])
+                    
+                    (self.parentView() as! QL_Form_New_ViewController).moveToMap()
+                    
+                    return
+                }
+                
                 let map = QL_Map_ViewController()
                 
                 map.indexing = "%i".format(parameters: indexPath.row)
                 
                 map.tempLocation = data["data"] as! [[String : String]]
-
-//                map.isMulti = false
                 
                 map.mutliType = data["shapeType"] as! String
-
+                
                 map.delegate = self
                 
                 self.present(map, animated: true, completion: {
@@ -850,6 +870,15 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 self.view.endEditing(true)
 
+                if self.isForm() {
+                    
+                    (self.parentView() as! QL_Form_New_ViewController).upDateMapType(update: ["type":data["shapeType"] as! String])
+
+                    (self.parentView() as! QL_Form_New_ViewController).moveToMap()
+                    
+                    return
+                }
+                
                 let map = QL_Map_ViewController()
                 
                 map.indexing = "%i".format(parameters: indexPath.row)

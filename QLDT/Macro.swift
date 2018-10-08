@@ -98,7 +98,12 @@ extension String {
     }
     
     func stringImage() -> UIImage {
-        let dataDecoded:NSData = NSData(base64Encoded: self, options: NSData.Base64DecodingOptions(rawValue: 0))!
+        let dataDecoded:NSData = NSData(base64Encoded: self.replacingOccurrences(of: " ", with: ""), options: NSData.Base64DecodingOptions(rawValue: 0))!
+                
+        if dataDecoded.length == 0 {
+            return UIImage(named: "bg_thumb_default_img")!
+        }
+        
         let decodedimage:UIImage = UIImage(data: dataDecoded as Data)!
         return decodedimage
     }
