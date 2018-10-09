@@ -28,6 +28,8 @@ class QL_Map_ViewController: UIViewController {
 
     var isMulti: Bool = false
     
+    var isTimer: Bool = false
+    
     var isForShow: Bool = false
     
     var mutliType: String = "Point"
@@ -68,7 +70,7 @@ class QL_Map_ViewController: UIViewController {
     }
 
     func reloadType () {
-        isMulti = self.mutliType != "Point" ? true : false
+        isMulti = self.mutliType != "Point"
         
         auto.isHidden = !isMulti
         
@@ -97,9 +99,14 @@ class QL_Map_ViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+    
         super.viewWillDisappear(animated)
         
         self.hideSVHUD()
+    }
+    
+    func endTimer() {
+        if !isForm() {return}
         
         if timer != nil {
             timer.invalidate()
@@ -126,14 +133,22 @@ class QL_Map_ViewController: UIViewController {
             
             tempLocation.append(["lat":"%f".format(parameters: latLng().latitude), "lng":"%f".format(parameters: latLng().longitude)])
             
-            if self.mutliType == "PolyLine" {
+            if self.mutliType == "Polyline" {
                 let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
                 
                 mapBox.addAnnotation(myTourline)
+                
+                if tempLocation.count >= 2 {
+                    self.updateLocation()
+                }
             } else {
                 let myTourline = MGLPolygon(coordinates: &self.coor, count: UInt(self.coor.count))
                 
                 mapBox.addAnnotation(myTourline)
+                
+                if tempLocation.count >= 3 {
+                    self.updateLocation()
+                }
             }
             
             resetCount()
@@ -165,7 +180,7 @@ class QL_Map_ViewController: UIViewController {
         }
 
         if isMulti {
-            if self.mutliType == "PolyLine" {
+            if self.mutliType == "Polyline" {
                 let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
                 
                 mapBox.addAnnotation(myTourline)
@@ -201,7 +216,6 @@ class QL_Map_ViewController: UIViewController {
             
             pack!.resume()
         }
-        
     }
     
     @objc func offlinePackProgressDidChange(notification: NSNotification) {
@@ -258,9 +272,6 @@ class QL_Map_ViewController: UIViewController {
     
     @objc func onMapSingleTapped(recognizer: UITapGestureRecognizer)
     {
-        
-        if isForShow {return}
-        
         let viewLocation: CGPoint = recognizer.location(in: mapBox)
         
         if(mapBox.annotations != nil)
@@ -303,16 +314,32 @@ class QL_Map_ViewController: UIViewController {
         tempLocation.append(["lat":"%f".format(parameters: mapLocation.latitude), "lng":"%f".format(parameters: mapLocation.longitude)])
         
         if isMulti {
-            if self.mutliType == "PolyLine" {
+            if self.mutliType == "Polyline" {
                 let myTourline = MGLPolyline(coordinates: &self.coor, count: UInt(self.coor.count))
                 
                 mapBox.addAnnotation(myTourline)
+                
+                if tempLocation.count >= 2 {
+                    self.updateLocation()
+                }
             } else {
                 let myTourline = MGLPolygon(coordinates: &self.coor, count: UInt(self.coor.count))
                 
                 mapBox.addAnnotation(myTourline)
+                
+                if tempLocation.count >= 3 {
+                    self.updateLocation()
+                }
             }
+        } else {
+            self.updateLocation()
         }
+    }
+    
+    func updateLocation() {
+        if !isForm() {return}
+        
+        ((self.topMost() as! QL_Form_New_ViewController).controllers.firstObject as! QL_Crash_ViewController).updateLocation(data: ["tempLocation":self.tempLocation, "type":self.mutliType])
     }
     
     override func didReceiveMemoryWarning() {
@@ -322,7 +349,7 @@ class QL_Map_ViewController: UIViewController {
     @IBAction func didPressBack() {
         
         if isMulti {
-            if self.mutliType == "PolyLine" {
+            if self.mutliType == "Polyline" {
                 if tempLocation.count < 2 {
                     self.showToast("Tọa độ cần chọn ít nhất 2 điểm", andPos: 0)
                     
@@ -340,7 +367,11 @@ class QL_Map_ViewController: UIViewController {
         delegate?.didReloadData(data: tempLocation as NSArray, indexing: self.indexing)
         
         self.dismiss(animated: true) {
-            
+            if self.timer != nil {
+                self.timer.invalidate()
+                
+                self.timer = nil
+            }
         }
     }
     
@@ -356,17 +387,29 @@ class QL_Map_ViewController: UIViewController {
     
     @IBAction func didPressTimer() {
         
-        self.countDown.isHidden = false
+        self.countDown.isHidden = self.isTimer
         
-        resetCount()
+        if !isTimer {
+            resetCount()
 
-        if timer != nil {
-            timer.invalidate()
+            if timer != nil {
+                timer.invalidate()
+                
+                timer = nil
+            }
             
-            timer = nil
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(update), userInfo: nil, repeats: true)
+        } else {
+            if timer != nil {
+                timer.invalidate()
+                
+                timer = nil
+            }
+            
+            countDown.text = "00:00"
         }
         
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector:#selector(update), userInfo: nil, repeats: true)
+        self.isTimer = !self.isTimer
     }
     
     @IBAction func didPressClear() {
@@ -377,6 +420,12 @@ class QL_Map_ViewController: UIViewController {
         coor.removeAll()
         
         tempLocation.removeAll()
+        
+        self.updateLocation()
+    }
+    
+    func isForm() -> Bool {
+        return (self.topMost().isKind(of: QL_Form_New_ViewController.self))
     }
 }
 

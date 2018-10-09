@@ -109,6 +109,19 @@ extension String {
     }
 }
 
+extension NSObject {
+    func topMost() -> UIViewController {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            
+            return topController
+        }
+        return UIViewController()
+    }
+}
+
 extension UIImage {
     func imageString() -> String {
         return (UIImageJPEGRepresentation(self,0.1)?.base64EncodedString(options: .endLineWithLineFeed))!

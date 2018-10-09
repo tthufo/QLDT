@@ -301,10 +301,17 @@
     {
         case 0:
         {
-            [SVProgressHUD showWithStatus:string];
+            if(string.length != 0 && !t[string isEqualToString:@"Đang tải"])
+            {
+                [SVProgressHUD showWithStatus:string];
+            }
+            else
+            {
+                [SVProgressHUD show];
+            }
             [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-            [SVProgressHUD setBackgroundColor:[UIColor orangeColor]];
-            [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
+            [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
+            [SVProgressHUD setForegroundColor:[UIColor orangeColor]];
         }
             break;
         case 1:

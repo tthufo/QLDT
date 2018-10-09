@@ -193,9 +193,9 @@ class QL_Crash_ViewController: UIViewController {
         } else {
             dataList.addObjects(from: dataFormat() as! [Any])
         }
-        
-        print(self.saveInfo)
     }
+    
+    
     
     func parentView() -> UIViewController {
         if !(self.parent?.isKind(of: UINavigationController.self))! {
@@ -263,13 +263,6 @@ class QL_Crash_ViewController: UIViewController {
             
 //            self.dataTemp = ["LayerFields":tempArray]
             
-            if self.isForm() {
-//                (self.parentView() as! QL_Form_New_ViewController).upDateMapType(update: ["type":self.dataTemp["ShapeType"] as! String])
-            }
-            
-            
-//            print(self.dataTemp)
-            
             self.prepareData()
             
             if self.saveInfo != nil {
@@ -279,6 +272,20 @@ class QL_Crash_ViewController: UIViewController {
             self.dataList.addObjects(from: self.dataTemp!["LayerFields"] as! [Any])
 
             self.tableView.reloadData()
+        }
+    }
+    
+    func updateLocation(data: NSDictionary) {
+        print(data)
+        
+        let type = data.getValueFromKey("type") as String
+        
+        for dict in self.dataList {
+            if (dict as! NSDictionary)["ident"] as! String == (type == "Point" ? "QL_Location_Cell" : "QL_Geo_Cell") {
+                (dict as! NSMutableDictionary)["data"] = data["tempLocation"]
+                
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -336,9 +343,6 @@ class QL_Crash_ViewController: UIViewController {
     
     func revertGeoText(geoText: String) -> NSArray {
         
- //LINESTRING (106.18326997500009 21.135535005000065, 106.18171565500006 21.13642666100003)
-
-        
         var text = geoText.replacingOccurrences(of: "LINESTRING", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
         
         text.removeFirst()
@@ -349,7 +353,7 @@ class QL_Crash_ViewController: UIViewController {
             
             let coors = coor.components(separatedBy: " ")
             
-            array.add(["lat":coors[0], "lng":coors[1]])
+            array.add(["lat":coors[1], "lng":coors[0]])
         }
         
         return array
@@ -380,12 +384,10 @@ class QL_Crash_ViewController: UIViewController {
                     Temp.deleteData(id: self.entityId, parentId: ID as! Int32)
                 }
                 
-                self.navigationController?.popViewController(animated: true)
-                
                 self.showToast("Cập nhật thành công", andPos: 0)
 
-                self.dismiss(animated: true, completion: {
-                })
+                self.didPressBack()
+                
             } else {
                 self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
             }
@@ -837,9 +839,7 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 self.view.endEditing(true)
 
                 if self.isForm() {
-                    
-                    (self.parentView() as! QL_Form_New_ViewController).upDateMapType(update: ["type":data["shapeType"] as! String])
-                    
+
                     (self.parentView() as! QL_Form_New_ViewController).moveToMap()
                     
                     return
@@ -893,8 +893,6 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 if self.isForm() {
                     
-                    (self.parentView() as! QL_Form_New_ViewController).upDateMapType(update: ["type":data["shapeType"] as! String])
-
                     (self.parentView() as! QL_Form_New_ViewController).moveToMap()
                     
                     return
@@ -905,8 +903,6 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 map.indexing = "%i".format(parameters: indexPath.row)
                 
                 map.tempLocation = data["data"] as! [[String : String]] 
-                
-//                map.isMulti = true
                 
                 map.mutliType = data["shapeType"] as! String
                 
@@ -927,6 +923,8 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 te.text = self.geoText(data: (data["data"] as? NSArray)!)
 
                 scroll.contentSize = CGSize.init(width: te.getSize().width + 10, height: 44)
+            } else {
+                te.text = ""
             }
         }
         

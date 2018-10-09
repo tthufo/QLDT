@@ -20,6 +20,8 @@ class QL_Form_New_ViewController: ViewPagerController {
     
     var saveInfo: NSDictionary!
     
+    var detail: NSDictionary!
+    
     var configType: NSDictionary!
     
     @IBOutlet var titleLabel: UILabel!
@@ -54,22 +56,39 @@ class QL_Form_New_ViewController: ViewPagerController {
         
         
         
+        let type = ((detail as NSDictionary)["Layer"] as! NSDictionary)["ShapeType"] as! String
+        
+        
         
         let map = QL_Map_ViewController()
                 
-        map.tempLocation = self.configType["coor"] as! [[String : String]]
+        map.tempLocation = self.saveInfo == nil ? [] : (type == "Point" ? [["lat":self.saveInfo.getValueFromKey("lat"), "lng":self.saveInfo.getValueFromKey("lng")]] : self.revertGeoText(geoText: self.saveInfo.getValueFromKey("geom_text"))) as! [[String : String]]
         
-        map.isMulti = (self.configType["coor"] as! NSArray).count != 1 ? true : false
+        map.isMulti = type == "Point" ? false : true
+        
+        map.mutliType = type
         
         map.isForShow = true
                 
         controllers.add(map)
     }
 
-    func upDateMapType(update: NSDictionary) {
-        (controllers.lastObject as! QL_Map_ViewController).mutliType = update["type"] as! String
+    func revertGeoText(geoText: String) -> NSArray {
         
-        (controllers.lastObject as! QL_Map_ViewController).reloadType()
+        var text = geoText.replacingOccurrences(of: "LINESTRING", with: "").replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "")
+        
+        text.removeFirst()
+        
+        let array = NSMutableArray()
+        
+        for coor in text.components(separatedBy: ", ") {
+            
+            let coors = coor.components(separatedBy: " ")
+            
+            array.add(["lat":coors[1], "lng":coors[0]])
+        }
+        
+        return array
     }
     
     func moveToMap() {
@@ -78,6 +97,14 @@ class QL_Form_New_ViewController: ViewPagerController {
     
     @IBAction func didPressBack() {
         self.dismiss(animated: true, completion: nil)
+        
+        (self.controllers.lastObject as! QL_Map_ViewController).endTimer()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        (self.controllers.lastObject as! QL_Map_ViewController).endTimer()
     }
     
     override func didReceiveMemoryWarning() {

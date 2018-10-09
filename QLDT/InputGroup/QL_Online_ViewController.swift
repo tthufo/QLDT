@@ -88,6 +88,8 @@ class QL_Online_ViewController: UIViewController {
                 search.icon = self.icon
 
                 search.dataInfo = data
+                                
+                search.detail = response?.dictionize()
                 
                 search.tagName = tagName as NSDictionary
 
@@ -99,6 +101,8 @@ class QL_Online_ViewController: UIViewController {
             let formNew = QL_Form_New_ViewController()
             
             let currentCorr = Permission.shareInstance().currentLocation()! as NSDictionary
+
+            formNew.detail = response?.dictionize()
 
             formNew.configType = ["title":(data["FormName"] as! String), "id":(data["Id"] as! NSNumber), "online":"", "coor": data.response(forKey: "lat") ? [["lat":data.getValueFromKey("lat"), "lng":data.getValueFromKey("lng")]] : [["lat":currentCorr.getValueFromKey("lat"), "lng":currentCorr.getValueFromKey("lng")]]]
 

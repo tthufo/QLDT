@@ -18,6 +18,8 @@ class QL_Search_ViewController: UIViewController {
     
     var dataInfo: NSDictionary!
     
+    var detail: NSDictionary!
+    
     var tagName: NSDictionary!
     
     var icon: String!
@@ -153,16 +155,6 @@ extension QL_Search_ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-//    func latLng() -> CLLocationCoordinate2D {
-//        let currentCorr = Permission.shareInstance().currentLocation()
-//
-//        return CLLocationCoordinate2D(latitude: (currentCorr!["lat"]! as! NSNumber).doubleValue , longitude: (currentCorr!["lng"]! as! NSNumber).doubleValue)
-//    }
-//
-//    func customlatLng(data: NSDictionary) -> CLLocationCoordinate2D {
-//        return CLLocationCoordinate2D(latitude: (data["lat"]! as! NSNumber).doubleValue , longitude: (data["lng"]! as! NSNumber).doubleValue)
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -172,6 +164,8 @@ extension QL_Search_ViewController: UITableViewDataSource, UITableViewDelegate {
 
         let newForm = QL_Form_New_ViewController()
 
+        newForm.detail = self.detail
+        
         newForm.configType = ["title":(dataInfo["FormName"] as! String), "id":(dataInfo["Id"] as! NSNumber), "online":"", "coor": data.response(forKey: "lat") ? [["lat":data.getValueFromKey("lat"), "lng":data.getValueFromKey("lng")]] : [["lat":currentCorr.getValueFromKey("lat"), "lng":currentCorr.getValueFromKey("lng")]]]
 
         newForm.saveInfo = data
