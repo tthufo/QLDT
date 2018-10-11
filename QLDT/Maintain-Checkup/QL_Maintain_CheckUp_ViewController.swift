@@ -81,19 +81,6 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
         return checkUpData["IsMaintenance"] as! Bool
     }
     
-    //http://117.4.242.159:3333/api/Maintain/detail?id=1039
-    
-    //http://117.4.242.159:3333/api/Maintain/listChat?id=1041
-    
-//    http://117.4.242.159:3333/api/Maintain/putChatMessage   {
-//    "Id": 0,
-//    "MaintenanceId": 1041,
-//    "Message": "dsfdsfd",
-//    "Time": "2018-09-07T10:10:08Z",
-//    "User": null,
-//    "UserId": "f92db026-7c7d-4143-98bf-a572da41c950"
-//}
-    
     func latLng() -> CLLocationCoordinate2D {
         let currentCorr = Permission.shareInstance().currentLocation()
         
@@ -146,6 +133,22 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
             
             self.tableView.reloadData()
         }
+    }
+    
+    func toolBar() -> UIToolbar {
+
+        let toolBar = UIToolbar.init(frame: CGRect.init(x: 0, y: 0, width: Int(self.screenWidth()), height: 50))
+
+        toolBar.barStyle = .default
+
+        toolBar.items = [UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+                         UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+                         UIBarButtonItem.init(title: "Thoát", style: .done, target: self, action: #selector(disMiss))]
+        return toolBar
+    }
+
+    @objc func disMiss() {
+        self.view.endEditing(true)
     }
     
     func didRequestUpdate() {
@@ -201,9 +204,9 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
                 
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        kb.keyboard(on: ["bar":bar, "host":self]) { (height, isOn) in
-            
-            self.tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: isOn ? height + 40 : 50, right: 0)
+        kb.keyboard{(height, isOn) in
+
+            self.tableView.contentInset = UIEdgeInsets.init(top: 0, left: 0, bottom: isOn ? height + 0 : 50, right: 0)
         }
     }
     
@@ -308,6 +311,8 @@ extension QL_Maintain_CheckUp_ViewController: UITableViewDataSource, UITableView
         
         let text = self.withView(cell, tag: 14) as! UITextView
  
+        text.inputAccessoryView = self.toolBar()
+        
         text.delegate = self
         
         text.text = data.getValueFromKey("Description")

@@ -436,6 +436,20 @@ class QL_Crash_ViewController: UIViewController {
     
     @IBAction func didRequestSubmit() {
         
+        if self.dataTemp == nil {
+            
+            self.showToast("Dữ liệu trống", andPos: 0)
+            
+            return
+        }
+        
+        if self.dataTemp.allKeys.count == 0 {
+            
+            self.showToast("Dữ liệu trống", andPos: 0)
+            
+            return
+        }
+        
         if self.configType.response(forKey: "online") {
             if checkValid() {
                 let postData = NSMutableDictionary()
@@ -564,6 +578,8 @@ class QL_Crash_ViewController: UIViewController {
         } else {
             Temp.modifyData(id: entityId, parentId: configType["id"] as! Int32, title: self.titleString, tempData: self.dataTemp.bv_jsonString(withPrettyPrint: true), date: self.currentDate("yyyy-MM-dd HH:ss"))
         }
+        
+        self.showToast("Cập nhật dữ liệu offline thành công", andPos: 0)
         
         didPressBack()
     }

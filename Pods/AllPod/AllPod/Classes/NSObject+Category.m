@@ -301,7 +301,7 @@
     {
         case 0:
         {
-            if(string.length != 0 && !t[string isEqualToString:@"Đang tải"])
+            if(string.length != 0 && ![string isEqualToString:@"Đang tải"])
             {
                 [SVProgressHUD showWithStatus:string];
             }
