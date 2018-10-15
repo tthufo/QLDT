@@ -245,7 +245,9 @@ class QL_Map_ViewController: UIViewController {
                 print("Offline pack “\(userInfo["name"] ?? "unknown")” completed: \(byteCount), \(completedResources) resources")
                 self.hideSVHUD()
                 self.addValue("1", andKey: "offline")
-                self.perform(#selector(showMarkers), with: nil, afterDelay: 0.5)
+                if tempLocation.count != 0 {
+                    self.perform(#selector(showMarkers), with: nil, afterDelay: 0.5)
+                }
             } else {
                 print("Offline pack “\(userInfo["name"] ?? "unknown")” has \(completedResources) of \(expectedResources) resources — \(progressPercentage * 100)%.")
             }
