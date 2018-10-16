@@ -66,10 +66,6 @@ func logged() -> Bool {
     return Information.token != nil
 }
 
-//func user() -> TG_User_ViewController {
-//    return ((root() as! UINavigationController).viewControllers.first as! TG_Root_ViewController).viewControllers?.last as! TG_User_ViewController
-//}
-
 extension String {
     func replace(target: String, withString: String) -> String {
         return self.replace(target:target, withString:withString)
@@ -92,7 +88,6 @@ extension Date {
 }
 
 extension String {
-    
     func format(parameters: CVarArg...) -> String {
         return String(format: self, arguments: parameters)
     }
@@ -170,6 +165,23 @@ extension UIView {
     
     func auto() {
         self.updateConstraint(attribute: .height, constant: iOS_VERSION_GREATER_THAN_OR_EQUAL_TO(version: "11") ? 44 : 64)
+    }
+}
+
+extension NSMutableAttributedString {
+    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
+        let attrs: [NSAttributedStringKey: Any] = [.font: UIFont(name: "AvenirNext-Medium", size: 19)!]
+        let boldString = NSMutableAttributedString(string:text, attributes: attrs)
+        append(boldString)
+        
+        return self
+    }
+    
+    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
+        let normal = NSAttributedString(string: text)
+        append(normal)
+        
+        return self
     }
 }
 

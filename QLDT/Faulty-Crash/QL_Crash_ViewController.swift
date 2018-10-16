@@ -44,6 +44,8 @@ class QL_Crash_ViewController: UIViewController {
             return
         }
         
+        let currentCorr = Permission.shareInstance().currentLocation()! as NSDictionary
+
         for dict in self.dataTemp!["LayerFields"] as! NSMutableArray {
             let tempo = dict as! NSMutableDictionary
             
@@ -118,14 +120,14 @@ class QL_Crash_ViewController: UIViewController {
                     if tempo.getValueFromKey("FieldName") == "lat" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
                         (dict as! NSMutableDictionary)["FieldLabel"] = "Tọa độ"
-                        (dict as! NSMutableDictionary)["data"] = []
+                        (dict as! NSMutableDictionary)["data"] = [["lat":currentCorr.getValueFromKey("lat"), "lng":currentCorr.getValueFromKey("lng")]]
                         (dict as! NSMutableDictionary)["shapeType"] = self.isForm() ? (self.dataTemp["Layer"] as! NSDictionary)["ShapeType"] : self.dataTemp["ShapeType"]
                     }
                     
                     if tempo.getValueFromKey("FieldName") == "lng" {
                         (dict as! NSMutableDictionary)["ident"] = "QL_Location_Cell"
                         (dict as! NSMutableDictionary)["IsVisible"] = false
-                        (dict as! NSMutableDictionary)["data"] = []
+                        (dict as! NSMutableDictionary)["data"] = [["lat":currentCorr.getValueFromKey("lat"), "lng":currentCorr.getValueFromKey("lng")]]
                         (dict as! NSMutableDictionary)["shapeType"] = self.isForm() ? (self.dataTemp["Layer"] as! NSDictionary)["ShapeType"] : self.dataTemp["ShapeType"]
                     }
                 }
@@ -837,7 +839,7 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             
             let date = (self.withView(cell, tag: 3) as! UILabel)
             
-            date.text = data["data"] as? String
+            date.text = (data["data"] as? String)?.components(separatedBy: "T").first
         }
         
         if data["ident"] as! String == "QL_Location_Cell" {

@@ -48,15 +48,4 @@ class Information: NSObject {
 
         userInfo = nil
     }
-    
-    static func cardType() -> NSDictionary {
-        
-        if userInfo == nil {
-            return ["star_level":0]
-        }
-        
-        let cardType = userInfo!["CardType"]
-        
-        return cardType as! NSDictionary
-    }
 }

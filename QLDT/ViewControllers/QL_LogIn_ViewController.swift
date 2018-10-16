@@ -129,9 +129,34 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
             
             Information.saveToken()
             
+            self.requestUserInfo()
+            
             self.hideSVHUD()
 
             self.navigationController?.pushViewController(QL_Home_ViewController(), animated: true)
+        }
+    }
+    
+    func requestUserInfo() {
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"http://117.4.242.159:3334/connect/userinfo",
+                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "method":"GET",
+                                                   "overrideLoading":1,
+                                                   "overrideAlert":1,
+                                                   "host":self
+            ], withCache: { (cache) in
+                
+        }) { (response, errorCode, error, isValid) in
+            
+            if errorCode != "200" {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+                
+                return
+            }
+            
+            self.add(response?.dictionize() as! [AnyHashable : Any], andKey: "info")
+            
+            Information.saveInfo()
         }
     }
     

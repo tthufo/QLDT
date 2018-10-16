@@ -35,8 +35,7 @@ class QL_Comment_ViewController: UIViewController {
         
         didRequestMessage()
         
-        print(checkUpData)
-        
+        titleLabel.text = checkUpData.getValueFromKey("Name")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -60,8 +59,6 @@ class QL_Comment_ViewController: UIViewController {
     
     func didRequestSend() {
         
-        print(self.textField.text)
-        
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/putChatMessage"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "Id":"0",
@@ -69,7 +66,7 @@ class QL_Comment_ViewController: UIViewController {
                                                    "Message":self.textField.text,
                                                    "Time":NSDate().string(withFormat: "yyyy-MM-dd'T'HH:mm:ss"),
                                                    "User":NSNull(),
-                                                   "UserId":checkUpData["UserId"],
+                                                   "UserId":Information.userInfo!["sub"],
                                                    "host":self,
                                                    "overrideLoading":1,
                                                    "overrideAlert":1], withCache: { (cache) in
@@ -169,12 +166,18 @@ extension QL_Comment_ViewController: UITableViewDataSource, UITableViewDelegate 
         
         let data = dataList[indexPath.row] as! NSDictionary
         
-        let isMe = (data["User"] as! NSDictionary)["UserName"] as? String != Information.userName
+        let isMe = data["UserId"] as? String != Information.userInfo!["sub"] as? String
 
+        
+        let admin = (data["User"] as! NSDictionary)["UserName"] as! String
         
         let dayLeft = self.withView(cell, tag: 10) as! UILabel
         
-        dayLeft.text = data.getValueFromKey("Time")
+        let formattedString = NSMutableAttributedString()
+                
+        formattedString.bold(admin + " ").normal(data.getValueFromKey("Time").replacingOccurrences(of: "T", with: " "))
+        
+        dayLeft.attributedText = formattedString
         
         let contentLeft = self.withView(cell, tag: 11) as! UILabel
 
@@ -182,7 +185,7 @@ extension QL_Comment_ViewController: UITableViewDataSource, UITableViewDelegate 
 
         let dayRight = self.withView(cell, tag: 20) as! UILabel
         
-        dayRight.text = data.getValueFromKey("Time")
+        dayRight.text = data.getValueFromKey("Time").replacingOccurrences(of: "T", with: " ")
 
         let contentRight = self.withView(cell, tag: 21) as! UILabel
         

@@ -243,7 +243,7 @@ extension QL_Maintain_CheckUp_ViewController: UITextViewDelegate {
         
         let indexing = Int(textView.accessibilityLabel!)
         
-        (dataList[indexing!] as! NSMutableDictionary)["Description"] = textView.text
+        (dataList[indexing!] as! NSMutableDictionary)[isMaintain() ? "MaintenanceDescription" : "Description"] = textView.text
         
         return true
     }
@@ -315,7 +315,7 @@ extension QL_Maintain_CheckUp_ViewController: UITableViewDataSource, UITableView
         
         text.delegate = self
         
-        text.text = data.getValueFromKey("Description")
+        text.text = data.getValueFromKey(isMaintain() ? "MaintenanceDescription" : "Description")
         
         text.accessibilityLabel = "%i".format(parameters: indexPath.row)
         

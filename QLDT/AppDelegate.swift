@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Information.saveToken()
         
+        Information.saveInfo()
+        
         if self.getValue("url") == nil {
             self.addValue("http://117.4.242.159:3333", andKey: "url")
         }
