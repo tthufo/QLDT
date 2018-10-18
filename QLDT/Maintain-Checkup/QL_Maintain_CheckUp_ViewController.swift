@@ -164,6 +164,8 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
             postData.add(dict)
         }
         
+        print(postData)
+        
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/updateAssets"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "Postparam":postData,
@@ -243,7 +245,11 @@ extension QL_Maintain_CheckUp_ViewController: UITextViewDelegate {
         
         let indexing = Int(textView.accessibilityLabel!)
         
-        (dataList[indexing!] as! NSMutableDictionary)[isMaintain() ? "MaintenanceDescription" : "Description"] = textView.text
+        if let result = textView.text as NSString? {
+            let txtAfterUpdate = result.replacingCharacters(in: range, with: text as String)
+            
+            (dataList[indexing!] as! NSMutableDictionary)[isMaintain() ? "MaintenanceDescription" : "Description"] = txtAfterUpdate
+        }
         
         return true
     }

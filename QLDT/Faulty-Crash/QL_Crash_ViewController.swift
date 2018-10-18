@@ -839,7 +839,7 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
             
             let date = (self.withView(cell, tag: 3) as! UILabel)
             
-            date.text = (data["data"] as? String)?.components(separatedBy: "T").first
+            date.text = (data["data"] as? String) != "" ? ((data["data"] as? NSString)?.date(withFormat: "yyyy-MM-dd'T'HH:mm:ss")! as! NSDate).string(withFormat: "dd-MM-yyyy") : ""
         }
         
         if data["ident"] as! String == "QL_Location_Cell" {
@@ -885,13 +885,13 @@ extension QL_Crash_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 let X = (self.withView(cell, tag: 3) as! UILabel)
 
-                X.text = coor["lat"] as? String
+                X.text = coor["lng"] as? String
                 
                 
                 
                 let Y = (self.withView(cell, tag: 4) as! UILabel)
 
-                Y.text = coor["lng"] as? String
+                Y.text = coor["lat"] as? String
             }
         }
         

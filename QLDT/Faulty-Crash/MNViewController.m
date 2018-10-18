@@ -47,7 +47,7 @@
   
   self.currentDate = [NSDate date];
 
-  chosenDate = [self.currentDate stringWithFormat:@"dd-MM-yyyy'T'HH:mm:ss"];
+  chosenDate = [self.currentDate stringWithFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
 //  chosenDate = [self.currentDate stringWithFormat:@"yyyy-MM-dd"];
 
     
@@ -87,7 +87,7 @@
 #pragma mark - MNCalendarViewDelegate
 
 - (void)calendarView:(MNCalendarView *)calendarView didSelectDate:(NSDate *)date {
-    chosenDate = [date stringWithFormat:@"dd-MM-yyyy'T'HH:mm:ss"];
+    chosenDate = [date stringWithFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
 //    chosenDate = [date stringWithFormat:@"yyyy-MM-dd"];
 }
 
