@@ -44,10 +44,16 @@ static CustomField * shareInstance = nil;
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     [manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    if(info[@"au"])
+        [manager.requestSerializer setValue:info[@"au"] forHTTPHeaderField:@"Authorization"];
+
     [manager POST:url parameters:info progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             self.rCompletion(YES, responseObject);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             self.rCompletion(NO, error.userInfo);
+            
+            NSLog(@"%@", error);
+            
         }];
 }
 

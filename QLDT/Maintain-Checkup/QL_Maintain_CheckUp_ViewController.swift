@@ -164,8 +164,6 @@ class QL_Maintain_CheckUp_ViewController: UIViewController {
             postData.add(dict)
         }
         
-        print(postData)
-        
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/updateAssets"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "Postparam":postData,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class QL_Recover_ViewController: UIViewController {
+class QL_Recover_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var old: UITextField!
     
@@ -41,6 +41,9 @@ class QL_Recover_ViewController: UIViewController {
     }
     
     @IBAction func didRecoverPass() {
+        
+        self.view.endEditing(true)
+        
         if !old.hasText || !new.hasText || !reNew.hasText {
             self.showToast("Bạn phải nhập đủ thông tin", andPos: 0)
             return
@@ -56,7 +59,44 @@ class QL_Recover_ViewController: UIViewController {
             return
         }
         
+        self.requestChangePass()
+    }
+    
+    func requestChangePass() {
         
+        let oldOne = old.text
+        
+        let newOne = new.text
+
+        let reNewOne = reNew.text
+
+        self.showSVHUD("", andOption: 0)
+        
+        (CustomField.shareText() as! CustomField).requesting("http://117.4.242.159:3334/Account/ChangePasswordMobile", andInfo: ["OldPasswd":oldOne, "NewPasswd":newOne, "ConfirmNewPasswd":reNewOne, "au" : Information.token == nil ? "" : Information.token!] as! [AnyHashable : Any], andCompletion: { (done, respond) in
+            
+            self.hideSVHUD()
+            
+            if done {
+
+                if (respond! as NSDictionary).getValueFromKey("Succeeded") == "0" {
+                    
+                    let message = (((respond! as NSDictionary)["Errors"] as! NSArray).firstObject as! NSDictionary).getValueFromKey("Description")
+                    
+                    self.showToast(message, andPos: 0)
+                    
+                    return
+                }
+                
+                self.showToast("Cập nhật thành công", andPos: 0)
+
+                Information.removeInfo()
+                
+                self.navigationController?.popToRootViewController(animated: true)
+
+            } else {
+                self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
+            }
+        })
     }
     
     override func didReceiveMemoryWarning() {
