@@ -51,7 +51,7 @@ class QL_Search_ViewController: UIViewController {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "/api/Data/Filter"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
-                                                   "Getparam":["radius":distance == "" ? 10000 : distance, "lat":currentCorr!["lat"], "lng":currentCorr!["lng"]!, "keyword":self.search.text, "formId":dataInfo["Id"]],
+                                                   "Getparam":["radius": distance == "" ? 10000 : distance, "lat":currentCorr!["lat"], "lng":currentCorr!["lng"]!, "keyword":self.search.text, "formId":dataInfo["Id"]],
                                                    "overrideLoading":1,
                                                    "overrideAlert":1,
                                                    "host":self

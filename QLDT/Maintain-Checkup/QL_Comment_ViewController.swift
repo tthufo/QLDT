@@ -58,7 +58,6 @@ class QL_Comment_ViewController: UIViewController {
     }
     
     func didRequestSend() {
-        
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "api/Maintain/putChatMessage"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "Id":"0",
