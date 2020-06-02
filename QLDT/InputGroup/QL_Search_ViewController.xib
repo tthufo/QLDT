@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Search_ViewController" customModule="QLDT" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Search_ViewController" customModule="QLBB" customModuleProvider="target">
             <connections>
                 <outlet property="distance" destination="ENf-hy-GCG" id="nFC-L8-C42"/>
                 <outlet property="search" destination="P9L-M0-rtT" id="ErW-kR-Z61"/>
@@ -25,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="83M-Vj-eRR">
-                    <rect key="frame" x="0.0" y="20" width="320" height="64"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UGT-pa-r5D">
                             <rect key="frame" x="0.0" y="20" width="44" height="44"/>
@@ -49,7 +47,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.90980392160000001" green="0.49019607840000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="QjH-H9-Uzn" firstAttribute="centerX" secondItem="83M-Vj-eRR" secondAttribute="centerX" id="ZGg-Qt-9np"/>
                         <constraint firstItem="UGT-pa-r5D" firstAttribute="leading" secondItem="83M-Vj-eRR" secondAttribute="leading" id="cim-TL-o9W"/>
@@ -62,7 +60,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sc3-zU-hHX">
-                    <rect key="frame" x="0.0" y="123" width="320" height="357"/>
+                    <rect key="frame" x="0.0" y="103" width="320" height="377"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="IXJ-lp-2nW"/>
@@ -70,11 +68,10 @@
                     </connections>
                 </tableView>
                 <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Tìm kiếm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P9L-M0-rtT">
-                    <rect key="frame" x="8" y="92" width="142" height="30"/>
+                    <rect key="frame" x="8" y="72" width="142" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Xlu-ZD-yYf"/>
                     </constraints>
-                    <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
@@ -82,7 +79,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wn5-Bw-T0i">
-                    <rect key="frame" x="286" y="92" width="30" height="30"/>
+                    <rect key="frame" x="286" y="72" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="Si0-nB-Qc1"/>
                         <constraint firstAttribute="height" constant="30" id="iWq-HG-giK"/>
@@ -93,12 +90,11 @@
                     </connections>
                 </button>
                 <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Khoảng cách (m)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ENf-hy-GCG">
-                    <rect key="frame" x="158" y="92" width="120" height="30"/>
+                    <rect key="frame" x="158" y="72" width="120" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="SZc-LB-NnA"/>
                         <constraint firstAttribute="height" constant="30" id="YQA-Gm-BFT"/>
                     </constraints>
-                    <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     <connections>
@@ -125,10 +121,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="WVp-ra-2dw"/>
+            <point key="canvasLocation" x="139" y="146"/>
         </view>
     </objects>
     <resources>
-        <image name="back_a" width="170" height="170"/>
-        <image name="mag_b" width="49" height="49"/>
+        <image name="back_a" width="170.5" height="170.5"/>
+        <image name="mag_b" width="49.5" height="49.5"/>
     </resources>
 </document>

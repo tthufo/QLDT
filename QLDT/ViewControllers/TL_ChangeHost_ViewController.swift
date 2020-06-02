@@ -12,10 +12,14 @@ class TL_ChangeHost_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var host: UITextField!
     
+    @IBOutlet var authen: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         host.text = self.getValue("url")
+        
+        authen.text = self.getValue("url_login")
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -26,13 +30,19 @@ class TL_ChangeHost_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func didPressSubmi() {
-        if host.text == "" {
-            self.showToast("Bạn chưa nhập địa chỉ máy chủ", andPos: 0)
+        if host.text == "" || authen.text == "" {
+            self.showToast("Bạn cần nhập địa chỉ máy chủ và địa chỉ đăng nhập", andPos: 0)
             
             return
         }
         
         self.addValue(host.text, andKey: "url")
+        
+        self.addValue(authen.text, andKey: "url_login")
+        
+        self.showToast("Cập nhật địa chỉ thành công.", andPos: 0)
+        
+        self.view.endEditing(true)
     }
     
     @IBAction func didPressBack() {

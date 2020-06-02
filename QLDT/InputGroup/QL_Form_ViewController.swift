@@ -27,7 +27,9 @@ class QL_Form_ViewController: UIViewController {
         
         dataList = NSMutableArray()
         
-        let images: NSMutableArray? = [["online":"", "Name":"Đường bộ", "title":"Biểu mẫu/Đường bộ", "Icon":"http://117.4.242.159:3334/images/mobiles/Duong_bo.png", "id":1], ["online":"", "Name":"Đường thủy", "title":"Biểu mẫu/Đường thủy", "Icon":"http://117.4.242.159:3334/images/mobiles/Duong_thuy.png", "id":3],["online":"", "Name":"Đường sắt", "title":"Biểu mẫu/Đường sắt", "Icon":"http://117.4.242.159:3334/images/mobiles/Duong_sat.png", "id":4]]
+//        let images: NSMutableArray? = [["online":"", "Name":"Đường bộ", "title":"Biểu mẫu/Đường bộ", "Icon": self.getValue("url") + "/images/mobiles/Duong_bo.png", "id":1], ["online":"", "Name":"Đường thủy", "title":"Biểu mẫu/Đường thủy", "Icon": self.getValue("url") + "/images/mobiles/Duong_thuy.png", "id":3],["online":"", "Name":"Đường sắt", "title":"Biểu mẫu/Đường sắt", "Icon": self.getValue("url") + "/images/mobiles/Duong_sat.png", "id":4]]
+        
+        let images: NSMutableArray? = [["online":"", "Name":"Đường bộ", "title":"Biểu mẫu/Đường bộ", "Icon": self.getValue("url") + "/images/mobiles/Duong_bo.png", "id":1]]
         
         dataList.addObjects(from: images as! [Any])
     }

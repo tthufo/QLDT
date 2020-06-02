@@ -29,36 +29,38 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     func syncing() {
         if Layer.getAllData().count == 0 {
-            self.showSVHUD("Đang cập nhật thông tin từ trang chủ", andOption: 0)
             
-            startTimer()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                self.showSVHUD("Đang cập nhật thông tin từ trang chủ", andOption: 0)
+            })
+            
+//            startTimer()
         }
         
         didRequestAllField()
         
-        didRequestLayerList()
-        
-        didRequestCommune()
-        
-        didRequestDistrict()
+//        didRequestLayerList()
+//
+//        didRequestCommune()
+//
+//        didRequestDistrict()
     }
     
-    func startTimer() {
-        if timer != nil {
-            timer?.invalidate()
-            timer = nil
-        }
-        timer = Timer.scheduledTimer(timeInterval: 3.0,
-                                     target: self,
-                                     selector: #selector(eventWith(timer:)),
-                                     userInfo: nil,
-                                     repeats: false)
-    }
-    
-    @objc func eventWith(timer: Timer!) {
-        self.hideSVHUD()
-    }
-
+//    func startTimer() {
+//        if timer != nil {
+//            timer?.invalidate()
+//            timer = nil
+//        }
+//        timer = Timer.scheduledTimer(timeInterval: 3.0,
+//                                     target: self,
+//                                     selector: #selector(eventWith(timer:)),
+//                                     userInfo: nil,
+//                                     repeats: false)
+//    }
+//
+//    @objc func eventWith(timer: Timer!) {
+//        self.hideSVHUD()
+//    }
     
     func didRequestLayerList() {
         if Layer.getAllData().count != 0 {
@@ -75,6 +77,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
             if errorCode != "200" {
                 self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
                 
+                self.hideSVHUD()
+
                 return
             }
             
@@ -85,6 +89,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 
                 Layer.insertData(layerId: layerId as! Int32, layerData: layerData!)
             }
+            
+            self.didRequestCommune()
         }
     }
     
@@ -103,6 +109,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
             if errorCode != "200" {
                 self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
                 
+                self.hideSVHUD()
+
                 return
             }
             
@@ -115,6 +123,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 
                 Field.insertData(layerId: layerId as! Int32, layerData: layerData!, moduleId: moduleId as! Int32)
             }
+            
+            self.didRequestLayerList()
         }
     }
     
@@ -133,6 +143,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
             if errorCode != "200" {
                 self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
                 
+                self.hideSVHUD()
+
                 return
             }
             
@@ -143,6 +155,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 
                 Commune.insertData(layerId: communeId as! Int32, layerData: communeData!)
             }
+            
+            self.didRequestDistrict()
         }
     }
     
@@ -161,9 +175,13 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
             if errorCode != "200" {
                 self.showToast("Lỗi xảy ra, mời bạn thử lại", andPos: 0)
                 
+                self.hideSVHUD()
+                
                 return
             }
             
+            self.hideSVHUD()
+
             for layer in (response?.dictionize()["array"] as! NSArray) {
                 let districtId = (layer as! NSDictionary)["area_id"]
                 
@@ -171,6 +189,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 
                 District.insertData(layerId: districtId as! Int32, layerData: districtData!)
             }
+            
+            self.showSVHUD("Cập nhật thành công", andOption: 1)
         }
     }
     
@@ -236,7 +256,7 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         let image = (self.withView(cell, tag: 11) as! UIImageView)
         
-        image.withBorder(["Bwidth":"3", "Bcolor":UIColor.red])
+        image.withBorder(["Bwidth":"6", "Bcolor":UIColor.blue])
 
         image.image = UIImage.init(named: dict["img"] as! String)
         

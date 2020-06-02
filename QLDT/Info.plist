@@ -2,10 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>QLBB cần sử dụng BlueTooth của bạn </string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>QLGTVTBN</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -32,13 +36,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>QLDT cần sử dụng Camera của bạn</string>
+	<string>QLBB cần sử dụng Camera của bạn để cập nhật hình ảnh biển báo</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>QLDT cần truy cập vị trí của bạn</string>
+	<string>QLBB cần truy cập vị trí của bạn để cập nhật thông tin biển bảo tại vị trí cụ thể.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>QLDT cần sử dụng Micro của bạn</string>
+	<string>QLBB cần sử dụng Micro của bạn</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>QLDT cần sử dụng bộ sưu tập của bạn</string>
+	<string>QLBB cần sử dụng bộ sưu tập của bạn để cập nhật hình ảnh biển báo.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

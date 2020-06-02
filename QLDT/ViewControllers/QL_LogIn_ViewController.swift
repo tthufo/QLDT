@@ -20,11 +20,13 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var changeHost: UILabel!
 
-    var authenHost = "http://117.4.242.159:3334"
+    var authenHost = "" //self.getValue("url_login") //"http://qlbb.gisgo.vn"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        authenHost = self.getValue("url_login")
+        
         if logged() {
             self.navigationController?.pushViewController(QL_Home_ViewController(), animated: false)
         }
@@ -97,6 +99,21 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
         didAuthorize()
     }
     
+//    {
+//      "server": "http://qlbb.gisgo.vn",
+//      "client_id": "htgt.bn.app",
+//      "client_secret": "secret",
+//      "redirect_uri": "http://qlbb.gisgo.vn/oauth2redirect",
+//      "authorization_scope": "profile openid htgt",
+//      "discovery_uri": "",
+//      "authorization_endpoint_uri": "http://qlbb.gisgo.vn/connect/authorize",
+//      "token_endpoint_uri": "http://qlbb.gisgo.vn/connect/token",
+//      "registration_endpoint_uri": "",
+//      "user_info_endpoint_uri": "http://qlbb.gisgo.vn/connect/userinfo",
+//      "https_required": false,
+//      "client_name": "Phần mềm GIS quản lý đô thị"
+//    }
+    
     func didAuthorize() {
         self.showSVHUD("Đang đăng nhập", andOption: 0)
         
@@ -138,7 +155,7 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func requestUserInfo() {
-        LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"http://117.4.242.159:3334/connect/userinfo",
+        LTRequest.sharedInstance().didRequestInfo(["absoluteLink": authenHost + "/connect/userinfo",
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
                                                    "overrideLoading":1,

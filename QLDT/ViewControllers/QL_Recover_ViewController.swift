@@ -72,7 +72,7 @@ class QL_Recover_ViewController: UIViewController, UITextFieldDelegate {
 
         self.showSVHUD("", andOption: 0)
         
-        (CustomField.shareText() as! CustomField).requesting("http://117.4.242.159:3334/Account/ChangePasswordMobile", andInfo: ["OldPasswd":oldOne, "NewPasswd":newOne, "ConfirmNewPasswd":reNewOne, "au" : Information.token == nil ? "" : Information.token!] as! [AnyHashable : Any], andCompletion: { (done, respond) in
+        (CustomField.shareText() as! CustomField).requesting(self.getValue("url") + "/Account/ChangePasswordMobile", andInfo: ["OldPasswd":oldOne, "NewPasswd":newOne, "ConfirmNewPasswd":reNewOne, "au" : Information.token == nil ? "" : Information.token!] as! [AnyHashable : Any], andCompletion: { (done, respond) in
             
             self.hideSVHUD()
             

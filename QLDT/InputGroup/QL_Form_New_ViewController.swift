@@ -29,7 +29,7 @@ class QL_Form_New_ViewController: ViewPagerController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.titleLabel.text = self.configType.response(forKey: "title") ? self.configType["title"] as! String : self.configType.response(forKey: "FormName") ? self.configType["FormName"] as! String : "QLGTVT Bắc Ninh"
+        self.titleLabel.text = self.configType.response(forKey: "title") ? self.configType["title"] as! String : self.configType.response(forKey: "FormName") ? self.configType["FormName"] as! String : "QLBB"
         
         self.dataSource = self
         

@@ -94,7 +94,7 @@
 		FC4354A32146DE480016A4CB /* QL_Crash_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Crash_ViewController.xib; sourceTree = "<group>"; };
 		FC4354A62146E2DA0016A4CB /* QL_List_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_List_ViewController.swift; sourceTree = "<group>"; };
 		FC4354A72146E2DA0016A4CB /* QL_List_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_List_ViewController.xib; sourceTree = "<group>"; };
-		FC53869A210C875600F00873 /* QLDT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLDT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC53869A210C875600F00873 /* Quản Lý Biển Báo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quản Lý Biển Báo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC53869D210C875600F00873 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC53869F210C875600F00873 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FC5386A2210C875600F00873 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -138,6 +138,7 @@
 		FCD38E6521653BC700241F39 /* QL_Form_New_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Form_New_ViewController.xib; sourceTree = "<group>"; };
 		FCD38E682165412000241F39 /* QL_Search_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Search_ViewController.swift; sourceTree = "<group>"; };
 		FCD38E692165412000241F39 /* QL_Search_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Search_ViewController.xib; sourceTree = "<group>"; };
+		FCE231DC246A59AA00C0E3C4 /* QLBB.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QLBB.entitlements; sourceTree = "<group>"; };
 		FCE372F8213AA96D00F79D7A /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		FCE6173C210EAA3500000438 /* QL_Home_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QL_Home_ViewController.xib; path = QLDT/ViewControllers/QL_Home_ViewController.xib; sourceTree = SOURCE_ROOT; };
 		FCE6173D210EAA3500000438 /* QL_Home_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QL_Home_ViewController.swift; path = QLDT/ViewControllers/QL_Home_ViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -240,7 +241,7 @@
 		FC53869B210C875600F00873 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FC53869A210C875600F00873 /* QLDT.app */,
+				FC53869A210C875600F00873 /* Quản Lý Biển Báo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,6 +249,7 @@
 		FC53869C210C875600F00873 /* QLDT */ = {
 			isa = PBXGroup;
 			children = (
+				FCE231DC246A59AA00C0E3C4 /* QLBB.entitlements */,
 				FCFE39AE214E609B00E85515 /* InputGroup */,
 				FC4354A12146DDCC0016A4CB /* Faulty-Crash */,
 				044F714E21421DD9003CB99A /* Maintain-Checkup */,
@@ -346,7 +348,7 @@
 			);
 			name = QLDT;
 			productName = QLDT;
-			productReference = FC53869A210C875600F00873 /* QLDT.app */;
+			productReference = FC53869A210C875600F00873 /* Quản Lý Biển Báo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -355,6 +357,9 @@
 		FC538692210C875600F00873 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Thanh Hai Tran";
@@ -665,21 +670,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Nguyen Ngoc Quang (589UWV5PGW)";
+				CODE_SIGN_ENTITLEMENTS = QLDT/QLBB.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development: Thanh Hai Tran (ZWKS8AV396)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QLDT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vn.cTest;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = vn.hanel.qlbb;
+				PRODUCT_NAME = "Quản Lý Biển Báo";
 				PROVISIONING_PROFILE = "bf4feb91-1e07-429b-9108-117b10f1232d";
-				PROVISIONING_PROFILE_SPECIFIER = AgriWildcard;
+				PROVISIONING_PROFILE_SPECIFIER = hanel_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "QLDT/QLDT-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -690,20 +696,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: VMG MEDIA JOINT STOCK COMPANY";
+				CODE_SIGN_ENTITLEMENTS = QLDT/QLBB.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: VIETGIS - GIS SOLUTION AND TECHNOLOGY COMPANY LIMITED (GAJPP6PZBM)";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QLDT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vn.cTest;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = vn.hanel.qlbb;
+				PRODUCT_NAME = "Quản Lý Biển Báo";
 				PROVISIONING_PROFILE = "52f6285b-c157-4c5e-918a-a04f84d30fcf";
-				PROVISIONING_PROFILE_SPECIFIER = cTest;
+				PROVISIONING_PROFILE_SPECIFIER = hanel_dis;
 				SWIFT_OBJC_BRIDGING_HEADER = "QLDT/QLDT-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

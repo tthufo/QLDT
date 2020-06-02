@@ -21,7 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Information.saveInfo()
         
         if self.getValue("url") == nil {
-            self.addValue("http://117.4.242.159:3333", andKey: "url")
+            self.addValue("http://103.47.194.15:16980/service", andKey: "url")
+        }
+        
+        if self.getValue("url_login") == nil {
+            self.addValue("http://103.47.194.15:16980", andKey: "url_login")
         }
         
         if self.getObject("timer") == nil {

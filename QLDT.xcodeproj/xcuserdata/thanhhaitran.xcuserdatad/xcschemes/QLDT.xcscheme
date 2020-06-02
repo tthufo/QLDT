@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FC538699210C875600F00873"
-               BuildableName = "QLDT.app"
+               BuildableName = "Qua&#x309;n Ly&#x301; Bie&#x302;&#x309;n Ba&#x301;o.app"
                BlueprintName = "QLDT"
                ReferencedContainer = "container:QLDT.xcodeproj">
             </BuildableReference>
@@ -27,19 +27,17 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FC538699210C875600F00873"
-            BuildableName = "QLDT.app"
+            BuildableName = "Qua&#x309;n Ly&#x301; Bie&#x302;&#x309;n Ba&#x301;o.app"
             BlueprintName = "QLDT"
             ReferencedContainer = "container:QLDT.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <Testables>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -56,7 +54,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FC538699210C875600F00873"
-            BuildableName = "QLDT.app"
+            BuildableName = "Qua&#x309;n Ly&#x301; Bie&#x302;&#x309;n Ba&#x301;o.app"
             BlueprintName = "QLDT"
             ReferencedContainer = "container:QLDT.xcodeproj">
          </BuildableReference>
@@ -80,7 +78,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FC538699210C875600F00873"
-            BuildableName = "QLDT.app"
+            BuildableName = "Qua&#x309;n Ly&#x301; Bie&#x302;&#x309;n Ba&#x301;o.app"
             BlueprintName = "QLDT"
             ReferencedContainer = "container:QLDT.xcodeproj">
          </BuildableReference>
