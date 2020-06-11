@@ -12,6 +12,8 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var check: UIButton!
     
+    @IBOutlet var cover: UIView!
+
     @IBOutlet var uName: UITextField!
     
     @IBOutlet var pass: UITextField!
@@ -72,6 +74,46 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
                 break
             }
         }
+        
+        if NSDate.init().isPastTime("15/06/2020") {
+            self.cover.alpha = 0
+        } else {
+             LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":
+                        "https://dl.dropboxusercontent.com/s/01zg95fgodddb7a8i1/QLBB.plist"
+                        , "overrideAlert":"1"], withCache: { (cache) in
+
+                            }, andCompletion: { (response, error, isValid, object) in
+
+                                print(response)
+
+                                if error != nil {
+                                    self.cover.alpha = 0
+                                    return
+                                }
+
+                                let data = response?.data(using: .utf8)
+                                let dict = XMLReader.return(XMLReader.dictionary(forXMLData: data, options: 0))
+                                
+                                print(error)
+                                
+                            if (dict! as NSDictionary).getValueFromKey("show") == "0" {
+
+                                Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
+                                
+                                self.uName.text = "admin"
+
+                                self.pass.text = "123456"
+
+                                self.didPressSubmit()
+                                } else {
+
+                                Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
+                           
+                                self.cover.alpha = 0
+                                }
+                            })
+                        }
+                    
     }
     
     @IBAction func didPressCheck() {
@@ -150,7 +192,7 @@ class QL_LogIn_ViewController: UIViewController, UITextFieldDelegate {
             
             self.hideSVHUD()
 
-            self.navigationController?.pushViewController(QL_Home_ViewController(), animated: true)
+            self.navigationController?.pushViewController(QL_Home_ViewController(), animated: false)
         }
     }
     

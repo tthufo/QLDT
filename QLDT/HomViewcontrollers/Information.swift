@@ -15,6 +15,8 @@ class Information: NSObject {
     
     static var userName: String?
     
+    static var check: String?
+    
     static func saveToken() {
         
         if self.getValue("token") != nil {

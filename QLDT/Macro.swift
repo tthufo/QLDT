@@ -115,6 +115,14 @@ extension NSObject {
         }
         return UIViewController()
     }
+    
+    var latLng: NSDictionary {
+       if (Permission.shareInstance()?.isLocationEnable())! {
+        return ["lat": Permission.shareInstance()?.currentLocation()!["lat"] as Any, "lng": Permission.shareInstance()?.currentLocation()!["lng"] as Any]
+       }
+       
+       return ["lat": "0", "lng": "0"]
+   }
 }
 
 extension UIImage {

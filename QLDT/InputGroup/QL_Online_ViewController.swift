@@ -100,7 +100,7 @@ class QL_Online_ViewController: UIViewController {
 
             let formNew = QL_Form_New_ViewController()
             
-            let currentCorr = Permission.shareInstance().currentLocation()! as NSDictionary
+            let currentCorr = self.latLng // Permission.shareInstance().currentLocation()! as NSDictionary
 
             formNew.detail = response?.dictionize()
 

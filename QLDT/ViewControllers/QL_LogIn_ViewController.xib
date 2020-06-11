@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_LogIn_ViewController" customModule="QLBB" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_LogIn_ViewController" customModule="Quản_Lý_Biển_Báo" customModuleProvider="target">
             <connections>
                 <outlet property="app" destination="Uj7-eS-N1x" id="AfO-dj-T06"/>
                 <outlet property="changeHost" destination="Sal-Fz-mKY" id="PcH-qN-ixm"/>
                 <outlet property="check" destination="K4d-UP-8sE" id="5VB-2x-17C"/>
+                <outlet property="cover" destination="rYd-Ee-99v" id="rb4-MS-w7G"/>
                 <outlet property="pass" destination="U5q-n1-X7e" id="aKl-dD-YWw"/>
                 <outlet property="uName" destination="Jt3-4B-10e" id="Iz3-rg-CDz"/>
                 <outlet property="view" destination="wim-2b-w5a" id="G31-jd-SXA"/>
@@ -168,19 +169,27 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYd-Ee-99v">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="rYd-Ee-99v" firstAttribute="top" secondItem="pH6-ub-6LB" secondAttribute="top" id="0NW-bW-O8b"/>
                 <constraint firstItem="Uj7-eS-N1x" firstAttribute="top" secondItem="jVB-cP-Kvx" secondAttribute="bottom" constant="8" id="61p-yO-rlK"/>
                 <constraint firstItem="jVB-cP-Kvx" firstAttribute="leading" secondItem="wim-2b-w5a" secondAttribute="leading" constant="16" id="88t-MG-H4l"/>
                 <constraint firstItem="pH6-ub-6LB" firstAttribute="trailing" secondItem="Uj7-eS-N1x" secondAttribute="trailing" constant="58" id="BS4-fs-7So"/>
                 <constraint firstItem="Uj7-eS-N1x" firstAttribute="leading" secondItem="pH6-ub-6LB" secondAttribute="leading" constant="58" id="LIt-FC-bEi"/>
+                <constraint firstItem="rYd-Ee-99v" firstAttribute="bottom" secondItem="pH6-ub-6LB" secondAttribute="bottom" id="Pwq-92-lTJ"/>
+                <constraint firstItem="rYd-Ee-99v" firstAttribute="leading" secondItem="pH6-ub-6LB" secondAttribute="leading" id="YGS-Bj-mRP"/>
                 <constraint firstItem="pH6-ub-6LB" firstAttribute="bottom" secondItem="Uj7-eS-N1x" secondAttribute="bottom" constant="7" id="ecx-Ch-LIU"/>
+                <constraint firstItem="rYd-Ee-99v" firstAttribute="trailing" secondItem="pH6-ub-6LB" secondAttribute="trailing" id="iUO-53-imG"/>
                 <constraint firstAttribute="trailing" secondItem="jVB-cP-Kvx" secondAttribute="trailing" constant="16" id="rY6-KW-x7x"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="pH6-ub-6LB"/>
-            <point key="canvasLocation" x="84" y="324"/>
+            <point key="canvasLocation" x="83.200000000000003" y="323.83808095952025"/>
         </view>
     </objects>
     <resources>

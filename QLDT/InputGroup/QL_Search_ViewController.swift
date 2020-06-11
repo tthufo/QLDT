@@ -46,12 +46,12 @@ class QL_Search_ViewController: UIViewController {
         
         let distance = self.distance.text
         
-        let currentCorr = Permission.shareInstance().currentLocation()
+        let currentCorr = self.latLng // Permission.shareInstance().currentLocation()
         
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":"".urlGet(postFix: "/api/Data/Filter"),
                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
                                                    "method":"GET",
-                                                   "Getparam":["radius": distance == "" ? 10000 : distance, "lat":currentCorr!["lat"], "lng":currentCorr!["lng"]!, "keyword":self.search.text, "formId":dataInfo["Id"]],
+                                                   "Getparam":["radius": distance == "" ? 10000 : distance, "lat":currentCorr["lat"], "lng":currentCorr["lng"]!, "keyword":self.search.text, "formId":dataInfo["Id"]],
                                                    "overrideLoading":1,
                                                    "overrideAlert":1,
                                                    "host":self
@@ -160,7 +160,7 @@ extension QL_Search_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = dataList![indexPath.row] as! NSDictionary
         
-        let currentCorr = Permission.shareInstance().currentLocation()! as NSDictionary
+        let currentCorr = self.latLng // Permission.shareInstance().currentLocation()! as NSDictionary
 
         let newForm = QL_Form_New_ViewController()
 

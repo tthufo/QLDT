@@ -378,9 +378,9 @@ class QL_Map_ViewController: UIViewController {
     }
     
     func latLng() -> CLLocationCoordinate2D {
-       let currentCorr = Permission.shareInstance().currentLocation()
+       let currentCorr = self.latLng // Permission.shareInstance().currentLocation()
         
-        return CLLocationCoordinate2D(latitude: (currentCorr!["lat"]! as! NSNumber).doubleValue , longitude: (currentCorr!["lng"]! as! NSNumber).doubleValue)
+        return CLLocationCoordinate2D(latitude: (currentCorr["lat"]! as! NSNumber).doubleValue , longitude: (currentCorr["lng"]! as! NSNumber).doubleValue)
     }
     
     @IBAction func didPressLocation() {

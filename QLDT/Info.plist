@@ -2,10 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>QLBB cần sử dụng BlueTooth của bạn </string>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
+	<key>CFBundleVersion</key>
+	<string>1.0</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -21,9 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MGLMapboxAccessToken</key>
@@ -35,10 +31,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>QLBB cần sử dụng BlueTooth của bạn </string>
 	<key>NSCameraUsageDescription</key>
 	<string>QLBB cần sử dụng Camera của bạn để cập nhật hình ảnh biển báo</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>QLBB cần truy cập vị trí của bạn để cập nhật thông tin biển bảo tại địa điểm cụ thể.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>QLBB cần truy cập vị trí của bạn để cập nhật thông tin biển bảo tại địa điểm cụ thể.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>QLBB cần truy cập vị trí của bạn để cập nhật thông tin biển bảo tại vị trí cụ thể.</string>
+	<string>QLBB cần truy cập vị trí của bạn để cập nhật thông tin biển bảo tại địa điểm cụ thể.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>QLBB cần sử dụng Micro của bạn</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -62,6 +64,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>host</key>
 	<string></string>
 </dict>

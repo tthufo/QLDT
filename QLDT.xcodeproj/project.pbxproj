@@ -47,6 +47,9 @@
 		FC935AF3210CCD750067D480 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC935AF2210CCD750067D480 /* Macro.swift */; };
 		FCAF7AC021404BC4007A1181 /* QL_Info_Collector_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7ABE21404BC3007A1181 /* QL_Info_Collector_ViewController.swift */; };
 		FCAF7AC121404BC4007A1181 /* QL_Info_Collector_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7ABF21404BC4007A1181 /* QL_Info_Collector_ViewController.xib */; };
+		FCB0AEC724927DDC00574817 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB0AEC624927DDC00574817 /* XMLReader.m */; };
+		FCB0AECA24927E0100574817 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0AEC824927E0100574817 /* libxml2.2.tbd */; };
+		FCB0AECB24927E0100574817 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCB0AEC924927E0100574817 /* libxml2.tbd */; };
 		FCC6D9062150354E00191E1B /* CustomField.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC6D9052150354E00191E1B /* CustomField.m */; };
 		FCCC3D62213BFD2A0005D519 /* QL_Setting_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCC3D60213BFD290005D519 /* QL_Setting_ViewController.swift */; };
 		FCCC3D63213BFD2A0005D519 /* QL_Setting_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCCC3D61213BFD2A0005D519 /* QL_Setting_ViewController.xib */; };
@@ -124,6 +127,10 @@
 		FC935AF2210CCD750067D480 /* Macro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
 		FCAF7ABE21404BC3007A1181 /* QL_Info_Collector_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Info_Collector_ViewController.swift; sourceTree = "<group>"; };
 		FCAF7ABF21404BC4007A1181 /* QL_Info_Collector_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Info_Collector_ViewController.xib; sourceTree = "<group>"; };
+		FCB0AEC524927DDC00574817 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		FCB0AEC624927DDC00574817 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
+		FCB0AEC824927E0100574817 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
+		FCB0AEC924927E0100574817 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		FCC6D9042150354D00191E1B /* CustomField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomField.h; sourceTree = "<group>"; };
 		FCC6D9052150354E00191E1B /* CustomField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomField.m; sourceTree = "<group>"; };
 		FCCC3D60213BFD290005D519 /* QL_Setting_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Setting_ViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +167,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCB0AECA24927E0100574817 /* libxml2.2.tbd in Frameworks */,
+				FCB0AECB24927E0100574817 /* libxml2.tbd in Frameworks */,
 				2DD18908589E68B3E352589B /* Pods_QLDT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +210,8 @@
 		870BA5345F77A5E7C102366E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCB0AEC824927E0100574817 /* libxml2.2.tbd */,
+				FCB0AEC924927E0100574817 /* libxml2.tbd */,
 				322D50A53DFEC8CC6483F8F4 /* Pods_QLDT.framework */,
 			);
 			name = Frameworks;
@@ -288,6 +299,8 @@
 				FCCC3D61213BFD2A0005D519 /* QL_Setting_ViewController.xib */,
 				FCCC3D64213C30540005D519 /* QL_Recover_ViewController.swift */,
 				FCCC3D65213C30540005D519 /* QL_Recover_ViewController.xib */,
+				FCB0AEC524927DDC00574817 /* XMLReader.h */,
+				FCB0AEC624927DDC00574817 /* XMLReader.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -531,6 +544,7 @@
 				FC84F1D9214D87370025E213 /* Temp.swift in Sources */,
 				FCCC3D74213C6D540005D519 /* District.swift in Sources */,
 				044F715721427FC9003CB99A /* QL_Comment_ViewController.swift in Sources */,
+				FCB0AEC724927DDC00574817 /* XMLReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,12 +687,14 @@
 				CODE_SIGN_ENTITLEMENTS = QLDT/QLBB.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: Thanh Hai Tran (ZWKS8AV396)";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QLDT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vn.hanel.qlbb;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = vn.vnc.qlbb;
 				PRODUCT_NAME = "Quản Lý Biển Báo";
 				PROVISIONING_PROFILE = "bf4feb91-1e07-429b-9108-117b10f1232d";
 				PROVISIONING_PROFILE_SPECIFIER = hanel_dev;
@@ -699,12 +715,14 @@
 				CODE_SIGN_ENTITLEMENTS = QLDT/QLBB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: VIETGIS - GIS SOLUTION AND TECHNOLOGY COMPANY LIMITED (GAJPP6PZBM)";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 3;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = QLDT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vn.hanel.qlbb;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = vn.vnc.qlbb;
 				PRODUCT_NAME = "Quản Lý Biển Báo";
 				PROVISIONING_PROFILE = "52f6285b-c157-4c5e-918a-a04f84d30fcf";
 				PROVISIONING_PROFILE_SPECIFIER = hanel_dis;

@@ -44,7 +44,7 @@ class QL_Crash_ViewController: UIViewController {
             return
         }
         
-        let currentCorr = Permission.shareInstance().currentLocation()! as NSDictionary
+        let currentCorr = self.latLng // Permission.shareInstance().currentLocation()! as NSDictionary
 
         for dict in self.dataTemp!["LayerFields"] as! NSMutableArray {
             let tempo = dict as! NSMutableDictionary
