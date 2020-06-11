@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6856EDC32479A2F9C3A9CF623663EC74"
+               BlueprintIdentifier = "A9DDA4936BA15BC21477F5DDC239E836"
+               BuildableName = "AllPod.framework"
                BlueprintName = "AllPod"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "AllPod.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

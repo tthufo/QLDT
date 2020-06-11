@@ -13,6 +13,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
 
     @IBOutlet var collectionView: UICollectionView!
     
+    @IBOutlet var menu: UIButton!
+
     var timer: Timer?
 
     var images: NSMutableArray? = [["title":"Thu thập dữ liệu", "img":"ic_thuthap"],["title":"Sự cố và vi phạm", "img":"ic_suco"],["title":"Kiểm tra - bảo trì", "img":"ic_kiemtra"]]
@@ -23,6 +25,8 @@ class QL_Home_ViewController: UIViewController, UICollectionViewDelegate, UIColl
         super.viewDidLoad()
 
         collectionView.withCell("TG_Image_Cell")
+        
+        menu.alpha = Information.check == "1" ? 1 : 0
         
         syncing()
     }

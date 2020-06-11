@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6D4778E6B4F8EBE1525730AC98A53326"
-               BuildableName = "AVHexColor.framework"
-               BlueprintName = "AVHexColor"
+               BlueprintIdentifier = "6746AB6F4D992402B59D1651512EA19E"
+               BuildableName = "Mapbox-iOS-SDK"
+               BlueprintName = "Mapbox-iOS-SDK"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

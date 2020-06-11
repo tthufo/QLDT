@@ -15,7 +15,7 @@
 		04E7283921410F8100C40CCE /* TG_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E7283821410F8100C40CCE /* TG_Cell.xib */; };
 		04E7283D214123D100C40CCE /* QL_Common_List_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E7283B214123D100C40CCE /* QL_Common_List_ViewController.swift */; };
 		04E7283E214123D100C40CCE /* QL_Common_List_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E7283C214123D100C40CCE /* QL_Common_List_ViewController.xib */; };
-		2DD18908589E68B3E352589B /* Pods_QLDT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 322D50A53DFEC8CC6483F8F4 /* Pods_QLDT.framework */; };
+		F5BD4405121F4C54C419F366 /* Pods_QLDT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED970ABC720CD0563512498 /* Pods_QLDT.framework */; };
 		FC1BB5912149761F0090D454 /* QL_Map_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1BB58F2149761F0090D454 /* QL_Map_ViewController.swift */; };
 		FC1BB5922149761F0090D454 /* QL_Map_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC1BB5902149761F0090D454 /* QL_Map_ViewController.xib */; };
 		FC4354A42146DE480016A4CB /* QL_Crash_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4354A22146DE480016A4CB /* QL_Crash_ViewController.swift */; };
@@ -88,9 +88,9 @@
 		04E7283821410F8100C40CCE /* TG_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Cell.xib; sourceTree = "<group>"; };
 		04E7283B214123D100C40CCE /* QL_Common_List_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Common_List_ViewController.swift; sourceTree = "<group>"; };
 		04E7283C214123D100C40CCE /* QL_Common_List_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Common_List_ViewController.xib; sourceTree = "<group>"; };
-		0BD10565D939699D9C0722CC /* Pods-QLDT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDT.release.xcconfig"; path = "Pods/Target Support Files/Pods-QLDT/Pods-QLDT.release.xcconfig"; sourceTree = "<group>"; };
-		322D50A53DFEC8CC6483F8F4 /* Pods_QLDT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C942F17FE159246DBF6592F9 /* Pods-QLDT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QLDT/Pods-QLDT.debug.xcconfig"; sourceTree = "<group>"; };
+		2ED970ABC720CD0563512498 /* Pods_QLDT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QLDT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		818889C5B36023B47BB5C808 /* Pods-QLDT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDT.release.xcconfig"; path = "Target Support Files/Pods-QLDT/Pods-QLDT.release.xcconfig"; sourceTree = "<group>"; };
+		A6EE3636BB8A06763616338D /* Pods-QLDT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QLDT.debug.xcconfig"; path = "Target Support Files/Pods-QLDT/Pods-QLDT.debug.xcconfig"; sourceTree = "<group>"; };
 		FC1BB58F2149761F0090D454 /* QL_Map_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Map_ViewController.swift; sourceTree = "<group>"; };
 		FC1BB5902149761F0090D454 /* QL_Map_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QL_Map_ViewController.xib; sourceTree = "<group>"; };
 		FC4354A22146DE480016A4CB /* QL_Crash_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QL_Crash_ViewController.swift; sourceTree = "<group>"; };
@@ -169,7 +169,7 @@
 			files = (
 				FCB0AECA24927E0100574817 /* libxml2.2.tbd in Frameworks */,
 				FCB0AECB24927E0100574817 /* libxml2.tbd in Frameworks */,
-				2DD18908589E68B3E352589B /* Pods_QLDT.framework in Frameworks */,
+				F5BD4405121F4C54C419F366 /* Pods_QLDT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,13 +198,13 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		637C09360AB8948283D39DDC /* Pods */ = {
+		34B7756EBD5791F2F912F31F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C942F17FE159246DBF6592F9 /* Pods-QLDT.debug.xcconfig */,
-				0BD10565D939699D9C0722CC /* Pods-QLDT.release.xcconfig */,
+				A6EE3636BB8A06763616338D /* Pods-QLDT.debug.xcconfig */,
+				818889C5B36023B47BB5C808 /* Pods-QLDT.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		870BA5345F77A5E7C102366E /* Frameworks */ = {
@@ -212,7 +212,7 @@
 			children = (
 				FCB0AEC824927E0100574817 /* libxml2.2.tbd */,
 				FCB0AEC924927E0100574817 /* libxml2.tbd */,
-				322D50A53DFEC8CC6483F8F4 /* Pods_QLDT.framework */,
+				2ED970ABC720CD0563512498 /* Pods_QLDT.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -244,8 +244,8 @@
 			children = (
 				FC53869C210C875600F00873 /* QLDT */,
 				FC53869B210C875600F00873 /* Products */,
-				637C09360AB8948283D39DDC /* Pods */,
 				870BA5345F77A5E7C102366E /* Frameworks */,
+				34B7756EBD5791F2F912F31F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -349,11 +349,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC5386AF210C875600F00873 /* Build configuration list for PBXNativeTarget "QLDT" */;
 			buildPhases = (
-				4AAE755B26B8CBFA38D9F700 /* [CP] Check Pods Manifest.lock */,
+				6E0D71FF5C81E581D6A60B3D /* [CP] Check Pods Manifest.lock */,
 				FC538696210C875600F00873 /* Sources */,
 				FC538697210C875600F00873 /* Frameworks */,
 				FC538698210C875600F00873 /* Resources */,
-				C4781737E6D91638A7D08F1F /* [CP] Embed Pods Frameworks */,
+				F32D58886E3970E26A81891B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -449,16 +449,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4AAE755B26B8CBFA38D9F700 /* [CP] Check Pods Manifest.lock */ = {
+		6E0D71FF5C81E581D6A60B3D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-QLDT-checkManifestLockResult.txt",
 			);
@@ -467,13 +471,13 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C4781737E6D91638A7D08F1F /* [CP] Embed Pods Frameworks */ = {
+		F32D58886E3970E26A81891B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-QLDT/Pods-QLDT-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-QLDT/Pods-QLDT-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/AVHexColor/AVHexColor.framework",
 				"${BUILT_PRODUCTS_DIR}/AllPod/AllPod.framework",
@@ -482,6 +486,8 @@
 				"${BUILT_PRODUCTS_DIR}/MNCalendarView/MNCalendarView.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/7153F022-4792-3200-B34D-702CFCED0163.bcsymbolmap",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/97E55811-1447-3778-BB3F-428F5D52C17B.bcsymbolmap",
 				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -497,6 +503,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MNCalendarView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
+				"${BUILT_PRODUCTS_DIR}/7153F022-4792-3200-B34D-702CFCED0163.bcsymbolmap",
+				"${BUILT_PRODUCTS_DIR}/97E55811-1447-3778-BB3F-428F5D52C17B.bcsymbolmap",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -504,7 +512,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QLDT/Pods-QLDT-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-QLDT/Pods-QLDT-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -679,25 +687,25 @@
 		};
 		FC5386B0210C875600F00873 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C942F17FE159246DBF6592F9 /* Pods-QLDT.debug.xcconfig */;
+			baseConfigurationReference = A6EE3636BB8A06763616338D /* Pods-QLDT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = QLDT/QLBB.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Thanh Hai Tran (ZWKS8AV396)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: 3D ART DESIGN CONSULTANCY AND TECHNOLOGY SOLUTION JOINT STOCK COMPANY (3L2APQ2D3U)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3L2APQ2D3U;
 				INFOPLIST_FILE = QLDT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = vn.vnc.qlbb;
+				PRODUCT_BUNDLE_IDENTIFIER = vn.dt.qlb;
 				PRODUCT_NAME = "Quản Lý Biển Báo";
 				PROVISIONING_PROFILE = "bf4feb91-1e07-429b-9108-117b10f1232d";
-				PROVISIONING_PROFILE_SPECIFIER = hanel_dev;
+				PROVISIONING_PROFILE_SPECIFIER = alb_dis;
 				SWIFT_OBJC_BRIDGING_HEADER = "QLDT/QLDT-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -707,25 +715,25 @@
 		};
 		FC5386B1210C875600F00873 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0BD10565D939699D9C0722CC /* Pods-QLDT.release.xcconfig */;
+			baseConfigurationReference = 818889C5B36023B47BB5C808 /* Pods-QLDT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = QLDT/QLBB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: VIETGIS - GIS SOLUTION AND TECHNOLOGY COMPANY LIMITED (GAJPP6PZBM)";
+				CODE_SIGN_IDENTITY = "Apple Distribution: 3D ART DESIGN CONSULTANCY AND TECHNOLOGY SOLUTION JOINT STOCK COMPANY (3L2APQ2D3U)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3L2APQ2D3U;
 				INFOPLIST_FILE = QLDT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = vn.vnc.qlbb;
+				PRODUCT_BUNDLE_IDENTIFIER = vn.dt.qlb;
 				PRODUCT_NAME = "Quản Lý Biển Báo";
 				PROVISIONING_PROFILE = "52f6285b-c157-4c5e-918a-a04f84d30fcf";
-				PROVISIONING_PROFILE_SPECIFIER = hanel_dis;
+				PROVISIONING_PROFILE_SPECIFIER = alb_dis;
 				SWIFT_OBJC_BRIDGING_HEADER = "QLDT/QLDT-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

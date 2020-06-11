@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QL_Home_ViewController" customModule="Quản_Lý_Biển_Báo" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="2GQ-UM-agp" id="sSU-H5-LBA"/>
+                <outlet property="menu" destination="1hZ-X2-dch" id="kru-Y5-hVg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
